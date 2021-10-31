@@ -1,8 +1,5 @@
 #include "pch.h"
 
-//Hacks
-#include "Features/Punch.h"
-
 INL bool IsShutdown(LPVOID lpParameter)
 {
     // Temp solution
@@ -20,7 +17,10 @@ INL bool IsShutdown(LPVOID lpParameter)
 
 DWORD WINAPI OnDllAttach(LPVOID lpParameter)
 {
-    Hook::Init();
+    if (!Hook::Init())
+        MessageBox(0, L"Failed to initialize all hooks", L"ERROR", MB_OK);
+    else
+        MessageBox(0, L"Initialized hooks!", L"Success", MB_OK);
 
     while (true)
     {
