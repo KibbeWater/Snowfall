@@ -48,7 +48,7 @@ PVOID MEM::PatternScan(PVOID pModule, const char* szPattern, int iOffset)
 PVOID MEM::PatternScan(const char* szPattern, int iOffset)
 {
     MEMORY_BASIC_INFORMATION mbi;
-    BYTE* MemoryAddress = (BYTE*)::GetModuleHandleA(0);
+    BYTE* MemoryAddress = (BYTE*)::GetModuleHandleA(NULL);
 
     // Pattern to bytes
     int PatternBytes[1024];
