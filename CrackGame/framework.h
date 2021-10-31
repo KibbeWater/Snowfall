@@ -31,6 +31,7 @@
 #include "Hooks/Hooks.h"
 #include "Hooks/PunchPlayers.h"
 #include "Hooks/CameraShake.h"
+#include "Hooks/PlayerMovement.h"
 
 // Features
 #include "Features/Punch.h"
