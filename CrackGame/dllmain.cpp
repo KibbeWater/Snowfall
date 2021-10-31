@@ -11,7 +11,7 @@ INL bool IsShutdown(LPVOID lpParameter)
     //if (!InputSys::IsKeyDown(VK_END))
     //    return false;
 
-    MH_Uninitialize();
+    Hook::Shutdown();
 
     ::FreeLibraryAndExitThread((HMODULE)lpParameter, 1);
 

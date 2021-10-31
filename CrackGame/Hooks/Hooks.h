@@ -4,8 +4,6 @@
 
 namespace Hook
 {
-	extern INL MH_STATUS Do(void* pTargetFn, void* pDetourFn, void** pOriginalFn);
-	extern INL MH_STATUS UnDoAll();
-
 	extern INL bool Init();
+	extern INL bool Shutdown();
 }

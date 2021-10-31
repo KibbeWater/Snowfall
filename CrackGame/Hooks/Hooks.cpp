@@ -1,9 +1,5 @@
 #include "pch.h"
 
-//-----------------------------------------------------------------------------
-// Init
-//-----------------------------------------------------------------------------
-
 INL bool Hook::Init()
 {
 	if (MH_Initialize() != MH_OK)
@@ -19,4 +15,9 @@ INL bool Hook::Init()
 		return false;
 
 	return true;
+}
+
+INL bool Hook::Shutdown()
+{
+	return MH_Uninitialize();
 }

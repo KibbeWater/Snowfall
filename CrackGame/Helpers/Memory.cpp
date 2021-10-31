@@ -113,7 +113,7 @@ PVOID MEM::PatternScan(const char* szPattern, int iOffset)
 // Pattern scanner dynamic, but bad secure bc string based module
 PVOID MEM::PatternScan(const char* szModule, const char* szPattern, int iOffset)
 {
-    if (szModule = "")
+    if (!szModule)
         return PatternScan(szPattern, iOffset);
 
     BYTE* Module = (BYTE*)::GetModuleHandleA(szModule);
