@@ -45,7 +45,7 @@ using std::stringstream;
 #if _DEBUG
 	#define DEBUG 1
 #else
-	#define RELEASE 1
+	#define _RELEASE 1
 #endif
 
 // Using inlines

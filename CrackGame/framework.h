@@ -27,5 +27,9 @@
 #include "Helpers/Math.h"
 #include "Helpers/Memory.h"
 
+// Hooks
+#include "Hooks/Hooks.h"
+#include "Hooks/PunchPlayers.h"
+
 // Features
 #include "Features/Punch.h"

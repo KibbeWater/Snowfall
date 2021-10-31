@@ -11,6 +11,8 @@ INL bool IsShutdown(LPVOID lpParameter)
     //if (!InputSys::IsKeyDown(VK_END))
     //    return false;
 
+    MH_Uninitialize();
+
     ::FreeLibraryAndExitThread((HMODULE)lpParameter, 1);
 
     return true;
@@ -18,17 +20,7 @@ INL bool IsShutdown(LPVOID lpParameter)
 
 DWORD WINAPI OnDllAttach(LPVOID lpParameter)
 {
-    #pragma region Initialize features, enable hooks etc
-    MH_Initialize();
-
-    #pragma region Initialize features
-    Punch::Init();
-    #pragma endregion
-
-    MH_EnableHook(MH_ALL_HOOKS);
-    #pragma endregion
-
-    
+    Hook::Init();
 
     while (true)
     {
