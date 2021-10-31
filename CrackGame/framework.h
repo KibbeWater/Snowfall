@@ -32,6 +32,7 @@
 #include "Hooks/PunchPlayers.h"
 #include "Hooks/CameraShake.h"
 #include "Hooks/PlayerMovement.h"
+#include "Hooks/AntiCheat.h"
 
 // Features
 #include "Features/Punch.h"

@@ -96,9 +96,9 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Helpers\Math.h" />
     <ClInclude Include="Helpers\Memory.h" />
+    <ClInclude Include="Hooks\AntiCheat.h" />
     <ClInclude Include="Hooks\CameraShake.h" />
     <ClInclude Include="Hooks\Hooks.h" />
-    <ClInclude Include="Hooks\Obscured.h" />
     <ClInclude Include="Hooks\PlayerMovement.h" />
     <ClInclude Include="Hooks\PunchPlayers.h" />
     <ClInclude Include="pch.h" />
@@ -118,9 +118,9 @@
     <ClCompile Include="Features\Punch.cpp" />
     <ClCompile Include="Helpers\Math.cpp" />
     <ClCompile Include="Helpers\Memory.cpp" />
+    <ClCompile Include="Hooks\AntiCheat.cpp" />
     <ClCompile Include="Hooks\CameraShake.cpp" />
     <ClCompile Include="Hooks\Hooks.cpp" />
-    <ClCompile Include="Hooks\Obscured.cpp" />
     <ClCompile Include="Hooks\PlayerMovement.cpp" />
     <ClCompile Include="Hooks\PunchPlayers.cpp" />
     <ClCompile Include="pch.cpp">
