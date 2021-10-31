@@ -6,7 +6,5 @@ namespace Hook
 	{
 		inline void* pPunch;
 		void __stdcall hkPunch(PunchPlayers_o* pThis, const MethodInfo* pMethod);
-
-
 	}
 }

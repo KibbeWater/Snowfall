@@ -7,7 +7,8 @@ INL bool Hook::Init()
 
 	// Do hooks
 	{
-		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 8B C4 48 89 58 10 48 89 70 18 48 89 78 20 41 56 48 81 EC ? ? ? ? 0F 29 70 E8 0F 29 78 D8 44 0F 29 40 ? 44 0F 29 48 ? 48"), PunchPlayers, Punch);
+		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "40 53 48 83 EC ? 80 3D ? ? ? ? ? 48 8B D9 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 80 7B ? ? 74 ? F3 0F 10 53"), PunchPlayers, Punch);
+		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 57 48 83 EC ? 80 3D ? ? ? ? ? 49 8B D8 48 8B EA 48 8B F1 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 48 8B 0D ? ? ? ? E8"), CameraShake, Shake);
 	}
 
 	if (MH_EnableHook(MH_ALL_HOOKS) != MH_OK)
