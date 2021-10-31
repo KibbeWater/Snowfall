@@ -1,5 +1,8 @@
 #include "pch.h"
 
+//Hacks
+#include "Features/Punch.h"
+
 INL bool IsShutdown(LPVOID lpParameter)
 {
     // Temp solution
@@ -15,6 +18,18 @@ INL bool IsShutdown(LPVOID lpParameter)
 
 DWORD WINAPI OnDllAttach(LPVOID lpParameter)
 {
+    #pragma region Initialize features, enable hooks etc
+    MH_Initialize();
+
+    #pragma region Initialize features
+    Punch::Init();
+    #pragma endregion
+
+    MH_EnableHook(MH_ALL_HOOKS);
+    #pragma endregion
+
+    
+
     while (true)
     {
         if (IsShutdown(lpParameter))

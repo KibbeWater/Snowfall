@@ -155,10 +155,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="config.h" />
+    <ClInclude Include="Features\Punch.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Helpers\Math.h" />
     <ClInclude Include="Helpers\Memory.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Thirdparty\Game Structures\il2cpp.h" />
     <ClInclude Include="Thirdparty\MinHook\buffer.h" />
     <ClInclude Include="Thirdparty\MinHook\hde\hde32.h" />
     <ClInclude Include="Thirdparty\MinHook\hde\hde64.h" />
@@ -171,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="Features\Punch.cpp" />
     <ClCompile Include="Helpers\Math.cpp" />
     <ClCompile Include="Helpers\Memory.cpp" />
     <ClCompile Include="pch.cpp">
