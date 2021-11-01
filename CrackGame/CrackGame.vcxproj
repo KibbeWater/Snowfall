@@ -98,8 +98,11 @@
     <ClInclude Include="Helpers\Memory.h" />
     <ClInclude Include="Hooks\AntiCheat.h" />
     <ClInclude Include="Hooks\CameraShake.h" />
+    <ClInclude Include="Hooks\GamemodeLights.h" />
+    <ClInclude Include="Globals.h" />
     <ClInclude Include="Hooks\Hooks.h" />
     <ClInclude Include="Hooks\PlayerMovement.h" />
+    <ClInclude Include="Hooks\PlayerStatus.h" />
     <ClInclude Include="Hooks\PunchPlayers.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="GameSDK\il2cpp.h" />
@@ -120,8 +123,10 @@
     <ClCompile Include="Helpers\Memory.cpp" />
     <ClCompile Include="Hooks\AntiCheat.cpp" />
     <ClCompile Include="Hooks\CameraShake.cpp" />
+    <ClCompile Include="Hooks\GamemodeLights.cpp" />
     <ClCompile Include="Hooks\Hooks.cpp" />
     <ClCompile Include="Hooks\PlayerMovement.cpp" />
+    <ClCompile Include="Hooks\PlayerStatus.cpp" />
     <ClCompile Include="Hooks\PunchPlayers.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

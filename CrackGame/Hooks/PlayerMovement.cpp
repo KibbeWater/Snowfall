@@ -15,3 +15,9 @@ void __stdcall Hook::PlayerMovement::hkJump(PlayerMovement_o* pThis, const Metho
 
 	return;
 }
+
+void __stdcall Hook::PlayerMovement::hkUpdate(PlayerMovement_o* pThis, const MethodInfo* pMethod)
+{
+	static auto oUpdate = static_cast<decltype(&hkUpdate)>(pUpdate);
+	oUpdate(pThis, pMethod);
+}

@@ -20,8 +20,14 @@ INL bool Hook::Init()
 			PlayerMovement, PushPlayer);
 		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 55 48 8D 6C 24 ? 48 81 EC ? ? ? ? 80 3D ? ? ? ? ? 48 8B D9 75 37"),
 			PlayerMovement, Jump);
+		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "40 53 48 83 EC 50 80 79 40 00"),
+			PlayerMovement, Update);
 		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "40 53 48 83 EC 20 48 8B D9 48 85 C9 74 71"),
 			AntiCheat, CheatingDetected);
+		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 56 48 83 EC 50 80 3D ? ? ? ? ? 0F B6 F2"),
+			GamemodeLights, ToggleLights);
+		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 55 57 41 57 48 8D 6C 24"),
+			PlayerStatus, DamagePlayer);
 	}
 
 	if (MH_EnableHook(MH_ALL_HOOKS) != MH_OK)
