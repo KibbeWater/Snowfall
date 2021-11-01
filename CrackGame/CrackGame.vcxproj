@@ -121,6 +121,7 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Features\Punch.cpp" />
+    <ClCompile Include="GameSDK\Other.cpp" />
     <ClCompile Include="Helpers\Math.cpp" />
     <ClCompile Include="Helpers\Memory.cpp" />
     <ClCompile Include="Hooks\AntiCheat.cpp" />
