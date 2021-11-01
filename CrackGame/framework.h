@@ -25,6 +25,7 @@
 
 // GameSDK
 #include "GameSDK/il2cpp.h"
+#include "GameSDK/Other.h"
 
 // Helpers
 #include "Helpers/Math.h"

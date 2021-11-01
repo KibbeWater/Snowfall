@@ -25,11 +25,6 @@ typedef unsigned __int64	uint64;
 
 typedef unsigned __int64	QWORD;
 
-//-----------------------------------------------------------------------------
-// Method Typedefs
-//-----------------------------------------------------------------------------
-
-typedef float(__stdcall hkDecryptFloat)(CodeStage_AntiCheat_ObscuredTypes_ObscuredFloat_o* pThis, const MethodInfo* pMethod);
 
 //-----------------------------------------------------------------------------
 // Usings
