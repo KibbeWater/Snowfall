@@ -36,6 +36,7 @@
 #include "Hooks/AntiCheat.h"
 #include "Hooks/GamemodeLights.h"
 #include "Hooks/PlayerStatus.h"
+#include "Hooks/LobbyManager.h"
 
 // Features
 #include "Features/Punch.h"

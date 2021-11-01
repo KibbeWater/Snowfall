@@ -101,6 +101,7 @@
     <ClInclude Include="Hooks\GamemodeLights.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Hooks\Hooks.h" />
+    <ClInclude Include="Hooks\LobbyManager.h" />
     <ClInclude Include="Hooks\PlayerMovement.h" />
     <ClInclude Include="Hooks\PlayerStatus.h" />
     <ClInclude Include="Hooks\PunchPlayers.h" />
@@ -125,6 +126,7 @@
     <ClCompile Include="Hooks\CameraShake.cpp" />
     <ClCompile Include="Hooks\GamemodeLights.cpp" />
     <ClCompile Include="Hooks\Hooks.cpp" />
+    <ClCompile Include="Hooks\LobbyManager.cpp" />
     <ClCompile Include="Hooks\PlayerMovement.cpp" />
     <ClCompile Include="Hooks\PlayerStatus.cpp" />
     <ClCompile Include="Hooks\PunchPlayers.cpp" />
