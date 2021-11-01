@@ -39,7 +39,7 @@
     <ClInclude Include="Features\Punch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Thirdparty\Game Structures\il2cpp.h">
+    <ClInclude Include="GameSDK\il2cpp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hooks\PunchPlayers.h">

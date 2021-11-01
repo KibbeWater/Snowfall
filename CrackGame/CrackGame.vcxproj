@@ -102,7 +102,7 @@
     <ClInclude Include="Hooks\PlayerMovement.h" />
     <ClInclude Include="Hooks\PunchPlayers.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Thirdparty\Game Structures\il2cpp.h" />
+    <ClInclude Include="GameSDK\il2cpp.h" />
     <ClInclude Include="Thirdparty\MinHook\buffer.h" />
     <ClInclude Include="Thirdparty\MinHook\hde\hde32.h" />
     <ClInclude Include="Thirdparty\MinHook\hde\hde64.h" />
