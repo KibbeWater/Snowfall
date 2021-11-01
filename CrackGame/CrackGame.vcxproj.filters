@@ -78,6 +78,15 @@
     <ClInclude Include="Hooks\AntiCheat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Hooks\GamemodeLights.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks\PlayerStatus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -123,6 +132,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Hooks\AntiCheat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hooks\GamemodeLights.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hooks\PlayerStatus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

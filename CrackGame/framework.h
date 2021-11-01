@@ -17,6 +17,7 @@
 
 // Config
 #include "config.h"
+#include "globals.h"
 
 // Thirdparty
 #include "Thirdparty/Ntdll/ntdll.h"
@@ -33,6 +34,8 @@
 #include "Hooks/CameraShake.h"
 #include "Hooks/PlayerMovement.h"
 #include "Hooks/AntiCheat.h"
+#include "Hooks/GamemodeLights.h"
+#include "Hooks/PlayerStatus.h"
 
 // Features
 #include "Features/Punch.h"

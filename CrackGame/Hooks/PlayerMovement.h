@@ -9,5 +9,8 @@ namespace Hook
 
 		inline void* pJump;
 		void __stdcall hkJump(PlayerMovement_o* pThis, const MethodInfo* pMethod);
+
+		inline void* pUpdate;
+		void __stdcall hkUpdate(PlayerMovement_o* pThis, const MethodInfo* pMethod);
 	}
 }
