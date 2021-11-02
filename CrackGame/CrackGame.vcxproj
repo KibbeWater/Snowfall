@@ -100,6 +100,7 @@
     <ClInclude Include="Helpers\Memory.h" />
     <ClInclude Include="Hooks\AntiCheat.h" />
     <ClInclude Include="Hooks\CameraShake.h" />
+    <ClInclude Include="Hooks\GameManager.h" />
     <ClInclude Include="Hooks\GamemodeLights.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Hooks\GamemodeRedLight.h" />
@@ -129,6 +130,7 @@
     <ClCompile Include="Helpers\Memory.cpp" />
     <ClCompile Include="Hooks\AntiCheat.cpp" />
     <ClCompile Include="Hooks\CameraShake.cpp" />
+    <ClCompile Include="Hooks\GameManager.cpp" />
     <ClCompile Include="Hooks\GamemodeLights.cpp" />
     <ClCompile Include="Hooks\GamemodeRedLight.cpp" />
     <ClCompile Include="Hooks\Hooks.cpp" />

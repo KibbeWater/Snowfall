@@ -4,6 +4,8 @@ void __stdcall Hook::OnlinePlayerMovement::hkUpdate(OnlinePlayerMovement_o* pThi
 {
 	static auto oUpdate = static_cast<decltype(&hkUpdate)>(pUpdate);
 
+	Globals::ptrPlayerManager = pThis->fields._playerManager_k__BackingField;
+
 	if (!Globals::bRedLightFreeze)
 		oUpdate(pThis, pMethod);
 }

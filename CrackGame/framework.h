@@ -43,6 +43,7 @@
 #include "Hooks/GamemodeRedLight.h"
 #include "Hooks/PlayerStatus.h"
 #include "Hooks/LobbyManager.h"
+#include "Hooks/GameManager.h"
 
 // Features
 #include "Features/Punch.h"

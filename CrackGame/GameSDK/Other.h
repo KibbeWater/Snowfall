@@ -9,4 +9,6 @@ namespace Obfuscation
 	CodeStage_AntiCheat_ObscuredTypes_ObscuredBool_o EncryptBool(bool value, short key);
 	CodeStage_AntiCheat_ObscuredTypes_ObscuredInt_o EncryptInt(int value);
 	int EncryptFloat(float value, int key);
+
+	void RespawnPlayer(UnityEngine_Vector3_o pos);
 }
