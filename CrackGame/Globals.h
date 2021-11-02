@@ -3,13 +3,14 @@
 struct GameManager_o;
 struct PlayerManager_o;
 
-namespace Globals {
+namespace Globals 
+{
 	inline bool bRedLightFreeze = false;
 
-	inline GameManager_o* ptrGameManager = nullptr;
-	inline PlayerManager_o* ptrPlayerManager = nullptr;
+	inline GameManager_o* pGameManager = nullptr;
+	inline PlayerManager_o* pPlayerManager = nullptr;
 
-	namespace Temp { //Temporary solution to hardcoding
+	namespace Temp { // Temporary solution to hardcoding
 		inline int32 iMaxPlayers = 1337;
 	}
 }

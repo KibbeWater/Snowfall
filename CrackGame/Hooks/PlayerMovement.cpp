@@ -12,8 +12,6 @@ void __stdcall Hook::PlayerMovement::hkJump(PlayerMovement_o* pThis, const Metho
 	pThis->fields.grounded = true;
 
 	oJump(pThis, pMethod);
-
-	return;
 }
 
 void __stdcall Hook::PlayerMovement::hkUpdate(PlayerMovement_o* pThis, const MethodInfo* pMethod)
@@ -33,11 +31,11 @@ void __stdcall Hook::PlayerMovement::hkMovement(PlayerMovement_o* pThis, float x
 {
 	static auto oMovement = static_cast<decltype(&hkMovement)>(pMovement);
 	
-	int oSurfaceType = pThis->fields.surfaceType;
-	pThis->fields.surfaceType = SurfaceType::normal;
+	int SurfaceTypeBackup = pThis->fields.surfaceType;
+	pThis->fields.surfaceType = SURFACE_NORMAL;
 
 	if (!Globals::bRedLightFreeze)
 		oMovement(pThis, x, y, pMethod);
 
-	pThis->fields.surfaceType = oSurfaceType;
+	pThis->fields.surfaceType = SurfaceTypeBackup;
 }

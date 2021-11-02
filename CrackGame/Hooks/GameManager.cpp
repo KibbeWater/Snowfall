@@ -4,7 +4,7 @@ void __stdcall Hook::GameManager::hkGetPlayersAlive(GameManager_o* pThis, const 
 {
 	static auto oGetPlayersAlive = static_cast<decltype(&hkGetPlayersAlive)>(pGetPlayersAlive);
 
-	Globals::ptrGameManager = pThis;
+	Globals::pGameManager = pThis;
 
 	oGetPlayersAlive(pThis, pMethod);
 }

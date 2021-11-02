@@ -97,7 +97,7 @@ PVOID MEM::PatternScan(const char* szPattern, int iOffset)
                     if (Found)
                     {
                         VirtualFree(PageBuffer, mbi.RegionSize, MEM_FREE);
-                        return (PVOID)((DWORD)mbi.BaseAddress + i + iOffset);
+                        return (PVOID)((INTPTR)mbi.BaseAddress + i + iOffset);
                     }
                 }
             }
@@ -159,4 +159,18 @@ PVOID MEM::PatternScan(const char* szModule, const char* szPattern, int iOffset)
     }
 
     return nullptr;
+}
+
+PVOID MEM::FromRelative(PVOID pAddress)
+{
+    return (PVOID)((INTPTR)pAddress + 4 + *(DWORD*)(pAddress));
+}
+
+PVOID MEM::PatternScanRel(const char* szModule, const char* szPattern, int iOffset)
+{
+    PVOID Address = PatternScan(szModule, szPattern, iOffset);
+    if (!Address)
+        return nullptr;
+
+    return FromRelative(Address);
 }

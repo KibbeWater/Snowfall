@@ -39,6 +39,19 @@ BOOL WINAPI DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved)
     {
         case DLL_PROCESS_ATTACH:
         {
+            float* pReachAccessPoint = (float*)MEM::RelativeScan("GameAssembly.dll", "F3 0F 10 15 ? ? ? ? 48 8D 55 FF", 4);
+
+            float Value = *pReachAccessPoint;
+
+            ::FreeLibraryAndExitThread((HMODULE)hModule, 1);
+
+
+
+
+
+
+
+
             ::DisableThreadLibraryCalls(hModule);
             ::CreateThread(NULL, 0, OnDllAttach, hModule, NULL, nullptr);
         }

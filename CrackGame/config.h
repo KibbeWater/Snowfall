@@ -25,6 +25,12 @@ typedef unsigned __int64	uint64;
 
 typedef unsigned __int64	QWORD;
 
+#ifdef _WIN64
+	typedef unsigned __int64  INTPTR;
+#else
+	typedef unsigned __int32  INTPTR;
+#endif
+
 
 //-----------------------------------------------------------------------------
 // Usings

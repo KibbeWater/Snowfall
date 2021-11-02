@@ -1,8 +1,8 @@
 #pragma once
 
-enum SurfaceType
+enum ESurfaceType
 {
-	normal,
-	ice,
-	fastIce
+	SURFACE_NORMAL,
+	SURFACE_ICE,
+	SURFACE_FASE_ICE
 };
