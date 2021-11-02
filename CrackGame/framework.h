@@ -37,8 +37,10 @@
 #include "Hooks/PunchPlayers.h"
 #include "Hooks/CameraShake.h"
 #include "Hooks/PlayerMovement.h"
+#include "Hooks/OnlinePlayerMovement.h"
 #include "Hooks/AntiCheat.h"
 #include "Hooks/GamemodeLights.h"
+#include "Hooks/GamemodeRedLight.h"
 #include "Hooks/PlayerStatus.h"
 #include "Hooks/LobbyManager.h"
 
