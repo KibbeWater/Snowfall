@@ -26,6 +26,7 @@
 // GameSDK
 #include "GameSDK/il2cpp.h"
 #include "GameSDK/Other.h"
+#include "GameSDK/Enums.h"
 
 // Helpers
 #include "Helpers/Math.h"

@@ -12,5 +12,8 @@ namespace Hook
 
 		inline void* pUpdate;
 		void __stdcall hkUpdate(PlayerMovement_o* pThis, const MethodInfo* pMethod);
+
+		inline void* pMovement;
+		void __stdcall hkMovement(PlayerMovement_o* pThis, float x, float y, const MethodInfo* pMethod);
 	}
 }

@@ -19,5 +19,25 @@ void __stdcall Hook::PlayerMovement::hkJump(PlayerMovement_o* pThis, const Metho
 void __stdcall Hook::PlayerMovement::hkUpdate(PlayerMovement_o* pThis, const MethodInfo* pMethod)
 {
 	static auto oUpdate = static_cast<decltype(&hkUpdate)>(pUpdate);
+
+	/*int key = pThis->fields.maxWalkSpeed.fields.currentCryptoKey;
+	auto walkSpeed = Obfuscation::DecryptFloat(&pThis->fields.maxWalkSpeed);
+	auto newWalkspeed = walkSpeed * 1.25;
+	pThis->fields.maxWalkSpeed.fields.fakeValue = Obfuscation::EncryptFloat(newWalkspeed, key);
+	auto updatedWalkspeed = Obfuscation::DecryptFloat(&pThis->fields.maxWalkSpeed);*/
+
 	oUpdate(pThis, pMethod);
+}
+
+void __stdcall Hook::PlayerMovement::hkMovement(PlayerMovement_o* pThis, float x, float y, const MethodInfo* pMethod)
+{
+	static auto oMovement = static_cast<decltype(&hkMovement)>(pMovement);
+	
+	int oSurfaceType = pThis->fields.surfaceType;
+	pThis->fields.surfaceType = SurfaceType::normal;
+
+	if (!Globals::bRedLightFreeze)
+		oMovement(pThis, x, y, pMethod);
+
+	pThis->fields.surfaceType = oSurfaceType;
 }

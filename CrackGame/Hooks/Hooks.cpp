@@ -22,6 +22,8 @@ INL bool Hook::Init()
 			PlayerMovement, Jump);
 		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "40 53 48 83 EC 50 80 79 40 00"),
 			PlayerMovement, Update);
+		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 8B C4 48 89 58 20 55 48 8D 68 B8"),
+			PlayerMovement, Movement);
 		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "40 53 48 83 EC 20 48 8B D9 48 85 C9 74 71"),
 			AntiCheat, CheatingDetected);
 		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 56 48 83 EC 50 80 3D ? ? ? ? ? 0F B6 F2"),
