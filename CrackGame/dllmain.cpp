@@ -21,6 +21,7 @@ DWORD WINAPI OnDllAttach(LPVOID lpParameter)
         ::MessageBoxA(0, "Failed to initialize all hooks", "ERROR", MB_OK);
     else
         ::MessageBoxA(0, "Initialized hooks!", "Success", MB_OK);
+    ImplHookDX11_Init((HMODULE)lpParameter, FindWindow(0, L"Crab Game"));
 
     while (true)
     {
