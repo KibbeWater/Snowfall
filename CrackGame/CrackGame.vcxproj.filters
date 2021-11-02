@@ -108,6 +108,24 @@
     <ClInclude Include="Hooks\ClientSend.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ImGUI\imconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGUI\imgui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGUI\imgui_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGUI\imstb_rectpack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGUI\imstb_textedit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGUI\imstb_truetype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -177,6 +195,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Hooks\ClientSend.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGUI\imgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGUI\imgui_demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGUI\imgui_draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGUI\imgui_tables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGUI\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
