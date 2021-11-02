@@ -63,8 +63,8 @@ void Obfuscation::RespawnPlayer(UnityEngine_Vector3_o pos)
 	static auto fnRespawnPlayer = reinterpret_cast<void(__thiscall*)(GameManager_o*, long, UnityEngine_Vector3_o, const MethodInfo*)>(
 		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC 40 80 3D ? ? ? ? ? 49 8B F0 48 8B FA 48 8B D9 75 43"));
 	
-	if (!Globals::pGameManager || !Globals::pPlayerManager)
+	if (!G::pGameManager || !G::pPlayerManager)
 		return;
 
-	return fnRespawnPlayer(Globals::pGameManager, (long)Globals::pPlayerManager->fields.steamProfile.fields.Id.fields.Value, pos, nullptr);
+	return fnRespawnPlayer(G::pGameManager, (long)G::pPlayerManager->fields.steamProfile.fields.Id.fields.Value, pos, nullptr);
 }

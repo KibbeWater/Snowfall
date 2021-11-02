@@ -4,7 +4,7 @@ void __stdcall Hook::GamemodeRedLight::hkRedLight(GameModeRedLight_o* pThis, flo
 {
 	static auto oRedLight = static_cast<decltype(&hkRedLight)>(pRedLight);
 
-	Globals::bRedLightFreeze = true;
+	G::bRedLightFreeze = true;
 
 	oRedLight(pThis, reactionTime, pMethod);
 }
@@ -13,7 +13,7 @@ void __stdcall Hook::GamemodeRedLight::hkGreenLight(GameModeRedLight_o* pThis, f
 {
 	static auto oGreenLight = static_cast<decltype(&hkGreenLight)>(pGreenLight);
 
-	Globals::bRedLightFreeze = false;
+	G::bRedLightFreeze = false;
 
 	oGreenLight(pThis, reactionTime, pMethod);
 }

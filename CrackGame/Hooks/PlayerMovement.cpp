@@ -31,11 +31,10 @@ void __stdcall Hook::PlayerMovement::hkMovement(PlayerMovement_o* pThis, float x
 {
 	static auto oMovement = static_cast<decltype(&hkMovement)>(pMovement);
 	
-	int SurfaceTypeBackup = pThis->fields.surfaceType;
+	int oldSurfaceType = pThis->fields.surfaceType;
 	pThis->fields.surfaceType = SURFACE_NORMAL;
 
-	if (!Globals::bRedLightFreeze)
-		oMovement(pThis, x, y, pMethod);
+	oMovement(pThis, x, y, pMethod);
 
-	pThis->fields.surfaceType = SurfaceTypeBackup;
+	pThis->fields.surfaceType = oldSurfaceType;
 }

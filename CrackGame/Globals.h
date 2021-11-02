@@ -3,7 +3,7 @@
 struct GameManager_o;
 struct PlayerManager_o;
 
-namespace Globals 
+namespace G 
 {
 	inline bool bRedLightFreeze = false;
 

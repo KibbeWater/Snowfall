@@ -6,8 +6,7 @@ INL bool Hook::Init()
 		return false;
 
 	// TODO:
-	// Add reach for punching
-	// Test and/or make new method by using a "lagswitch" and stop sending movement packets during red light
+	// Add reach for punching (Somewhat done???)
 
 	// Do hooks
 	{
@@ -39,6 +38,10 @@ INL bool Hook::Init()
 			LobbyManager, StartLobby);
 		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC ? 48 8B F9 80 3D ? ? ? ? ? 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05"),
 			GameManager, GetPlayersAlive);
+		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 41 56 48 83 EC ? 4C 8B F2 48 8B F1 80 3D ? ? ? ? ? 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05"),
+			ClientSend, PlayerPosition);
+		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC ? 0F 29 74 24 ? 0F 29 7C 24 ? 49 8B F0"),
+			ClientSend, PlayerRotation);
 	}
 
 	if (MH_EnableHook(MH_ALL_HOOKS) != MH_OK)

@@ -5,7 +5,7 @@ void __stdcall Hook::LobbyManager::hkStartLobby(LobbyManager_o* pThis, const Met
 	static auto oStartLobby = static_cast<decltype(&hkStartLobby)>(pStartLobby);
 
 	//Provide override settings
-	pThis->fields.gameSettings->fields.maxPlayers = Globals::Temp::iMaxPlayers;
+	pThis->fields.gameSettings->fields.maxPlayers = G::Temp::iMaxPlayers;
 
 	//Call original function
 	oStartLobby(pThis, pMethod);

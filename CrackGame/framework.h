@@ -44,6 +44,7 @@
 #include "Hooks/PlayerStatus.h"
 #include "Hooks/LobbyManager.h"
 #include "Hooks/GameManager.h"
+#include "Hooks/ClientSend.h"
 
 // Features
 #include "Features/Punch.h"
