@@ -9,6 +9,9 @@ namespace Obfuscation
 	CodeStage_AntiCheat_ObscuredTypes_ObscuredBool_o EncryptBool(bool value, short key);
 	CodeStage_AntiCheat_ObscuredTypes_ObscuredInt_o EncryptInt(int value);
 	int EncryptFloat(float value, int key);
+}
 
+namespace GameAPI {
 	void RespawnPlayer(UnityEngine_Vector3_o pos);
+	void TagPlayer(GameModeBombTag_o* pThis, long tagger, long tagged);
 }
