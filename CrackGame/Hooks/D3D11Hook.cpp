@@ -148,7 +148,6 @@ DWORD __stdcall HookDX11_Init()
 	pDeviceContextVTable = (DWORD_PTR*)(g_pd3dContext);
 	pDeviceContextVTable = (DWORD_PTR*)(pDeviceContextVTable[0]);
 
-	if (MH_Initialize() != MH_OK) { return 1; }
 	if (MH_CreateHook((DWORD_PTR*)pSwapChainVTable[8], PresentHook, reinterpret_cast<void**>(&phookD3D11Present)) != MH_OK) { return 1; }
 	if (MH_EnableHook((DWORD_PTR*)pSwapChainVTable[8]) != MH_OK) { return 1; }
 	if (MH_CreateHook((DWORD_PTR*)pDeviceContextVTable[12], DrawIndexedHook, reinterpret_cast<void**>(&phookD3D11DrawIndexed)) != MH_OK) { return 1; }
@@ -185,7 +184,7 @@ D3D11_HOOK_API void ImplHookDX11_Init(HMODULE hModule, void* hwnd)
 {
 	g_hWnd = (HWND)hwnd;
 	g_hModule = hModule;
-	HookDX11_Init();
+	auto retVal = HookDX11_Init();
 }
 
 D3D11_HOOK_API void ImplHookDX11_Shutdown()
