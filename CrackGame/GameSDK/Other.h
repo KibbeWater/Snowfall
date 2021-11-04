@@ -14,4 +14,5 @@ namespace Obfuscation
 namespace GameAPI {
 	void RespawnPlayer(UnityEngine_Vector3_o pos);
 	void TagPlayer(GameModeBombTag_o* pThis, long tagger, long tagged);
+	void DamagePlayer(long hurtPlayerId, int damage, int itemID, int objectID);
 }

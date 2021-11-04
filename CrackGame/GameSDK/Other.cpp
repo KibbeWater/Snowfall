@@ -76,3 +76,13 @@ void GameAPI::TagPlayer(GameModeBombTag_o* pThis, long tagger, long tagged)
 	
 	return fnSendTagPlayer(pThis, tagger, tagged, nullptr);
 }
+
+void GameAPI::DamagePlayer(long hurtPlayerId, int damage, int itemID, int objectID)
+{
+	static auto fnDamagePlayer = reinterpret_cast<void(__thiscall*)(long, int, UnityEngine_Vector3_o, int, int, const MethodInfo*)>(
+		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 41 54 41 56 41 57 48 83 EC 50 45 8B E1 "));
+
+	UnityEngine_Vector3_o emptyDir = {};
+
+	return fnDamagePlayer(hurtPlayerId, damage, emptyDir, itemID, objectID, nullptr);
+}

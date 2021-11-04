@@ -39,6 +39,7 @@ BOOL WINAPI DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved)
     {
         case DLL_PROCESS_ATTACH:
         {
+            
             ::DisableThreadLibraryCalls(hModule);
             ::CreateThread(NULL, 0, OnDllAttach, hModule, NULL, nullptr);
         }
