@@ -114,6 +114,9 @@
     <ClInclude Include="Hooks\PlayerInventory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Hooks\Chatbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -189,6 +192,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Hooks\PlayerInventory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hooks\Chatbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

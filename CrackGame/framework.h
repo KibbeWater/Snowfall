@@ -1,5 +1,8 @@
 #pragma once
 
+// Define some compile options
+#define DEV_MODE true
+
 // Vista min supported version
 #define _WIN32_WINNT 0x0600 
 #define WINVER 0x0600 
@@ -47,6 +50,7 @@
 #include "Hooks/LobbyManager.h"
 #include "Hooks/GameManager.h"
 #include "Hooks/ClientSend.h"
+#include "Hooks/Chatbox.h"
 
 // Features
 #include "Features/Punch.h"
