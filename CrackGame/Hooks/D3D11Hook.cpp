@@ -5,8 +5,9 @@
 
 #pragma comment(lib, "d3d11.lib")
 
+
 // KeyBoard Options.
-const int OpenMenuKey = VK_F9;
+const int OpenMenuKey = VK_INSERT;
 const int UninjectLibraryKey = VK_DELETE;
 
 typedef HRESULT(__stdcall* D3D11PresentHook) (IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags);
@@ -28,30 +29,165 @@ D3D11CreateQueryHook			phookD3D11CreateQuery = nullptr;
 D3D11PSSetShaderResourcesHook	phookD3D11PSSetShaderResources = nullptr;
 D3D11ClearRenderTargetViewHook  phookD3D11ClearRenderTargetViewHook = nullptr;
 
-DWORD_PTR* pSwapChainVTable = nullptr;
-DWORD_PTR* pDeviceVTable = nullptr;
-DWORD_PTR* pDeviceContextVTable = nullptr;
+DWORD** pSwapChainVTable = nullptr;
+DWORD** pDeviceVTable = nullptr;
+DWORD** pDeviceContextVTable = nullptr;
 
 InputHook inputHook = InputHook();
 
+template <typename T = void*>
+__forceinline T GetVirtual(void* thisptr, int iIndex)
+{
+	return (*static_cast<T**>(thisptr))[iIndex];
+}
+
+
 D3D11_HOOK_API void ImplHookDX11_Present(ID3D11Device* device, ID3D11DeviceContext* ctx, IDXGISwapChain* swap_chain)
 {
-	if (GetAsyncKeyState(OpenMenuKey) & 0x1) {
-		Menu::bIsOpen = !Menu::bIsOpen;
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+
+	//if (FontSys::BuildFonts())
+	//{
+	//	ImGui_ImplDX9_InvalidateDeviceObjects();
+	//	ImGui_ImplDX9_CreateDeviceObjects();
+	//	SkipRenderTicks = 2;
+	//}
+
+	ImGui::NewFrame();
+
+
+
+
+
+
+
+	{
+		if (GetAsyncKeyState(OpenMenuKey) & 0x1) {
+			Menu::bIsOpen = !Menu::bIsOpen;
+		}
+
+		static bool no_titlebar = false;
+		static bool no_border = true;
+		static bool no_resize = false;
+		static bool auto_resize = false;
+		static bool no_move = false;
+		static bool no_scrollbar = false;
+		static bool no_collapse = false;
+		static bool no_menu = true;
+		static bool start_pos_set = false;
+
+		ImVec4* colors = ImGui::GetStyle().Colors;
+		colors[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+		colors[ImGuiCol_TextDisabled] = ImVec4(0.50f, 0.50f, 0.50f, 1.00f);
+		colors[ImGuiCol_WindowBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.83f);
+		colors[ImGuiCol_ChildBg] = ImVec4(1.00f, 1.00f, 1.00f, 0.00f);
+		colors[ImGuiCol_PopupBg] = ImVec4(0.08f, 0.08f, 0.08f, 0.94f);
+		colors[ImGuiCol_Border] = ImVec4(0.43f, 0.43f, 0.50f, 0.50f);
+		colors[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+		colors[ImGuiCol_FrameBg] = ImVec4(0.16f, 0.29f, 0.48f, 0.54f);
+		colors[ImGuiCol_FrameBgHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
+		colors[ImGuiCol_FrameBgActive] = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
+		colors[ImGuiCol_TitleBg] = ImVec4(0.04f, 0.04f, 0.04f, 1.00f);
+		colors[ImGuiCol_TitleBgActive] = ImVec4(0.16f, 0.29f, 0.48f, 1.00f);
+		colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
+		colors[ImGuiCol_MenuBarBg] = ImVec4(1.00f, 0.00f, 0.00f, 0.61f);
+		colors[ImGuiCol_ScrollbarBg] = ImVec4(0.02f, 0.02f, 0.02f, 0.53f);
+		colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.16f, 0.29f, 0.48f, 0.54f);
+		colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.41f, 0.41f, 0.41f, 1.00f);
+		colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.51f, 0.51f, 0.51f, 1.00f);
+		colors[ImGuiCol_CheckMark] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
+		colors[ImGuiCol_SliderGrab] = ImVec4(0.24f, 0.52f, 0.88f, 1.00f);
+		colors[ImGuiCol_SliderGrabActive] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
+		colors[ImGuiCol_Button] = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
+		colors[ImGuiCol_ButtonHovered] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
+		colors[ImGuiCol_ButtonActive] = ImVec4(0.06f, 0.53f, 0.98f, 1.00f);
+		colors[ImGuiCol_Header] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+		colors[ImGuiCol_HeaderHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.80f);
+		colors[ImGuiCol_HeaderActive] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
+		colors[ImGuiCol_Separator] = ImVec4(0.43f, 0.43f, 0.50f, 0.50f);
+		colors[ImGuiCol_SeparatorHovered] = ImVec4(0.10f, 0.40f, 0.75f, 0.78f);
+		colors[ImGuiCol_SeparatorActive] = ImVec4(0.10f, 0.40f, 0.75f, 1.00f);
+		colors[ImGuiCol_ResizeGrip] = ImVec4(0.26f, 0.59f, 0.98f, 0.25f);
+		colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
+		colors[ImGuiCol_ResizeGripActive] = ImVec4(0.26f, 0.59f, 0.98f, 0.95f);
+		colors[ImGuiCol_PlotLines] = ImVec4(0.61f, 0.61f, 0.61f, 1.00f);
+		colors[ImGuiCol_PlotLinesHovered] = ImVec4(1.00f, 0.43f, 0.35f, 1.00f);
+		colors[ImGuiCol_PlotHistogram] = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
+		colors[ImGuiCol_PlotHistogramHovered] = ImVec4(1.00f, 0.60f, 0.00f, 1.00f);
+		colors[ImGuiCol_TextSelectedBg] = ImVec4(0.26f, 0.59f, 0.98f, 0.35f);
+		//colors[ImGuiCol_ModalWindowDarkening] = ImVec4(0.80f, 0.80f, 0.80f, 0.35f);
+		colors[ImGuiCol_DragDropTarget] = ImVec4(1.00f, 1.00f, 0.00f, 0.90f);
+
+		ImGuiWindowFlags	window_flags = 0;
+		if (no_titlebar)	window_flags |= ImGuiWindowFlags_NoTitleBar;
+		if (no_resize)		window_flags |= ImGuiWindowFlags_NoResize;
+		if (auto_resize)	window_flags |= ImGuiWindowFlags_AlwaysAutoResize;
+		if (no_move)		window_flags |= ImGuiWindowFlags_NoMove;
+		if (no_scrollbar)	window_flags |= ImGuiWindowFlags_NoScrollbar;
+		if (no_collapse)	window_flags |= ImGuiWindowFlags_NoCollapse;
+		if (!no_menu)		window_flags |= ImGuiWindowFlags_MenuBar;
+		ImGui::SetNextWindowSize(ImVec2(450, 600));
+		if (!start_pos_set) { ImGui::SetNextWindowPos(ImVec2(25, 25)); start_pos_set = true; }
+
+		ImGui::GetIO().MouseDrawCursor = Menu::bIsOpen;
+
+		if (Menu::bIsOpen)
+		{
+			ImGui::GetBackgroundDrawList()->AddRectFilled(ImVec2(0, 0), ImVec2(10, 10), 0xFFFFFFFF);
+
+
+			ImGui::Begin("ImGui Menu", &Menu::bIsOpen, window_flags);
+
+			ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.65f);
+			ImGui::PushItemWidth(-140);
+
+			if (ImGui::CollapsingHeader("MENU"))
+			{
+				if (ImGui::TreeNode("SUB MENU"))
+				{
+					ImGui::Text("Text Test");
+					if (ImGui::Button("Button Test")) {}
+					ImGui::Checkbox("CheckBox Test", &no_titlebar);
+					//ImGui::SliderFloat("Slider Test", &test, 1.0f, 100.0f);
+
+					ImGui::TreePop();
+				}
+			}
+
+			ImGui::End();
+		}
 	}
 
-	Menu::Render();
+
+
+
+
+
+	ImGui::EndFrame();
+	ImGui::Render();
+
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 }
+
 
 HRESULT __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 {
-	std::call_once(g_isInitialized, [&]() {
+	static bool IsInited = false;
+	if (!IsInited)
+	{
 		pSwapChain->GetDevice(__uuidof(g_pd3dDevice), reinterpret_cast<void**>(&g_pd3dDevice));
 		g_pd3dDevice->GetImmediateContext(&g_pd3dContext);
 
-		ImGui_ImplDX11_Init(g_pd3dDevice, g_pd3dContext);
+		ImGui::CreateContext();
+
 		inputHook.Init(g_hWnd);
-		});
+
+		ImGui_ImplWin32_Init(g_hWnd);
+		ImGui_ImplDX11_Init(g_pd3dDevice, g_pd3dContext);
+
+		IsInited = true;
+	}
 
 	ImplHookDX11_Present(g_pd3dDevice, g_pd3dContext, g_pSwapChain);
 
@@ -139,26 +275,19 @@ DWORD __stdcall HookDX11_Init()
 		return E_FAIL;
 	}
 
-	pSwapChainVTable = (DWORD_PTR*)(g_pSwapChain);
-	pSwapChainVTable = (DWORD_PTR*)(pSwapChainVTable[0]);
+	pSwapChainVTable = ((DWORD***)g_pSwapChain)[0];
+	pDeviceVTable = ((DWORD***)g_pd3dDevice)[0];
+	pDeviceContextVTable = ((DWORD***)g_pd3dContext)[0];
 
-	pDeviceVTable = (DWORD_PTR*)(g_pd3dDevice);
-	pDeviceVTable = (DWORD_PTR*)pDeviceVTable[0];
+	if (MH_CreateHook(pSwapChainVTable[8], PresentHook, reinterpret_cast<void**>(&phookD3D11Present)) != MH_OK) { return 1; }
+	if (MH_CreateHook(pDeviceContextVTable[12], DrawIndexedHook, reinterpret_cast<void**>(&phookD3D11DrawIndexed)) != MH_OK) { return 1; }
+	if (MH_CreateHook(pDeviceVTable[24], hookD3D11CreateQuery, reinterpret_cast<void**>(&phookD3D11CreateQuery)) != MH_OK) { return 1; }
+	if (MH_CreateHook(pDeviceContextVTable[8], hookD3D11PSSetShaderResources, reinterpret_cast<void**>(&phookD3D11PSSetShaderResources)) != MH_OK) { return 1; }
+	if (MH_CreateHook(pSwapChainVTable[50], ClearRenderTargetViewHook, reinterpret_cast<void**>(&phookD3D11ClearRenderTargetViewHook)) != MH_OK) { return 1; }
 
-	pDeviceContextVTable = (DWORD_PTR*)(g_pd3dContext);
-	pDeviceContextVTable = (DWORD_PTR*)(pDeviceContextVTable[0]);
+	if (MH_EnableHook(MH_ALL_HOOKS) != MH_OK)
+		return false;
 
-	if (MH_Initialize() != MH_OK) { return 1; }
-	if (MH_CreateHook((DWORD_PTR*)pSwapChainVTable[8], PresentHook, reinterpret_cast<void**>(&phookD3D11Present)) != MH_OK) { return 1; }
-	if (MH_EnableHook((DWORD_PTR*)pSwapChainVTable[8]) != MH_OK) { return 1; }
-	if (MH_CreateHook((DWORD_PTR*)pDeviceContextVTable[12], DrawIndexedHook, reinterpret_cast<void**>(&phookD3D11DrawIndexed)) != MH_OK) { return 1; }
-	if (MH_EnableHook((DWORD_PTR*)pDeviceContextVTable[12]) != MH_OK) { return 1; }
-	if (MH_CreateHook((DWORD_PTR*)pDeviceVTable[24], hookD3D11CreateQuery, reinterpret_cast<void**>(&phookD3D11CreateQuery)) != MH_OK) { return 1; }
-	if (MH_EnableHook((DWORD_PTR*)pDeviceVTable[24]) != MH_OK) { return 1; }
-	if (MH_CreateHook((DWORD_PTR*)pDeviceContextVTable[8], hookD3D11PSSetShaderResources, reinterpret_cast<void**>(&phookD3D11PSSetShaderResources)) != MH_OK) { return 1; }
-	if (MH_EnableHook((DWORD_PTR*)pDeviceContextVTable[8]) != MH_OK) { return 1; }
-	if (MH_CreateHook((DWORD_PTR*)pSwapChainVTable[50], ClearRenderTargetViewHook, reinterpret_cast<void**>(&phookD3D11ClearRenderTargetViewHook)) != MH_OK) { return 1; }
-	if (MH_EnableHook((DWORD_PTR*)pSwapChainVTable[50]) != MH_OK) { return 1; }
 
 	DWORD old_protect;
 	VirtualProtect(phookD3D11Present, 2, PAGE_EXECUTE_READWRITE, &old_protect);
