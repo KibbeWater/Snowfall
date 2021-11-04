@@ -17,9 +17,9 @@ typedef void(__stdcall* D3D11ClearRenderTargetViewHook) (ID3D11DeviceContext* pC
 
 static HWND                     g_hWnd = nullptr;
 static HMODULE					g_hModule = nullptr;
-static ID3D11Device* g_pd3dDevice = nullptr;
-static ID3D11DeviceContext* g_pd3dContext = nullptr;
-static IDXGISwapChain* g_pSwapChain = nullptr;
+static ID3D11Device*			g_pd3dDevice = nullptr;
+static ID3D11DeviceContext*		g_pd3dContext = nullptr;
+static IDXGISwapChain*			g_pSwapChain = nullptr;
 static std::once_flag           g_isInitialized;
 
 D3D11PresentHook                phookD3D11Present = nullptr;
@@ -34,6 +34,8 @@ DWORD** pDeviceContextVTable = nullptr;
 
 InputHook inputHook = InputHook();
 
+bool bIsOpen = true;
+
 template <typename T = void*>
 __forceinline T GetVirtual(void* thisptr, int iIndex)
 {
@@ -43,7 +45,20 @@ __forceinline T GetVirtual(void* thisptr, int iIndex)
 
 D3D11_HOOK_API void ImplHookDX11_Present(ID3D11Device* device, ID3D11DeviceContext* ctx, IDXGISwapChain* swap_chain)
 {
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+
+	ImGui::NewFrame();
 	
+	// Super advanced menu code in here
+	{
+		ImGui::ShowDemoWindow(&bIsOpen);
+	}
+
+	ImGui::EndFrame();
+	ImGui::Render();
+
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 }
 
 
@@ -54,6 +69,15 @@ HRESULT __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT SyncInterval, UIN
 	{
 		pSwapChain->GetDevice(__uuidof(g_pd3dDevice), reinterpret_cast<void**>(&g_pd3dDevice));
 		g_pd3dDevice->GetImmediateContext(&g_pd3dContext);
+
+		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO();
+		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+
+		ImGui::StyleColorsDark();
+
+		ImGui_ImplWin32_Init(g_hWnd);
+		ImGui_ImplDX11_Init(g_pd3dDevice, g_pd3dContext);
 
 		IsInited = true;
 	}
