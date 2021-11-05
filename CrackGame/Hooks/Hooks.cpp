@@ -8,6 +8,9 @@ INL bool Hook::Init()
 	// TODO:
 	// Add reach for punching (Somewhat done???)
 
+	//PersistentPlayerData_TypeInfo (-7)
+	//48 8B 88 ? ? ? ? 48 8B 79 08 
+
 	// Do hooks
 	{
 		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "40 53 48 83 EC ? 80 3D ? ? ? ? ? 48 8B D9 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 80 7B ? ? 74 ? F3 0F 10 53"), 
@@ -22,6 +25,8 @@ INL bool Hook::Init()
 			PlayerMovement, Update);
 		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 8B C4 48 89 58 20 55 48 8D 68 B8"),
 			PlayerMovement, Movement);
+		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "40 53 48 83 EC 20 80 3D ? ? ? ? ? 48 8B D9 75 37 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 80 7B 34 00"),
+			PlayerInput, Update);
 		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 81 EC ? ? ? ? 33 D2 48 8B D9"),
 			OnlinePlayerMovement, Update);
 		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "40 53 48 83 EC 20 48 8B D9 48 85 C9 74 71"),
@@ -40,6 +45,8 @@ INL bool Hook::Init()
 			LobbyManager, StartLobby);
 		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC ? 48 8B F9 80 3D ? ? ? ? ? 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05"),
 			GameManager, GetPlayersAlive);
+		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 41 54 41 56 41 57 48 83 EC ? 45 8B E1 4D 8B F0"),
+			ClientSend, DamagePlayer);
 		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 41 56 48 83 EC ? 4C 8B F2 48 8B F1 80 3D ? ? ? ? ? 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 33 FF 48 8B 0D"),
 			ClientSend, PlayerPosition);
 		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC ? 0F 29 74 24 ? 0F 29 7C 24 ? 49 8B F0"),

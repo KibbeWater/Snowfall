@@ -110,6 +110,7 @@
     <ClInclude Include="Hooks\Hooks.h" />
     <ClInclude Include="Hooks\LobbyManager.h" />
     <ClInclude Include="Hooks\OnlinePlayerMovement.h" />
+    <ClInclude Include="Hooks\PlayerInput.h" />
     <ClInclude Include="Hooks\PlayerInventory.h" />
     <ClInclude Include="Hooks\PlayerMovement.h" />
     <ClInclude Include="Hooks\PlayerStatus.h" />
@@ -143,6 +144,7 @@
     <ClCompile Include="Hooks\Hooks.cpp" />
     <ClCompile Include="Hooks\LobbyManager.cpp" />
     <ClCompile Include="Hooks\OnlinePlayerMovement.cpp" />
+    <ClCompile Include="Hooks\PlayerInput.cpp" />
     <ClCompile Include="Hooks\PlayerInventory.cpp" />
     <ClCompile Include="Hooks\PlayerMovement.cpp" />
     <ClCompile Include="Hooks\PlayerStatus.cpp" />
