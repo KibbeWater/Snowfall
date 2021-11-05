@@ -52,7 +52,7 @@ D3D11_HOOK_API void ImplHookDX11_Present(ID3D11Device* device, ID3D11DeviceConte
 	
 	// Super advanced menu code in here
 	{
-		ImGui::ShowDemoWindow(&bIsOpen);
+		Menu::Render();
 	}
 
 	ImGui::EndFrame();
@@ -79,7 +79,13 @@ HRESULT __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT SyncInterval, UIN
 		ImGui_ImplWin32_Init(g_hWnd);
 		ImGui_ImplDX11_Init(g_pd3dDevice, g_pd3dContext);
 
+		inputHook.Init(g_hWnd);
+
 		IsInited = true;
+	}
+
+	if (GetAsyncKeyState(OpenMenuKey) & 0x1) {
+		Menu::bIsOpen = !Menu::bIsOpen;
 	}
 
 	ImplHookDX11_Present(g_pd3dDevice, g_pd3dContext, g_pSwapChain);

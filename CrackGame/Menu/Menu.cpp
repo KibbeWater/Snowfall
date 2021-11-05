@@ -6,8 +6,6 @@ float test = 1;
 
 void Menu::Render()
 {
-	ImGui_ImplDX11_NewFrame();
-
 	static bool no_titlebar = false;
 	static bool no_border = true;
 	static bool no_resize = false;
@@ -75,25 +73,63 @@ void Menu::Render()
 
 	if (Menu::bIsOpen)
 	{
-		ImGui::Begin("ImGui Menu", &Menu::bIsOpen, window_flags);
+		ImGui::Begin("Snowfall", &Menu::bIsOpen, window_flags);
 
 		ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.65f);
 		ImGui::PushItemWidth(-140);
 
-		if (ImGui::CollapsingHeader("MENU"))
 		{
-			if (ImGui::TreeNode("SUB MENU"))
+			if (ImGui::CollapsingHeader("General"))
 			{
-				ImGui::Text("Text Test");
-				if (ImGui::Button("Button Test")) {}
-				ImGui::Checkbox("CheckBox Test", &no_titlebar);
-				ImGui::SliderFloat("Slider Test", &test, 1.0f, 100.0f);
-
-				ImGui::TreePop();
+				ImGui::Checkbox("Camera shake disable", &F::bDisabledCamShake);
+			}
+			ImGui::Spacing();
+			if (ImGui::CollapsingHeader("Combat"))
+			{
+				ImGui::Checkbox("Godmode", &F::bGodmode);
+				ImGui::Checkbox("Fast Punch", &F::bFastPunch);
+				ImGui::Checkbox("Reach", &F::bReach);
+				if (F::bReach)
+					ImGui::SliderFloat("Reach Slider", &F::fReachDist, 2.5, 100);
+			}
+			ImGui::Spacing();
+			if (ImGui::CollapsingHeader("Movement"))
+			{
+				ImGui::Checkbox("Speedhack", &F::bSpeedhack);
+				if (F::bSpeedhack)
+					ImGui::SliderInt("Speed", &F::iSpeedPercent, 100, 1000);
+				ImGui::Checkbox("AirJump", &F::bAirJump);
+				ImGui::Checkbox("Anti-Knockback", &F::bAntiKnockback);
+				ImGui::Checkbox("NoSlide", &F::bNoSlide);
+			}
+			ImGui::Spacing();
+			if (ImGui::CollapsingHeader("Gamemodes"))
+			{
+				if (ImGui::TreeNode("Red Light Green Light"))
+				{
+					ImGui::Checkbox("Red Light freeze", &F::bRedGreenProtection);
+					ImGui::TreePop();
+				}
+				if (ImGui::TreeNode("Bomb Tag"))
+				{
+					ImGui::Checkbox("Delete bomb on tag", &F::bBombDeleting);
+					ImGui::TreePop();
+				}
+				if (ImGui::TreeNode("Dorms"))
+				{
+					ImGui::Checkbox("Lights always on", &F::bLightsAlwaysOn);
+					ImGui::TreePop();
+				}
+			}
+			ImGui::Spacing();
+			if (ImGui::CollapsingHeader("Lobby"))
+			{
+				ImGui::Checkbox("Max Player Override", &F::bMaxPlayersOverride);
+				if (F::bMaxPlayersOverride)
+					ImGui::SliderInt("Max Players", &F::iMaxPlayersCount, 40, 5000);
 			}
 		}
 
 		ImGui::End();
 	}
-	ImGui::Render();
 }

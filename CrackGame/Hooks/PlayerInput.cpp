@@ -4,7 +4,7 @@ void __stdcall Hook::PlayerInput::hkUpdate(PlayerInput_o* pThis, const MethodInf
 {
 	static auto oUpdate = static_cast<decltype(&hkUpdate)>(pUpdate);
 
-	*reinterpret_cast<bool*>(GameAPI::GetPersistentData() + 0xB8) = false;
+	//*reinterpret_cast<bool*>(GameAPI::GetPersistentData() + 0xB8) = false;
 
 	oUpdate(pThis, pMethod);
 }

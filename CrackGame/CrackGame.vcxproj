@@ -92,7 +92,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="config.h" />
-    <ClInclude Include="Features\Punch.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameSDK\Enums.h" />
     <ClInclude Include="GameSDK\Other.h" />
@@ -140,7 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="Features\Punch.cpp" />
     <ClCompile Include="GameSDK\Other.cpp" />
     <ClCompile Include="Helpers\Math.cpp" />
     <ClCompile Include="Helpers\Memory.cpp" />
