@@ -50,6 +50,16 @@
 #include "Hooks/LobbyManager.h"
 #include "Hooks/GameManager.h"
 #include "Hooks/ClientSend.h"
+#include "Hooks/D3D11Hook.h"
+#include "Hooks/InputHook.h"
+
+// ImGUI
+#include "ImGUI/imgui.h"
+#include "ImGUI/imgui_impl_win32.h"
+#include "ImGUI/imgui_impl_dx11.h"
+
+// Menu
+#include "Menu/Menu.h"
 #include "Hooks/Chatbox.h"
 #include "Hooks/PlayerInput.h"
 

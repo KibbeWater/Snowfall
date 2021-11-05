@@ -12,7 +12,7 @@ void __stdcall Hook::ClientSend::hkPlayerRotation(float x, float y, uint64_t toI
 {
 	static auto oPlayerRotation = static_cast<decltype(&hkPlayerRotation)>(pPlayerRotation);
 
-	if (!G::bRedLightFreeze)
+	if (!(G::bRedLightFreeze && F::bRedGreenProtection) || !F::bRedGreenProtection)
 		oPlayerRotation(x, y, toId, pMethod);
 }
 

@@ -4,5 +4,5 @@ void __stdcall Hook::GamemodeLights::hkToggleLights(GameModeLights_o* pThis, boo
 {
 	static auto oToggleLights = static_cast<decltype(&hkToggleLights)>(pToggleLights);
 
-	oToggleLights(pThis, true, pMethod);
+	oToggleLights(pThis, F::bLightsAlwaysOn ? true : b, pMethod);
 }

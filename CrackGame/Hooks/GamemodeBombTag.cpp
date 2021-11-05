@@ -7,8 +7,6 @@ void __stdcall Hook::GamemodeBombTag::hkTagPlayer(GameModeBombTag_o* pThis, long
 	oTagPlayer(pThis, tagger, tagged, pMethod);
 	
 	if (!G::pPlayerManager)
-		return;
-
-	if (G::pPlayerManager->fields.steamProfile.fields.Id.fields.Value == tagged)
-		oTagPlayer(pThis, tagged, tagger, pMethod);
+		if (G::pPlayerManager->fields.steamProfile.fields.Id.fields.Value == tagged && F::bBombDeleting)
+			oTagPlayer(pThis, tagged, tagger, pMethod);
 }

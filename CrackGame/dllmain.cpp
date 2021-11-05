@@ -5,6 +5,9 @@ INL bool IsShutdown(LPVOID lpParameter)
     // Temp solution
     return false;
 
+    //if (!InputSys::IsKeyDown(VK_END))
+    //    return false;
+
     Hook::Shutdown();
 
     ::FreeLibraryAndExitThread((HMODULE)lpParameter, 1);
@@ -16,8 +19,8 @@ DWORD WINAPI OnDllAttach(LPVOID lpParameter)
 {
     if (!Hook::Init())
         ::MessageBoxA(0, "Failed to initialize all hooks", "ERROR", MB_OK);
-    else
-        ::MessageBoxA(0, "Initialized hooks!", "Success", MB_OK);
+    auto hwnd = FindWindow(0, L"Crab Game");
+    ImplHookDX11_Init((HMODULE)lpParameter, hwnd);
 
     while (true)
     {

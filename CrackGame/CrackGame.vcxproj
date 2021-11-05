@@ -92,7 +92,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="config.h" />
-    <ClInclude Include="Features\Punch.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameSDK\Enums.h" />
     <ClInclude Include="GameSDK\Other.h" />
@@ -102,12 +101,14 @@
     <ClInclude Include="Hooks\CameraShake.h" />
     <ClInclude Include="Hooks\Chatbox.h" />
     <ClInclude Include="Hooks\ClientSend.h" />
+    <ClInclude Include="Hooks\D3D11Hook.h" />
     <ClInclude Include="Hooks\GameManager.h" />
     <ClInclude Include="Hooks\GamemodeBombTag.h" />
     <ClInclude Include="Hooks\GamemodeLights.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Hooks\GamemodeRedLight.h" />
     <ClInclude Include="Hooks\Hooks.h" />
+    <ClInclude Include="Hooks\InputHook.h" />
     <ClInclude Include="Hooks\LobbyManager.h" />
     <ClInclude Include="Hooks\OnlinePlayerMovement.h" />
     <ClInclude Include="Hooks\PlayerInput.h" />
@@ -115,6 +116,15 @@
     <ClInclude Include="Hooks\PlayerMovement.h" />
     <ClInclude Include="Hooks\PlayerStatus.h" />
     <ClInclude Include="Hooks\PunchPlayers.h" />
+    <ClInclude Include="ImGUI\imconfig.h" />
+    <ClInclude Include="ImGUI\imgui.h" />
+    <ClInclude Include="ImGUI\imgui_impl_dx11.h" />
+    <ClInclude Include="ImGUI\imgui_impl_win32.h" />
+    <ClInclude Include="ImGUI\imgui_internal.h" />
+    <ClInclude Include="ImGUI\imstb_rectpack.h" />
+    <ClInclude Include="ImGUI\imstb_textedit.h" />
+    <ClInclude Include="ImGUI\imstb_truetype.h" />
+    <ClInclude Include="Menu\Menu.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="GameSDK\il2cpp.h" />
     <ClInclude Include="Thirdparty\MinHook\buffer.h" />
@@ -129,7 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="Features\Punch.cpp" />
     <ClCompile Include="GameSDK\Other.cpp" />
     <ClCompile Include="Helpers\Math.cpp" />
     <ClCompile Include="Helpers\Memory.cpp" />
@@ -137,11 +146,13 @@
     <ClCompile Include="Hooks\CameraShake.cpp" />
     <ClCompile Include="Hooks\Chatbox.cpp" />
     <ClCompile Include="Hooks\ClientSend.cpp" />
+    <ClCompile Include="Hooks\D3D11Hook.cpp" />
     <ClCompile Include="Hooks\GameManager.cpp" />
     <ClCompile Include="Hooks\GamemodeBombTag.cpp" />
     <ClCompile Include="Hooks\GamemodeLights.cpp" />
     <ClCompile Include="Hooks\GamemodeRedLight.cpp" />
     <ClCompile Include="Hooks\Hooks.cpp" />
+    <ClCompile Include="Hooks\InputHook.cpp" />
     <ClCompile Include="Hooks\LobbyManager.cpp" />
     <ClCompile Include="Hooks\OnlinePlayerMovement.cpp" />
     <ClCompile Include="Hooks\PlayerInput.cpp" />
@@ -149,6 +160,14 @@
     <ClCompile Include="Hooks\PlayerMovement.cpp" />
     <ClCompile Include="Hooks\PlayerStatus.cpp" />
     <ClCompile Include="Hooks\PunchPlayers.cpp" />
+    <ClCompile Include="ImGUI\imgui.cpp" />
+    <ClCompile Include="ImGUI\imgui_demo.cpp" />
+    <ClCompile Include="ImGUI\imgui_draw.cpp" />
+    <ClCompile Include="ImGUI\imgui_impl_dx11.cpp" />
+    <ClCompile Include="ImGUI\imgui_impl_win32.cpp" />
+    <ClCompile Include="ImGUI\imgui_tables.cpp" />
+    <ClCompile Include="ImGUI\imgui_widgets.cpp" />
+    <ClCompile Include="Menu\Menu.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
