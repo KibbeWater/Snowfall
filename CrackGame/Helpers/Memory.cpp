@@ -107,6 +107,9 @@ PVOID MEM::PatternScan(const char* szPattern, int iOffset)
         MemoryAddress += mbi.RegionSize;
     }
 
+    if (DEV_MODE)
+        DebugBreak();
+
     return nullptr;
 }
 

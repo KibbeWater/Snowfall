@@ -15,3 +15,10 @@ void __stdcall Hook::ClientSend::hkPlayerRotation(float x, float y, uint64_t toI
 	if (!G::bRedLightFreeze)
 		oPlayerRotation(x, y, toId, pMethod);
 }
+
+void __stdcall Hook::ClientSend::hkDamagePlayer(long hurtPlayerId, int damage, UnityEngine_Vector3_o* damageDir, int itemID, int objectID, const MethodInfo* pMethod)
+{
+	static auto oDamagePlayer = static_cast<decltype(&hkDamagePlayer)>(pDamagePlayer);
+
+	oDamagePlayer(hurtPlayerId, damage, damageDir, itemID, objectID, pMethod);
+}

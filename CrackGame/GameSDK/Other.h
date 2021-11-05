@@ -6,9 +6,16 @@ namespace Obfuscation
 	int DecryptInt(CodeStage_AntiCheat_ObscuredTypes_ObscuredInt_o pThis);
 	float DecryptFloat(CodeStage_AntiCheat_ObscuredTypes_ObscuredFloat_o* pThis);
 
-	CodeStage_AntiCheat_ObscuredTypes_ObscuredBool_o EncryptBool(bool value, short key);
-	CodeStage_AntiCheat_ObscuredTypes_ObscuredInt_o EncryptInt(int value);
-	int EncryptFloat(float value, int key);
+	void EncryptBool(CodeStage_AntiCheat_ObscuredTypes_ObscuredBool_o* obscuredBool, bool value);
+	void EncryptInt(CodeStage_AntiCheat_ObscuredTypes_ObscuredInt_o* obscuredInt, int value);
+	void EncryptFloat(CodeStage_AntiCheat_ObscuredTypes_ObscuredFloat_o* obscuredFloat, float value);
+}
 
+namespace GameAPI {
+	GameManager_c* GetGamemanager();
+	SteamManager_c* GetSteammanager();
+	PersistentPlayerData_c* GetPersistentData();
 	void RespawnPlayer(UnityEngine_Vector3_o pos);
+	void TagPlayer(GameModeBombTag_o* pThis, long tagger, long tagged);
+	void DamagePlayer(long hurtPlayerId, int damage, int itemID, int objectID);
 }

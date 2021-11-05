@@ -2,8 +2,11 @@
 
 INL bool IsShutdown(LPVOID lpParameter)
 {
-    if (!GetAsyncKeyState(VK_END))
-        return false;
+    // Temp solution
+    return false;
+
+    //if (!InputSys::IsKeyDown(VK_END))
+    //    return false;
 
     Hook::Shutdown();
 
