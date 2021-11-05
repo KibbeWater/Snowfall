@@ -28,14 +28,12 @@ void __stdcall Hook::PlayerMovement::hkUpdate(PlayerMovement_o* pThis, const Met
 	static int originalRunSpeed = Obfuscation::DecryptFloat(&pThis->fields.maxRunSpeed);
 	static int originalMax = Obfuscation::DecryptFloat(&pThis->fields.maxSpeed);
 
-	if (F::bSpeedhack) {
-		float increasePercent = (float)F::iSpeedPercent / 100;
+	float increasePercent = F::bSpeedhack ? (float)F::iSpeedPercent / 100 : 1;
 
-		Obfuscation::EncryptFloat(&pThis->fields.defaultMoveSpeed, originalDefaultSpeed * increasePercent);
-		Obfuscation::EncryptFloat(&pThis->fields.maxWalkSpeed, originalWalkSpeed * increasePercent);
-		Obfuscation::EncryptFloat(&pThis->fields.maxRunSpeed, originalRunSpeed * increasePercent);
-		Obfuscation::EncryptFloat(&pThis->fields.maxSpeed, originalMax * increasePercent);
-	}
+	Obfuscation::EncryptFloat(&pThis->fields.defaultMoveSpeed, originalDefaultSpeed * increasePercent);
+	Obfuscation::EncryptFloat(&pThis->fields.maxWalkSpeed, originalWalkSpeed * increasePercent);
+	Obfuscation::EncryptFloat(&pThis->fields.maxRunSpeed, originalRunSpeed * increasePercent);
+	Obfuscation::EncryptFloat(&pThis->fields.maxSpeed, originalMax * increasePercent);
 
 	oUpdate(pThis, pMethod);
 }

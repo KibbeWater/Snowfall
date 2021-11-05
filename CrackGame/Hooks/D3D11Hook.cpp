@@ -33,8 +33,7 @@ DWORD** pDeviceVTable = nullptr;
 DWORD** pDeviceContextVTable = nullptr;
 
 InputHook inputHook = InputHook();
-
-bool bIsOpen = true;
+ELockState oldLockState = LOCKSTATE_NONE;
 
 template <typename T = void*>
 __forceinline T GetVirtual(void* thisptr, int iIndex)
@@ -86,6 +85,16 @@ HRESULT __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT SyncInterval, UIN
 
 	if (GetAsyncKeyState(OpenMenuKey) & 0x1) {
 		Menu::bIsOpen = !Menu::bIsOpen;
+
+		if (Menu::bIsOpen) {
+			oldLockState = GameAPI::GetLockState();
+			GameAPI::SetLockState(LOCKSTATE_NONE);
+		}
+		else {
+			auto curLockstate = GameAPI::GetLockState();
+			if (curLockstate == LOCKSTATE_NONE)
+				GameAPI::SetLockState(oldLockState);
+		}
 	}
 
 	ImplHookDX11_Present(g_pd3dDevice, g_pd3dContext, g_pSwapChain);

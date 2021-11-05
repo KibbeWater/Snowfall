@@ -1,4 +1,5 @@
 #pragma once
+enum ELockState;
 
 namespace Obfuscation
 {
@@ -15,6 +16,10 @@ namespace GameAPI {
 	GameManager_c* GetGamemanager();
 	SteamManager_c* GetSteammanager();
 	PersistentPlayerData_c* GetPersistentData();
+
+	void SetLockState(ELockState lockState);
+	ELockState GetLockState();
+
 	void RespawnPlayer(UnityEngine_Vector3_o pos);
 	void TagPlayer(GameModeBombTag_o* pThis, long tagger, long tagged);
 	void DamagePlayer(long hurtPlayerId, int damage, int itemID, int objectID);

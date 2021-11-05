@@ -4,7 +4,7 @@ void __stdcall Hook::ClientSend::hkPlayerPosition(UnityEngine_Vector3_o position
 {
 	static auto oPlayerPosition = static_cast<decltype(&hkPlayerPosition)>(pPlayerPosition);
 
-	if (!G::bRedLightFreeze)
+	if (!(G::bRedLightFreeze && F::bRedGreenProtection) || !F::bRedGreenProtection)
 		oPlayerPosition(position, toId, pMethod);
 }
 
