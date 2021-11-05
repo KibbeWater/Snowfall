@@ -1,7 +1,7 @@
 #pragma once
 
 // Define some compile options
-#define DEV_MODE false
+#define DEV_MODE true
 
 // Vista min supported version
 #define _WIN32_WINNT 0x0600 
