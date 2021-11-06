@@ -44,23 +44,44 @@ void Obfuscation::EncryptFloat(CodeStage_AntiCheat_ObscuredTypes_ObscuredFloat_o
 
 GameManager_c* GameAPI::GetGamemanager()
 {
-	static auto GameManager_TypeInfo = reinterpret_cast<GameManager_c*>(
+	static auto GameManager_TypeInfo = reinterpret_cast<GameManager_c**>(
 		MEM::PatternScanRel("GameAssembly.dll", "48 8B 91 ? ? ? ? 48 8B 0A 48 85 C9 74 2C F2 0F 10 00 4C 8D 44 24 ? 8B 40 08 45 33 C9 48 8B D7 F2 0F 11 44 24 ? 89 44 24 28", -4));
-	return GameManager_TypeInfo;
+	return *GameManager_TypeInfo;
 }
 
 SteamManager_c* GameAPI::GetSteammanager()
 {
-	static auto SteamManager_TypeInfo = reinterpret_cast<SteamManager_c*>(
+	static auto SteamManager_TypeInfo = reinterpret_cast<SteamManager_c**>(
 		MEM::PatternScanRel("GameAssembly.dll", "48 8B 89 ? ? ? ? 48 89 19 48 8B D3 E8 ? ? ? ? 48 8B 15 ? ? ? ? 48 89 53 18 48 8D 4B 18 E8 ? ? ? ? 90 33 C9", -4));
-	return SteamManager_TypeInfo;
+	return *SteamManager_TypeInfo;
 }
 
 PersistentPlayerData_c* GameAPI::GetPersistentData()
 {
-	static auto PersistentPlayerData_TypeInfo = reinterpret_cast<PersistentPlayerData_c*>(
+	static auto PersistentPlayerData_TypeInfo = reinterpret_cast<PersistentPlayerData_c**>(
 		MEM::PatternScanRel("GameAssembly.dll", "48 8B D3 48 8B 88 ? ? ? ? 48 83 C1 08 48 89 19 E8 ? ? ? ? 33 D2 48 8B CB E8 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B D8 F6 81 ? ? ? ? ? 74 0E 83 B9 ? ? ? ? ? 75 05 E8 ? ? ? ? 33 D2", -4));
-	return PersistentPlayerData_TypeInfo;
+	return *PersistentPlayerData_TypeInfo;
+}
+
+PlayerInventory_c* GameAPI::GetInventory()
+{
+	static auto PlayerInventory_TypeInfo = reinterpret_cast<PlayerInventory_c**>(
+		MEM::PatternScanRel("GameAssembly.dll", "48 8B D0 48 8B 89 ? ? ? ? 48 89 01 E8 ? ? ? ? 48 8B 0D ? ? ? ? E8 ? ? ? ? 48 8B 15 ? ? ? ? 48 8B C8 48 8B D8 E8 ? ? ? ? 48 8D 4F 18 48 8B D3", -4));
+	return *PlayerInventory_TypeInfo;
+}
+
+ItemManager_c* GameAPI::GetItemMgr()
+{
+	static auto ItemManager_TypeInfo = reinterpret_cast<ItemManager_c**>(
+		MEM::PatternScanRel("GameAssembly.dll", "48 8B D3 48 8B 88 ? ? ? ? 48 83 C1 08 48 89 19 E8 ? ? ? ? 33 D2 48 8B CB E8 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B D8 F6 81 ? ? ? ? ? 74 0E 83 B9 ? ? ? ? ? 75 05 E8 ? ? ? ? 33 D2 48 8B CB E8 ? ? ? ? 80 3D ? ", -4));
+	return *ItemManager_TypeInfo;
+}
+
+PlayerInput_c* GameAPI::GetPlayerInput()
+{
+	static auto PlayerManager_TypeInfo = reinterpret_cast<PlayerInput_c**>(
+		MEM::PatternScanRel("GameAssembly.dll", "48 8B 88 ? ? ? ? 48 8B D7 48 83 C1 08 48 89 5C 24 ? 48 89 39 E8 ? ? ? ? 48 8B 15 ? ? ? ?", -4));
+	return *PlayerManager_TypeInfo;
 }
 
 void GameAPI::SetLockState(ELockState lockState)
@@ -81,27 +102,46 @@ void GameAPI::RespawnPlayer(UnityEngine_Vector3_o pos)
 {
 	static auto fnRespawnPlayer = reinterpret_cast<void(__thiscall*)(GameManager_o*, long, UnityEngine_Vector3_o, const MethodInfo*)>(
 		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC 40 80 3D ? ? ? ? ? 49 8B F0 48 8B FA 48 8B D9 75 43"));
-	
-	if (!G::pGameManager || !G::pPlayerManager)
-		return;
 
 	return fnRespawnPlayer(GameAPI::GetGamemanager()->static_fields->Instance, GameAPI::GetSteammanager()->static_fields->Instance->fields._PlayerSteamId_k__BackingField.fields.Value, pos, nullptr);
 }
 
 void GameAPI::TagPlayer(GameModeBombTag_o* pThis, long tagger, long tagged)
 {
-	static auto fnSendTagPlayer = reinterpret_cast<void(__thiscall*)(GameModeBombTag_o*, long, long, const MethodInfo*)>(
+	static auto fnTagPlayer = reinterpret_cast<void(__thiscall*)(GameModeBombTag_o*, long, long, const MethodInfo*)>(
 		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC ? 80 3D ? ? ? ? ? 49 8B F0 48 8B DA 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 48 8B 0D ? ? ? ? F6 81 ? ? ? ? ? 74 ? 83 B9 ? ? ? ? ? 75 ? E8 ? ? ? ? 45 33 C0 48 8B D6 48 8B CB E8 ? ? ? ? 48 8B 0D ? ? ? ? 33 D2 E8 ? ? ? ? 48 8B 0D ? ? ? ? 8B F8 48 8B 91 ? ? ? ? 48 8B 0A 48 85 C9 74 ? 33 D2 E8 ? ? ? ? 45 33 C9 44 8B C0 8B D7 48 8B CE E8 ? ? ? ? 48 85 DB 74 ? 45 33 C0 8B D7 48 8B CB E8 ? ? ? ? 48 8B 5C 24 ? 48 8B 74 24 ? 48 83 C4 ? 5F C3 E8 ? ? ? ? CC CC CC CC CC CC CC 48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC ? 80 3D ? ? ? ? ? 49 8B F0 48 8B DA"));
 	
-	return fnSendTagPlayer(pThis, tagger, tagged, nullptr);
+	return fnTagPlayer(pThis, tagger, tagged, nullptr);
 }
 
-void GameAPI::DamagePlayer(long hurtPlayerId, int damage, int itemID, int objectID)
+void GameAPI::DamagePlayer(long hurtPlayerId, int damage, int itemID, int objectID, UnityEngine_Vector3_o dmgDir)
 {
 	static auto fnDamagePlayer = reinterpret_cast<void(__thiscall*)(long, int, UnityEngine_Vector3_o, int, int, const MethodInfo*)>(
 		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 41 54 41 56 41 57 48 83 EC 50 45 8B E1 "));
 
-	UnityEngine_Vector3_o emptyDir = {};
+	return fnDamagePlayer(hurtPlayerId, damage, dmgDir, itemID, objectID, nullptr);
+}
 
-	return fnDamagePlayer(hurtPlayerId, damage, emptyDir, itemID, objectID, nullptr);
+ItemData_o* GameAPI::GetItemByID(int ID)
+{
+	static auto fnGetItemByID = reinterpret_cast<ItemData_o*(__thiscall*)(int, const MethodInfo*)>(
+		MEM::PatternScan("GameAssembly.dll", "40 53 48 83 EC ? 80 3D ? ? ? ? ? 8B D9 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05"));
+
+	return fnGetItemByID(ID, nullptr);
+}
+
+void GameAPI::ForceGiveItem(ItemData_o* item)
+{
+	static auto fnForceGiveItem = reinterpret_cast<void(__thiscall*)(PlayerInventory_o*, ItemData_o*, const MethodInfo*)>(
+		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC 20 80 3D ? ? ? ? ? 48 8B DA 48 8B F9 75 2B 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 48 89 74 24 ? 4C 89 74 24 ?"));
+
+	return fnForceGiveItem(GameAPI::GetInventory()->static_fields->Instance, item, nullptr);
+}
+
+void GameAPI::SendPacket(Packet_o* packet)
+{
+	static auto fnSendPacket = reinterpret_cast<void(__thiscall*)(Packet_o*, const MethodInfo*)>(
+		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC ? 80 3D ? ? ? ? ? 48 8B D9 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 48 8B 05 ? ? ? ? F6 80 ? ? ? ? ? 74 ? 83 B8 ? ? ? ? ? 75 ? 48 8B C8 E8 ? ? ? ? 48 8B 05 ? ? ? ? 48 8B 80 ? ? ? ? 8B 78 ? 48 85 DB 0F 84 ? ? ? ? 33 D2 48 8B CB E8 ? ? ? ? 8D 14 38 48 8B 05 ? ? ? ? 48 8B 88 ? ? ? ? 89 51 ? 33 D2 48 8B 05 ? ? ? ? 48 8B 88 ? ? ? ? FF 01 48 8B CB E8 ? ? ? ? 48 8B 05 ? ? ? ? F6 80 ? ? ? ? ? 74 ? 83 B8 ? ? ? ? ? 75 ? 48 8B C8 E8 ? ? ? ? 48 8B 05 ? ? ? ? 48 8B 80 ? ? ? ? 4C 8B 10 4D 85 D2 74 ? 48 8B 05 ? ? ? ? 41 B9 ? ? ? ? 48 8B D3 48 C7 44 24 ? ? ? ? ? 48 8B 88 ? ? ? ? 44 8B 41 ? 49 8B 4A ? E8 ? ? ? ? 48 8B 5C 24 ? 48 83 C4 ? 5F C3 E8 ? ? ? ? CC CC CC CC 48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC ? 80 3D ? ? ? ? ? 48 8B F2 48 8B D9 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 48 8B 05 ? ? ? ? F6 80 ? ? ? ? ? 74 ? 83 B8 ? ? ? ? ? 75 ? 48 8B C8 E8 ? ? ? ? 48 8B 05 ? ? ? ? 48 8B 80 ? ? ? ? 8B 78 ? 48 85 DB 74 ? 33 D2 48 8B CB E8 ? ? ? ? 8D 14 38 48 8B 05 ? ? ? ? 48 8B 88 ? ? ? ? 89 51 ? 33 D2 48 8B 05 ? ? ? ? 48 8B 88 ? ? ? ? FF 01 48 8B CB E8 ? ? ? ? 48 8B 05 ? ? ? ? 41 B9 ? ? ? ? 48 8B D3 48 C7 44 24 ? ? ? ? ? 48 8B 88 ? ? ? ? 44 8B 41 ? 48 8B CE E8 ? ? ? ? 48 8B 5C 24 ? 48 8B 74 24 ? 48 83 C4 ? 5F C3 E8 ? ? ? ? CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 80 3D ? ? ? ? ? 48 8B D9"));
+
+	return fnSendPacket(packet, nullptr);
 }

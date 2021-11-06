@@ -88,6 +88,7 @@ void Menu::Render()
 			{
 				ImGui::Checkbox("Godmode", &F::bGodmode);
 				ImGui::Checkbox("Fast Punch", &F::bFastPunch);
+				ImGui::Checkbox("Infinite Ammo", &F::bInfAmmo);
 				ImGui::Checkbox("Reach", &F::bReach);
 				if (F::bReach)
 					ImGui::SliderFloat("Reach Slider", &F::fReachDist, 2.5, 100);
@@ -112,13 +113,37 @@ void Menu::Render()
 				}
 				if (ImGui::TreeNode("Bomb Tag"))
 				{
-					ImGui::Checkbox("Delete bomb on tag", &F::bBombDeleting);
+					ImGui::Checkbox("Anti-Bomb Tag", &F::bAntiBombTag);
 					ImGui::TreePop();
 				}
 				if (ImGui::TreeNode("Dorms"))
 				{
 					ImGui::Checkbox("Lights always on", &F::bLightsAlwaysOn);
 					ImGui::TreePop();
+				}
+			}
+			ImGui::Spacing();
+			if (ImGui::CollapsingHeader("Item Giver"))
+			{
+				static const char* curItem = "Rifle (BANNABLE)";
+				static int selectedWeapon = 0;
+				const char* items[] = { "Rifle (BANNABLE)", "Pistol", "Shotgun (BANNABLE)", "Bat", "Bomb", "Katana", "Knife", "Pipe", "Stick" };
+
+				if (ImGui::BeginCombo("Weapon", curItem)) {
+					for (int n = 0; n < IM_ARRAYSIZE(items); n++) { //Loop through all weapons
+						bool isSelected = (curItem == items[n]);
+						if (ImGui::Selectable(items[n], isSelected))
+							curItem = items[n];
+						if (isSelected) {
+							selectedWeapon = n;
+							ImGui::SetItemDefaultFocus();
+						}
+					}
+					ImGui::EndCombo();
+				}
+
+				if (ImGui::Button("Give Weapon")) {
+					GameAPI::ForceGiveItem(GameAPI::GetItemByID(selectedWeapon));
 				}
 			}
 			ImGui::Spacing();
@@ -129,6 +154,22 @@ void Menu::Render()
 					ImGui::SliderInt("Max Players", &F::iMaxPlayersCount, 40, 5000);
 			}
 		}
+		#ifdef DEBUG
+		ImGui::Spacing();
+		if (ImGui::CollapsingHeader("Exploits (EXPERIMENTAL)"))
+		{
+			if (ImGui::Button("Respawn"))
+				GameAPI::RespawnPlayer(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.cameraRot);
+			if (ImGui::Button("Spam packets")) {
+				for (size_t i = 0; i < 30; i++)
+				{
+					GameAPI::DamagePlayer(213, i, 69, 69, GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.cameraRot);
+				}
+			}
+		}
+		#endif
+
+		
 
 		ImGui::End();
 	}

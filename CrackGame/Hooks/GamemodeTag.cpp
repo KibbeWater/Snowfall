@@ -1,6 +1,6 @@
 #include "pch.h"
 
-void __stdcall Hook::GamemodeBombTag::hkTagPlayer(GameModeBombTag_o* pThis, long tagger, long tagged, const MethodInfo* pMethod)
+void __stdcall Hook::GamemodeTag::hkTagPlayer(GameModeTag_o* pThis, long tagger, long tagged, const MethodInfo* pMethod)
 {
 	static auto oTagPlayer = static_cast<decltype(&hkTagPlayer)>(pTagPlayer);
 

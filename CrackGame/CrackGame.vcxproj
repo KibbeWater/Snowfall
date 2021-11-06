@@ -107,8 +107,10 @@
     <ClInclude Include="Hooks\GamemodeLights.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Hooks\GamemodeRedLight.h" />
+    <ClInclude Include="Hooks\GamemodeTag.h" />
     <ClInclude Include="Hooks\Hooks.h" />
     <ClInclude Include="Hooks\InputHook.h" />
+    <ClInclude Include="Hooks\ItemGun.h" />
     <ClInclude Include="Hooks\LobbyManager.h" />
     <ClInclude Include="Hooks\OnlinePlayerMovement.h" />
     <ClInclude Include="Hooks\PlayerInput.h" />
@@ -151,8 +153,10 @@
     <ClCompile Include="Hooks\GamemodeBombTag.cpp" />
     <ClCompile Include="Hooks\GamemodeLights.cpp" />
     <ClCompile Include="Hooks\GamemodeRedLight.cpp" />
+    <ClCompile Include="Hooks\GamemodeTag.cpp" />
     <ClCompile Include="Hooks\Hooks.cpp" />
     <ClCompile Include="Hooks\InputHook.cpp" />
+    <ClCompile Include="Hooks\ItemGun.cpp" />
     <ClCompile Include="Hooks\LobbyManager.cpp" />
     <ClCompile Include="Hooks\OnlinePlayerMovement.cpp" />
     <ClCompile Include="Hooks\PlayerInput.cpp" />

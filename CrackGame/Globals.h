@@ -5,6 +5,7 @@ struct PlayerManager_o;
 
 namespace G {
 	inline bool bRedLightFreeze = false;
+	inline bool bAnticheatDisabler = false;
 
 	inline GameManager_o* pGameManager = nullptr;
 	inline PlayerManager_o* pPlayerManager = nullptr;
@@ -17,6 +18,7 @@ namespace F {
 	//Combat
 	inline bool bGodmode = false;
 	inline bool bFastPunch = false;
+	inline bool bInfAmmo = false;
 	inline bool bReach = false;
 	inline float fReachDist = 2.5;
 
@@ -29,8 +31,11 @@ namespace F {
 
 	//Gamemodes
 	inline bool bRedGreenProtection = false;
-	inline bool bBombDeleting = false;
+	inline bool bAntiBombTag = false;
 	inline bool bLightsAlwaysOn = false;
+
+	//Item giver
+	inline int iWeaponID = 0;
 
 	//Lobby
 	inline bool bMaxPlayersOverride = false;

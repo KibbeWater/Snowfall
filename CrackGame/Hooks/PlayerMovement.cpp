@@ -4,7 +4,7 @@ void __stdcall Hook::PlayerMovement::hkPushPlayer(PlayerMovement_o* pThis, Unity
 {
 	static auto oPushPlayer = static_cast<decltype(&hkPushPlayer)>(pPushPlayer);
 	
-	if (F::bAntiKnockback)
+	if (!F::bAntiKnockback)
 		oPushPlayer(pThis, pushForce, pMethod);
 }
 

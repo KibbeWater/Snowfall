@@ -12,5 +12,8 @@ namespace Hook
 
 		inline void* pDamagePlayer;
 		void __stdcall hkDamagePlayer(long hurtPlayerId, int damage, UnityEngine_Vector3_o* damageDir, int itemID, int objectID, const MethodInfo* pMethod);
+
+		inline void* pUseItem;
+		void __stdcall hkUseItem(int itemID, UnityEngine_Vector3_o* dir, const MethodInfo* pMethod);
 	}
 }

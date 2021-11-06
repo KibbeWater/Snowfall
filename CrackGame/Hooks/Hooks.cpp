@@ -39,7 +39,9 @@ INL bool Hook::Init()
 			GamemodeRedLight, GreenLight);
 		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC 60 80 3D ? ? ? ? ? 49 8B F0 48 8B DA 48 8B F9 75 73"),
 			GamemodeBombTag, TagPlayer);
-		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 4C 89 74 24 ? 55 48 8B EC 48 83 EC ? 80 3D ? ? ? ? ? 4D 8B F1"),
+		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC 60 80 3D ? ? ? ? ? 49 8B F0 48 8B FA 48 8B D9 75 73"),
+			GamemodeTag, TagPlayer);
+		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 55 57 41 57 48 8D 6C 24"),
 			PlayerStatus, DamagePlayer);
 		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "40 57 48 83 EC ? 80 3D ? ? ? ? ? 48 8B F9 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 48 8B 05 ? ? ? ? 48 89 5C 24"),
 			LobbyManager, StartLobby);
@@ -49,6 +51,10 @@ INL bool Hook::Init()
 			ClientSend, PlayerPosition);
 		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC ? 0F 29 74 24 ? 0F 29 7C 24 ? 49 8B F0"),
 			ClientSend, PlayerRotation);
+		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 41 56 48 83 EC ? 48 8B F2 44 8B F1"),
+			ClientSend, UseItem);
+		DO_HOOK(MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 55 48 8D 6C 24 ? 48 81 EC ? ? ? ? 80 3D ? ? ? ? ? 48 8B F2"),
+			ItemGun, TryUse);
 	}
 
 	if (MH_EnableHook(MH_ALL_HOOKS) != MH_OK)

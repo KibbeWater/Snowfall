@@ -20,5 +20,18 @@ void __stdcall Hook::ClientSend::hkDamagePlayer(long hurtPlayerId, int damage, U
 {
 	static auto oDamagePlayer = static_cast<decltype(&hkDamagePlayer)>(pDamagePlayer);
 
+	if (G::bAnticheatDisabler && (itemID == WEAPON_RIFLE || itemID == WEAPON_SHOTGUN))
+		return;
+
 	oDamagePlayer(hurtPlayerId, damage, damageDir, itemID, objectID, pMethod);
+}
+
+void __stdcall Hook::ClientSend::hkUseItem(int itemID, UnityEngine_Vector3_o* dir, const MethodInfo* pMethod)
+{
+	static auto oUseItem = static_cast<decltype(&hkUseItem)>(pUseItem);
+
+	if (G::bAnticheatDisabler && (itemID == WEAPON_RIFLE || itemID == WEAPON_SHOTGUN))
+		return;
+
+	oUseItem(itemID, dir, pMethod);
 }

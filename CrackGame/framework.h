@@ -1,7 +1,7 @@
 #pragma once
 
 // Define some compile options
-#define DEV_MODE false
+#define DEV_MODE true
 
 // Vista min supported version
 #define _WIN32_WINNT 0x0600 
@@ -47,11 +47,13 @@
 #include "Hooks/GamemodeLights.h"
 #include "Hooks/GamemodeRedLight.h"
 #include "Hooks/GamemodeBombTag.h"
+#include "Hooks/GamemodeTag.h"
 #include "Hooks/LobbyManager.h"
 #include "Hooks/GameManager.h"
 #include "Hooks/ClientSend.h"
 #include "Hooks/D3D11Hook.h"
 #include "Hooks/InputHook.h"
+#include "Hooks/ItemGun.h"
 
 // ImGUI
 #include "ImGUI/imgui.h"
