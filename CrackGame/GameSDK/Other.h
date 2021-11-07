@@ -19,6 +19,8 @@ namespace GameAPI {
 	PlayerInventory_c* GetInventory();
 	ItemManager_c* GetItemMgr();
 	PlayerInput_c* GetPlayerInput();
+	LobbyManager_c* GetLobbyManager();
+	Prompt_c* GetPromptManager();
 
 	void SetLockState(ELockState lockState);
 	ELockState GetLockState();
@@ -27,6 +29,9 @@ namespace GameAPI {
 	void TagPlayer(GameModeBombTag_o* pThis, long tagger, long tagged);
 	void DamagePlayer(long hurtPlayerId, int damage, int itemID, int objectID, UnityEngine_Vector3_o dmgDir = {});
 	ItemData_o* GetItemByID(int ID);
-	void ForceGiveItem(ItemData_o* item);
+	void ForceGiveItem(ItemData_o* item) noexcept;
 	void SendPacket(Packet_o* packet);
+	void BanPlayer(long ID);
+	void JoinLobby(long ID);
+	void Prompt(const char* header, const char* content);
 }

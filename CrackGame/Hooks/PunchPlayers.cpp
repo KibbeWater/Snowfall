@@ -1,8 +1,5 @@
 #include "pch.h"
 
-#define SWAP_INT32(x) (((x) >> 24) | (((x) & 0x00FF0000) >> 8) | (((x) & 0x0000FF00) << 8) | ((x) << 24))
-
-
 void __stdcall Hook::PunchPlayers::hkPunch(PunchPlayers_o* pThis, const MethodInfo* pMethod)
 {
 	static auto oPunch = static_cast<decltype(&hkPunch)>(pPunch);
@@ -15,9 +12,6 @@ void __stdcall Hook::PunchPlayers::hkPunch(PunchPlayers_o* pThis, const MethodIn
 	*p_fReach = F::fReachDist;
 
 	oPunch(pThis, pMethod);
-
-	if (F::bFastPunch)
-		pThis->fields.ready = true;
 
 	pThis->fields.maxDistance = oldReach;
 	*p_fReach = oldReach;

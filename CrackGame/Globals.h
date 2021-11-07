@@ -5,7 +5,7 @@ struct PlayerManager_o;
 
 namespace G {
 	inline bool bRedLightFreeze = false;
-	inline bool bAnticheatDisabler = false;
+	inline bool bAnticheatDisabler = true;
 
 	inline GameManager_o* pGameManager = nullptr;
 	inline PlayerManager_o* pPlayerManager = nullptr;
@@ -14,10 +14,11 @@ namespace G {
 namespace F {
 	//General
 	inline bool bDisabledCamShake = false;
+	inline bool bDisablePregameFreeze = false;
 	
 	//Combat
 	inline bool bGodmode = false;
-	inline bool bFastPunch = false;
+	inline bool bFastSwing = false;
 	inline bool bInfAmmo = false;
 	inline bool bReach = false;
 	inline float fReachDist = 2.5;

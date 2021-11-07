@@ -47,6 +47,7 @@
 #include "Hooks/GamemodeLights.h"
 #include "Hooks/GamemodeRedLight.h"
 #include "Hooks/GamemodeBombTag.h"
+#include "Hooks/GamemodeHat.h"
 #include "Hooks/GamemodeTag.h"
 #include "Hooks/LobbyManager.h"
 #include "Hooks/GameManager.h"
@@ -54,6 +55,8 @@
 #include "Hooks/D3D11Hook.h"
 #include "Hooks/InputHook.h"
 #include "Hooks/ItemGun.h"
+#include "Hooks/ItemMelee.h"
+#include "Hooks/SteamPacketManager.h"
 
 // ImGUI
 #include "ImGUI/imgui.h"

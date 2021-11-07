@@ -35,6 +35,9 @@ void __stdcall Hook::PlayerMovement::hkUpdate(PlayerMovement_o* pThis, const Met
 	Obfuscation::EncryptFloat(&pThis->fields.maxRunSpeed, originalRunSpeed * increasePercent);
 	Obfuscation::EncryptFloat(&pThis->fields.maxSpeed, originalMax * increasePercent);
 
+	if (F::bDisablePregameFreeze)
+		GameAPI::GetPersistentData()->static_fields->frozen = false;
+
 	oUpdate(pThis, pMethod);
 }
 

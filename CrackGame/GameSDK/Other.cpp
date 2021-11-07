@@ -84,6 +84,20 @@ PlayerInput_c* GameAPI::GetPlayerInput()
 	return *PlayerManager_TypeInfo;
 }
 
+LobbyManager_c* GameAPI::GetLobbyManager()
+{
+	static auto LobbyManager_TypeInfo = reinterpret_cast<LobbyManager_c**>(
+		MEM::PatternScanRel("GameAssembly.dll", "48 8B 88 ? ? ? ? 48 8B D7 48 83 C1 10", -4));
+	return *LobbyManager_TypeInfo;
+}
+
+Prompt_c* GameAPI::GetPromptManager()
+{
+	static auto PromptManager_TypeInfo = reinterpret_cast<Prompt_c**>(
+		MEM::PatternScanRel("GameAssembly.dll", "48 8B D7 48 8B 88 ? ? ? ? 48 89 39 E8 ? ? ? ? 33 D2 48 8B CF E8 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B D8 ", -4));
+	return *PromptManager_TypeInfo;
+}
+
 void GameAPI::SetLockState(ELockState lockState)
 {
 	static auto fnSetLockState = reinterpret_cast<void(__thiscall*)(int, const MethodInfo*)>(
@@ -103,7 +117,7 @@ void GameAPI::RespawnPlayer(UnityEngine_Vector3_o pos)
 	static auto fnRespawnPlayer = reinterpret_cast<void(__thiscall*)(GameManager_o*, long, UnityEngine_Vector3_o, const MethodInfo*)>(
 		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC 40 80 3D ? ? ? ? ? 49 8B F0 48 8B FA 48 8B D9 75 43"));
 
-	return fnRespawnPlayer(GameAPI::GetGamemanager()->static_fields->Instance, GameAPI::GetSteammanager()->static_fields->Instance->fields._PlayerSteamId_k__BackingField.fields.Value, pos, nullptr);
+	return fnRespawnPlayer(GameAPI::GetGamemanager()->static_fields->Instance, GameAPI::GetSteammanager()->static_fields->Instance->fields._PlayerSteamId_k__BackingField.fields.m_SteamID, pos, nullptr);
 }
 
 void GameAPI::TagPlayer(GameModeBombTag_o* pThis, long tagger, long tagged)
@@ -130,7 +144,7 @@ ItemData_o* GameAPI::GetItemByID(int ID)
 	return fnGetItemByID(ID, nullptr);
 }
 
-void GameAPI::ForceGiveItem(ItemData_o* item)
+void GameAPI::ForceGiveItem(ItemData_o* item) noexcept
 {
 	static auto fnForceGiveItem = reinterpret_cast<void(__thiscall*)(PlayerInventory_o*, ItemData_o*, const MethodInfo*)>(
 		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC 20 80 3D ? ? ? ? ? 48 8B DA 48 8B F9 75 2B 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 48 89 74 24 ? 4C 89 74 24 ?"));
@@ -144,4 +158,33 @@ void GameAPI::SendPacket(Packet_o* packet)
 		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC ? 80 3D ? ? ? ? ? 48 8B D9 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 48 8B 05 ? ? ? ? F6 80 ? ? ? ? ? 74 ? 83 B8 ? ? ? ? ? 75 ? 48 8B C8 E8 ? ? ? ? 48 8B 05 ? ? ? ? 48 8B 80 ? ? ? ? 8B 78 ? 48 85 DB 0F 84 ? ? ? ? 33 D2 48 8B CB E8 ? ? ? ? 8D 14 38 48 8B 05 ? ? ? ? 48 8B 88 ? ? ? ? 89 51 ? 33 D2 48 8B 05 ? ? ? ? 48 8B 88 ? ? ? ? FF 01 48 8B CB E8 ? ? ? ? 48 8B 05 ? ? ? ? F6 80 ? ? ? ? ? 74 ? 83 B8 ? ? ? ? ? 75 ? 48 8B C8 E8 ? ? ? ? 48 8B 05 ? ? ? ? 48 8B 80 ? ? ? ? 4C 8B 10 4D 85 D2 74 ? 48 8B 05 ? ? ? ? 41 B9 ? ? ? ? 48 8B D3 48 C7 44 24 ? ? ? ? ? 48 8B 88 ? ? ? ? 44 8B 41 ? 49 8B 4A ? E8 ? ? ? ? 48 8B 5C 24 ? 48 83 C4 ? 5F C3 E8 ? ? ? ? CC CC CC CC 48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC ? 80 3D ? ? ? ? ? 48 8B F2 48 8B D9 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 48 8B 05 ? ? ? ? F6 80 ? ? ? ? ? 74 ? 83 B8 ? ? ? ? ? 75 ? 48 8B C8 E8 ? ? ? ? 48 8B 05 ? ? ? ? 48 8B 80 ? ? ? ? 8B 78 ? 48 85 DB 74 ? 33 D2 48 8B CB E8 ? ? ? ? 8D 14 38 48 8B 05 ? ? ? ? 48 8B 88 ? ? ? ? 89 51 ? 33 D2 48 8B 05 ? ? ? ? 48 8B 88 ? ? ? ? FF 01 48 8B CB E8 ? ? ? ? 48 8B 05 ? ? ? ? 41 B9 ? ? ? ? 48 8B D3 48 C7 44 24 ? ? ? ? ? 48 8B 88 ? ? ? ? 44 8B 41 ? 48 8B CE E8 ? ? ? ? 48 8B 5C 24 ? 48 8B 74 24 ? 48 83 C4 ? 5F C3 E8 ? ? ? ? CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 80 3D ? ? ? ? ? 48 8B D9"));
 
 	return fnSendPacket(packet, nullptr);
+}
+
+void GameAPI::BanPlayer(long ID)
+{
+	static auto oBanPlayer = static_cast<decltype(&Hook::LobbyManager::hkBanPlayer)>(Hook::LobbyManager::pBanPlayer);
+
+	oBanPlayer(GameAPI::GetLobbyManager()->static_fields->Instance, ID, nullptr);
+}
+
+void GameAPI::JoinLobby(long ID)
+{
+	static auto fnJoinLobby = reinterpret_cast<void(__thiscall*)(SteamManager_o*, SteamworksNative_CSteamID_o, const MethodInfo*)>(
+		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC 20 80 3D ? ? ? ? ? 48 8B DA 48 8B F1 75 4F"));
+
+	SteamworksNative_CSteamID_o steamId = {};
+	steamId.fields.m_SteamID = ID;
+
+	return fnJoinLobby(GameAPI::GetSteammanager()->static_fields->Instance, steamId, nullptr);
+}
+
+void GameAPI::Prompt(const char* header, const char* content)
+{
+	static auto fnJoinLobby = reinterpret_cast<void(__thiscall*)(Prompt_o*, System_String_o*, System_String_o*, const MethodInfo*)>(
+		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 41 56 48 83 EC ? 80 3D ? ? ? ? ? 4D 8B F0 48 8B EA 48 8B F9 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D"));
+	
+	System_String_o title = {};
+	System_String_o text = {};
+
+	
 }

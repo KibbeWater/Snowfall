@@ -104,6 +104,7 @@
     <ClInclude Include="Hooks\D3D11Hook.h" />
     <ClInclude Include="Hooks\GameManager.h" />
     <ClInclude Include="Hooks\GamemodeBombTag.h" />
+    <ClInclude Include="Hooks\GamemodeHat.h" />
     <ClInclude Include="Hooks\GamemodeLights.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Hooks\GamemodeRedLight.h" />
@@ -111,6 +112,7 @@
     <ClInclude Include="Hooks\Hooks.h" />
     <ClInclude Include="Hooks\InputHook.h" />
     <ClInclude Include="Hooks\ItemGun.h" />
+    <ClInclude Include="Hooks\ItemMelee.h" />
     <ClInclude Include="Hooks\LobbyManager.h" />
     <ClInclude Include="Hooks\OnlinePlayerMovement.h" />
     <ClInclude Include="Hooks\PlayerInput.h" />
@@ -118,6 +120,7 @@
     <ClInclude Include="Hooks\PlayerMovement.h" />
     <ClInclude Include="Hooks\PlayerStatus.h" />
     <ClInclude Include="Hooks\PunchPlayers.h" />
+    <ClInclude Include="Hooks\SteamPacketManager.h" />
     <ClInclude Include="ImGUI\imconfig.h" />
     <ClInclude Include="ImGUI\imgui.h" />
     <ClInclude Include="ImGUI\imgui_impl_dx11.h" />
@@ -151,12 +154,14 @@
     <ClCompile Include="Hooks\D3D11Hook.cpp" />
     <ClCompile Include="Hooks\GameManager.cpp" />
     <ClCompile Include="Hooks\GamemodeBombTag.cpp" />
+    <ClCompile Include="Hooks\GamemodeHat.cpp" />
     <ClCompile Include="Hooks\GamemodeLights.cpp" />
     <ClCompile Include="Hooks\GamemodeRedLight.cpp" />
     <ClCompile Include="Hooks\GamemodeTag.cpp" />
     <ClCompile Include="Hooks\Hooks.cpp" />
     <ClCompile Include="Hooks\InputHook.cpp" />
     <ClCompile Include="Hooks\ItemGun.cpp" />
+    <ClCompile Include="Hooks\ItemMelee.cpp" />
     <ClCompile Include="Hooks\LobbyManager.cpp" />
     <ClCompile Include="Hooks\OnlinePlayerMovement.cpp" />
     <ClCompile Include="Hooks\PlayerInput.cpp" />
@@ -164,6 +169,7 @@
     <ClCompile Include="Hooks\PlayerMovement.cpp" />
     <ClCompile Include="Hooks\PlayerStatus.cpp" />
     <ClCompile Include="Hooks\PunchPlayers.cpp" />
+    <ClCompile Include="Hooks\SteamPacketManager.cpp" />
     <ClCompile Include="ImGUI\imgui.cpp" />
     <ClCompile Include="ImGUI\imgui_demo.cpp" />
     <ClCompile Include="ImGUI\imgui_draw.cpp" />

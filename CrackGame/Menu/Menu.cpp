@@ -81,13 +81,14 @@ void Menu::Render()
 		{
 			if (ImGui::CollapsingHeader("General"))
 			{
-				ImGui::Checkbox("Camera shake disable", &F::bDisabledCamShake);
+				ImGui::Checkbox("Disable Camera shake ", &F::bDisabledCamShake);
+				ImGui::Checkbox("Disable pre-game freeze", &F::bDisablePregameFreeze);
 			}
 			ImGui::Spacing();
 			if (ImGui::CollapsingHeader("Combat"))
 			{
 				ImGui::Checkbox("Godmode", &F::bGodmode);
-				ImGui::Checkbox("Fast Punch", &F::bFastPunch);
+				ImGui::Checkbox("Fast Swing", &F::bFastSwing);
 				ImGui::Checkbox("Infinite Ammo", &F::bInfAmmo);
 				ImGui::Checkbox("Reach", &F::bReach);
 				if (F::bReach)
@@ -132,12 +133,12 @@ void Menu::Render()
 				if (ImGui::BeginCombo("Weapon", curItem)) {
 					for (int n = 0; n < IM_ARRAYSIZE(items); n++) { //Loop through all weapons
 						bool isSelected = (curItem == items[n]);
-						if (ImGui::Selectable(items[n], isSelected))
+						if (ImGui::Selectable(items[n], isSelected)) {
 							curItem = items[n];
-						if (isSelected) {
 							selectedWeapon = n;
-							ImGui::SetItemDefaultFocus();
 						}
+						if (isSelected)
+							ImGui::SetItemDefaultFocus();
 					}
 					ImGui::EndCombo();
 				}
