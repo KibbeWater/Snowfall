@@ -188,3 +188,32 @@ void GameAPI::Prompt(const char* header, const char* content)
 
 	
 }
+
+bool GameAPI::Raycast(UnityEngine_Vector3_o origin, UnityEngine_Vector3_o dir, UnityEngine_RaycastHit_o* hitInfo, float maxDistance, int layerMask)
+{
+	static auto fnRaycast = reinterpret_cast<bool(__thiscall*)(UnityEngine_Ray_o*, UnityEngine_RaycastHit_o*, float, int32_t, const MethodInfo*)>(
+		MEM::PatternScan("GameAssembly.dll", "48 8B C4 48 89 58 ? 55 56 57 41 56"));
+
+	UnityEngine_Ray_o ray = {};
+	ray.fields.m_Origin = origin;
+	ray.fields.m_Direction = dir;
+
+	return fnRaycast(&ray, hitInfo, maxDistance, layerMask, nullptr);
+}
+
+UnityEngine_Vector3_o GameAPI::GetPosition(UnityEngine_Transform_o* pThis)
+{
+	static auto fnGetPosition = reinterpret_cast<UnityEngine_Vector3_o(__thiscall*)(UnityEngine_Transform_o*, const MethodInfo*)>(
+		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC ? 33 C0 48 8B FA 48 89 01 48 8B D9 89 41 ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF FF D0 48 8B C3 48 8B 5C 24 ? 48 83 C4 ? 5F C3 CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 33 C0"));
+	return fnGetPosition(pThis, nullptr);
+}
+
+void GameAPI::Teleport(UnityEngine_Vector3_o pos)
+{
+	static auto fnSetPosition = reinterpret_cast<void(__thiscall*)(UnityEngine_Rigidbody_o*, UnityEngine_Vector3_o, const MethodInfo*)>(
+		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF FF D0 48 8B 5C 24 ? 48 83 C4 ? 5F C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF 48 8B 5C 24 ? 48 83 C4 ? 5F 48 FF E0 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF FF D0 48 8B 5C 24 ? 48 83 C4 ? 5F C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 0F B6 DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 0F B6 D3 48 8B CF 48 8B 5C 24 ? 48 83 C4 ? 5F 48 FF E0 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57"));
+
+	auto rb = GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerMovement->fields.rb;
+
+	fnSetPosition(rb, pos, nullptr);
+}
