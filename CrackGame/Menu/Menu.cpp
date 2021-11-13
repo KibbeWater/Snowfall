@@ -167,19 +167,7 @@ void Menu::Render()
 					GameAPI::DamagePlayer(213, i, 69, 69, GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.cameraRot);
 				}
 			}
-			if (ImGui::Button("Teleport")) {
-				auto input = GameAPI::GetPlayerInput();
-				auto pos = GameAPI::GetPosition(input->static_fields->_Instance_k__BackingField->fields.playerCam);
-				auto rot = input->static_fields->_Instance_k__BackingField->fields.cameraRot;
-
-				UnityEngine_RaycastHit_o hit = {};
-				if (GameAPI::Raycast(pos, rot, &hit, 1000, GameAPI::GetGamemanager()->static_fields->Instance->fields.whatIsHittableBullet.fields.m_Mask)) {
-					OutputDebugString(L"Raycast success, teleporting...\n");
-					GameAPI::Teleport(hit.fields.m_Point);
-				}
-				else
-					OutputDebugString(L"Raycast failed\n");
-			}
+			ImGui::Checkbox("Click TP (Mouse3)", &F::bClickTP);
 		}
 		#endif
 

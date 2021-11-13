@@ -36,5 +36,6 @@ namespace GameAPI {
 	void Prompt(const char* header, const char* content);
 	bool Raycast(UnityEngine_Vector3_o origin, UnityEngine_Vector3_o dir, UnityEngine_RaycastHit_o* hitInfo, float maxDistance, int layerMask);
 	UnityEngine_Vector3_o GetPosition(UnityEngine_Transform_o* pThis);
+	UnityEngine_Vector3_o GetForward(UnityEngine_Transform_o* pThis);
 	void Teleport(UnityEngine_Vector3_o pos);
 }

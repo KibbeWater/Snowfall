@@ -23,6 +23,16 @@ void __stdcall Hook::PlayerMovement::hkUpdate(PlayerMovement_o* pThis, const Met
 {
 	static auto oUpdate = static_cast<decltype(&hkUpdate)>(pUpdate);
 
+	if (F::bDisablePregameFreeze)
+		GameAPI::GetPersistentData()->static_fields->frozen = false;
+
+	oUpdate(pThis, pMethod);
+}
+
+void __stdcall Hook::PlayerMovement::hkMovement(PlayerMovement_o* pThis, float x, float y, const MethodInfo* pMethod)
+{
+	static auto oMovement = static_cast<decltype(&hkMovement)>(pMovement);
+
 	static int originalDefaultSpeed = Obfuscation::DecryptFloat(&pThis->fields.defaultMoveSpeed);
 	static int originalWalkSpeed = Obfuscation::DecryptFloat(&pThis->fields.maxWalkSpeed);
 	static int originalRunSpeed = Obfuscation::DecryptFloat(&pThis->fields.maxRunSpeed);
@@ -34,16 +44,6 @@ void __stdcall Hook::PlayerMovement::hkUpdate(PlayerMovement_o* pThis, const Met
 	Obfuscation::EncryptFloat(&pThis->fields.maxWalkSpeed, originalWalkSpeed * increasePercent);
 	Obfuscation::EncryptFloat(&pThis->fields.maxRunSpeed, originalRunSpeed * increasePercent);
 	Obfuscation::EncryptFloat(&pThis->fields.maxSpeed, originalMax * increasePercent);
-
-	if (F::bDisablePregameFreeze)
-		GameAPI::GetPersistentData()->static_fields->frozen = false;
-
-	oUpdate(pThis, pMethod);
-}
-
-void __stdcall Hook::PlayerMovement::hkMovement(PlayerMovement_o* pThis, float x, float y, const MethodInfo* pMethod)
-{
-	static auto oMovement = static_cast<decltype(&hkMovement)>(pMovement);
 	
 	int oldSurfaceType = pThis->fields.surfaceType;
 	if (F::bNoSlide)
