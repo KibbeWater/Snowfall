@@ -41,7 +41,4 @@ namespace F {
 	//Lobby
 	inline bool bMaxPlayersOverride = false;
 	inline int iMaxPlayersCount = 40;
-
-	//Other
-	inline bool bClickTP = false;
 }
