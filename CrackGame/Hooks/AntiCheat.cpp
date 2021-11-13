@@ -4,6 +4,6 @@ void __stdcall Hook::AntiCheat::hkCheatingDetected(CodeStage_AntiCheat_Detectors
 {
 	static auto oCheatingDetected = static_cast<decltype(&hkCheatingDetected)>(pCheatingDetected);
 
-	if (!G::bAnticheatDisabler)
+	if (!G::bAnticheatDisabler && false)
 		oCheatingDetected(pThis, pMethod);
 }
