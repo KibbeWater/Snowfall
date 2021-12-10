@@ -13,6 +13,8 @@ namespace Obfuscation
 }
 
 namespace GameAPI {
+
+	// Managers
 	GameManager_c* GetGamemanager();
 	SteamManager_c* GetSteammanager();
 	PersistentPlayerData_c* GetPersistentData();
@@ -21,21 +23,36 @@ namespace GameAPI {
 	PlayerInput_c* GetPlayerInput();
 	LobbyManager_c* GetLobbyManager();
 	Prompt_c* GetPromptManager();
-
-	void SetLockState(ELockState lockState);
-	ELockState GetLockState();
-
+	Alerts_c* GetAlertManager();
+	Chatbox_c* GetChatboxManager();
+	QuestManager_c* GetQuestManager();
+	SaveManager_c* GetSaveManager();
+	
+	// In-Game API
 	void RespawnPlayer(UnityEngine_Vector3_o pos);
 	void TagPlayer(GameModeBombTag_o* pThis, long tagger, long tagged);
 	void DamagePlayer(long hurtPlayerId, int damage, int itemID, int objectID, UnityEngine_Vector3_o dmgDir = {});
 	ItemData_o* GetItemByID(int ID);
 	void ForceGiveItem(ItemData_o* item) noexcept;
-	void SendPacket(Packet_o* packet);
 	void BanPlayer(long ID);
-	void JoinLobby(long ID);
+	void AddQuestProgress(float progress);
+	
+	// CrackGame API
 	void Prompt(const char* header, const char* content);
+	void Alert(const char* content);
+	void ChatMessage(const char* message, const char* username, bool useFiltering = false);
+	void Teleport(UnityEngine_Vector3_o pos);
+
+	// IL2CPP Functions
+	System_String_o* CreateString(const char* string);
+
+	// Unity game functions
 	bool Raycast(UnityEngine_Vector3_o origin, UnityEngine_Vector3_o dir, UnityEngine_RaycastHit_o* hitInfo, float maxDistance, int layerMask);
 	UnityEngine_Vector3_o GetPosition(UnityEngine_Transform_o* pThis);
 	UnityEngine_Vector3_o GetForward(UnityEngine_Transform_o* pThis);
-	void Teleport(UnityEngine_Vector3_o pos);
+	UnityEngine_Vector3_o GetRight(UnityEngine_Transform_o* pThis);
+	float DeltaTime();
+	
+	void SetLockState(ELockState lockState);
+	ELockState GetLockState();
 }

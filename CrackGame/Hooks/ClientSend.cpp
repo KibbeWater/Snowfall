@@ -4,7 +4,7 @@ void __stdcall Hook::ClientSend::hkPlayerPosition(UnityEngine_Vector3_o position
 {
 	static auto oPlayerPosition = static_cast<decltype(&hkPlayerPosition)>(pPlayerPosition);
 
-	if (!(G::bRedLightFreeze && F::bRedGreenProtection) || !F::bRedGreenProtection)
+	if ((!(G::bRedLightFreeze && F::bRedGreenProtection) || !F::bRedGreenProtection) && !F::bLagSwitch)
 		oPlayerPosition(position, toId, pMethod);
 }
 
@@ -12,7 +12,7 @@ void __stdcall Hook::ClientSend::hkPlayerRotation(float x, float y, uint64_t toI
 {
 	static auto oPlayerRotation = static_cast<decltype(&hkPlayerRotation)>(pPlayerRotation);
 
-	if (!(G::bRedLightFreeze && F::bRedGreenProtection) || !F::bRedGreenProtection)
+	if ((!(G::bRedLightFreeze && F::bRedGreenProtection) || !F::bRedGreenProtection) && !F::bLagSwitch)
 		oPlayerRotation(x, y, toId, pMethod);
 }
 

@@ -19,7 +19,7 @@ int Obfuscation::DecryptInt(CodeStage_AntiCheat_ObscuredTypes_ObscuredInt_o pThi
 float Obfuscation::DecryptFloat(CodeStage_AntiCheat_ObscuredTypes_ObscuredFloat_o* pThis)
 {
 	static auto fnDecryptFloat = reinterpret_cast<float(__thiscall*)(CodeStage_AntiCheat_ObscuredTypes_ObscuredFloat_o*, const MethodInfo*)>(
-		MEM::PatternScan("GameAssembly.dll", "48 83 EC ? 33 D2 E8 ? ? ? ? 48 83 C4 ? C3 40 53 48 83 EC ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8B C8 E8 ? ? ? ? 33 D2 48 8B C8 48 8B D8 E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8B D0 48 8B CB E8 ? ? ? ? CC CC 48 83 EC ? 33 D2 E8 ? ? ? ? 33 D2 F3 0F 11 44 24"));
+		MEM::PatternScan("GameAssembly.dll", "40 53 48 83 EC ? 80 3D ? ? ? ? ? 48 8B D9 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 80 7B ? ? 0F 84 ? ? ? ? 0F 29 74 24 ? 0F 29 7C 24 ? 8B 13 45 33 C0 8B 4B ? E8 ? ? ? ? 33 C9 0F 28 F0 E8 ? ? ? ? 84 C0 74 ? 80 7B ? ? 74 ? 48 8B 0D ? ? ? ? F3 0F 10 7B ? F6 81 ? ? ? ? ? 74 ? 83 B9 ? ? ? ? ? 75 ? E8 ? ? ? ? 48 8B 0D ? ? ? ? E8 ? ? ? ? 48 85 C0 74"));
 
 	return fnDecryptFloat(pThis, nullptr);
 }
@@ -59,28 +59,28 @@ SteamManager_c* GameAPI::GetSteammanager()
 PersistentPlayerData_c* GameAPI::GetPersistentData()
 {
 	static auto PersistentPlayerData_TypeInfo = reinterpret_cast<PersistentPlayerData_c**>(
-		MEM::PatternScanRel("GameAssembly.dll", "48 8B D3 48 8B 88 ? ? ? ? 48 83 C1 08 48 89 19 E8 ? ? ? ? 33 D2 48 8B CB E8 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B D8 F6 81 ? ? ? ? ? 74 0E 83 B9 ? ? ? ? ? 75 05 E8 ? ? ? ? 33 D2", -4));
+		MEM::PatternScanRel("GameAssembly.dll", "48 8B 88 ? ? ? ? 80 39 00 75 15 33 D2 48 8B CB 48 83 C4 20 5B E9 ? ? ? ? 48 83 C4 20 5B C3 33 D2 48 8B CB 48 83 C4 20 5B E9 ? ? ? ? E8 ? ? ? ?", -4));
 	return *PersistentPlayerData_TypeInfo;
 }
 
 PlayerInventory_c* GameAPI::GetInventory()
 {
 	static auto PlayerInventory_TypeInfo = reinterpret_cast<PlayerInventory_c**>(
-		MEM::PatternScanRel("GameAssembly.dll", "48 8B D0 48 8B 89 ? ? ? ? 48 89 01 E8 ? ? ? ? 48 8B 0D ? ? ? ? E8 ? ? ? ? 48 8B 15 ? ? ? ? 48 8B C8 48 8B D8 E8 ? ? ? ? 48 8D 4F 18 48 8B D3", -4));
+		MEM::PatternScanRel("GameAssembly.dll", "48 8B 80 ? ? ? ? 48 8B 0D ? ? ? ? 8B 50 ? E8 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B D0 48 8B 89 ? ? ? ? 48 89 01 E8 ? ? ? ? 48 8B 0D ? ? ? ? E8 ? ? ? ? 48 8B 15 ? ? ? ? 48 8B C8 48 8B D8 E8 ? ? ? ? 48 8D 4F ? 48 8B D3 48 89 19 48 8B 5C 24 ? 48 83 C4 ? 5F E9 ? ? ? ? CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 80 3D ? ? ? ? ? 8B FA", -4));
 	return *PlayerInventory_TypeInfo;
 }
 
 ItemManager_c* GameAPI::GetItemMgr()
 {
 	static auto ItemManager_TypeInfo = reinterpret_cast<ItemManager_c**>(
-		MEM::PatternScanRel("GameAssembly.dll", "48 8B D3 48 8B 88 ? ? ? ? 48 83 C1 08 48 89 19 E8 ? ? ? ? 33 D2 48 8B CB E8 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B D8 F6 81 ? ? ? ? ? 74 0E 83 B9 ? ? ? ? ? 75 05 E8 ? ? ? ? 33 D2 48 8B CB E8 ? ? ? ? 80 3D ? ", -4));
+		MEM::PatternScanRel("GameAssembly.dll", "F2 0F 11 44 24 ? 48 8B 88 ? ? ? ? 48 8B 41 08 48 85 C0 0F 84 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B 58 18 F6 81 ? ? ? ? ? 74 0E 83 B9 ? ? ? ? ? 75 05 E8 ? ? ? ? 48 8B 15 ? ? ? ? 48 8B CB E8 ? ? ? ? 48 8B D8", -4));
 	return *ItemManager_TypeInfo;
 }
 
 PlayerInput_c* GameAPI::GetPlayerInput()
 {
 	static auto PlayerManager_TypeInfo = reinterpret_cast<PlayerInput_c**>(
-		MEM::PatternScanRel("GameAssembly.dll", "48 8B 88 ? ? ? ? 48 8B D7 48 83 C1 08 48 89 5C 24 ? 48 89 39 E8 ? ? ? ? 48 8B 15 ? ? ? ?", -4));
+		MEM::PatternScanRel("GameAssembly.dll", "80 3D ? ? ? ? ? 75 1A 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8B 05 ? ? ? ? C6 05 ? ? ? ? ? F6 80 ? ? ? ? ? 74 18 83 B8 ? ? ? ? ? 75 0F 48 8B C8 E8 ? ? ? ? 48 8B 05 ? ? ? ? 48 8B 88 ? ? ? ? 48 8B D3 ", -4));
 	return *PlayerManager_TypeInfo;
 }
 
@@ -94,8 +94,36 @@ LobbyManager_c* GameAPI::GetLobbyManager()
 Prompt_c* GameAPI::GetPromptManager()
 {
 	static auto PromptManager_TypeInfo = reinterpret_cast<Prompt_c**>(
-		MEM::PatternScanRel("GameAssembly.dll", "48 8B D7 48 8B 88 ? ? ? ? 48 89 39 E8 ? ? ? ? 33 D2 48 8B CF E8 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B D8 ", -4));
+		MEM::PatternScanRel("GameAssembly.dll", "48 8B 91 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B 1A 48 8D 54 24 ? 89 44 24 ? E8 ? ? ? ? 48 8B 0D ? ? ? ? 45 33 C0 48 8B D0 E8 ? ? ? ? 48 85 DB 74 ? 48 8B 15 ? ? ? ? 45 33 C9 4C 8B C0 48 8B CB E8 ? ? ? ? 48 83 C4 ? 5B C3 E8 ? ? ? ? CC CC CC CC CC CC 40 53", -4));
 	return *PromptManager_TypeInfo;
+}
+
+Alerts_c* GameAPI::GetAlertManager()
+{
+	static auto AlertManager_TypeInfo = reinterpret_cast<Alerts_c**>(
+		MEM::PatternScanRel("GameAssembly.dll", "48 8B 88 ? ? ? ? 48 8B 09 48 85 C9 74 13 48 8B 15 ? ? ? ? 45 33 C0 48 83 C4 28 E9 ? ? ? ? E8 ? ? ? ? CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC 60 80 3D ? ? ? ? ?", -4));
+	return *AlertManager_TypeInfo;
+}
+
+Chatbox_c* GameAPI::GetChatboxManager()
+{
+	static auto ChatboxManager_TypeInfo = reinterpret_cast<Chatbox_c**>(
+		MEM::PatternScanRel("GameAssembly.dll", "48 8B D7 48 8B 88 ? ? ? ? 48 89 39 E8 ? ? ? ? 80 3D ? ? ? ? ? 75 1F 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 80 BF ? ? ? ? ? 48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 4C 89 64 24 ?", -4));
+	return *ChatboxManager_TypeInfo;
+}
+
+QuestManager_c* GameAPI::GetQuestManager()
+{
+	static auto QuestManager_TypeInfo = reinterpret_cast<QuestManager_c**>(
+		MEM::PatternScanRel("GameAssembly.dll", "48 8B 19 48 8B 88 ? ? ? ? 48 8B 09 48 85 C9 74 ? 4C 8B 05 ? ? ? ? 8B 57 ? E8 ? ? ? ? 48 85 C0 74 ? 33 D2 48 8B C8 E8 ? ? ? ? 4C 8B 05 ? ? ? ? 45 33 C9 48 8B 0D ? ? ? ? 48 8B D0 E8 ? ? ? ? 48 85 DB 74 ? 45 33 C0 48 8B D0 48 8B CB E8 ? ? ? ? 48 8B 5C 24 ? 48 83 C4 ? 5F C3 E8 ? ? ? ? CC CC CC CC CC CC 40 53", -4));
+	return *QuestManager_TypeInfo;
+}
+
+SaveManager_c* GameAPI::GetSaveManager()
+{
+	static auto SaveManager_TypeInfo = reinterpret_cast<SaveManager_c**>(
+		MEM::PatternScanRel("GameAssembly.dll", "48 8B 88 ? ? ? ? 48 8B 19 48 8B 0D ? ? ? ? F6 81 ? ? ? ? ? 74 0E 83 B9 ? ? ? ? ? 75 05 E8 ? ? ? ? 45 33 C0 33 D2 48 8B CB E8 ? ? ? ? 84 C0 0F 84 ? ? ? ? 80 3D ? ? ? ? ? 75 13 ", -4));
+	return *SaveManager_TypeInfo;
 }
 
 void GameAPI::SetLockState(ELockState lockState)
@@ -159,6 +187,102 @@ void GameAPI::BanPlayer(long ID)
 	oBanPlayer(GameAPI::GetLobbyManager()->static_fields->Instance, ID, nullptr);
 }
 
+void GameAPI::AddQuestProgress(float progress)
+{
+	static auto fnAddQuestProgress = reinterpret_cast<void(__thiscall*)(PlayerSave_o* pThis, float progress, const MethodInfo* pMethod)>(
+		MEM::PatternScan("GameAssembly.dll", "F3 0F 58 89"));
+
+	return fnAddQuestProgress(GameAPI::GetSaveManager()->static_fields->_Instance_k__BackingField->fields.state, progress, nullptr);
+}
+
+System_String_o* GameAPI::CreateString(const char* string) {
+	static auto fnCreateString = reinterpret_cast<System_String_o*(__thiscall*)(System_String_o*, const char*, const MethodInfo*)>(
+		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC 50 48 8B DA 48 8B F9 80 3D ? ? ? ? ?"));
+	return fnCreateString({}, string, nullptr);
+}
+
+void GameAPI::Prompt(const char* header, const char* content)
+{
+	static auto fnNewPrompt = reinterpret_cast<void(__thiscall*)(Prompt_o*, System_String_o*, System_String_o*, const MethodInfo*)>(
+		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? 33 D2 49 8B CE E8 ? ? ? ? 48 8B 05 ? ? ? ?", 1));
+
+	System_String_o* headerStr = GameAPI::CreateString(header);
+	System_String_o* contentStr = GameAPI::CreateString(content);
+
+	fnNewPrompt(GameAPI::GetPromptManager()->static_fields->Instance, headerStr, contentStr, nullptr);
+}
+
+void GameAPI::Alert(const char* content)
+{
+	static auto fnNewAleart = reinterpret_cast<void(__thiscall*)(Alerts_o*, System_String_o*, const MethodInfo*)>(
+		MEM::PatternScanRel("GameAssembly.dll", "E9 ? ? ? ? E8 ? ? ? ? CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC 60 48 8B F9", 1));
+
+	System_String_o* contentStr = GameAPI::CreateString(content);
+
+	fnNewAleart(GameAPI::GetAlertManager()->static_fields->Instance, contentStr, nullptr);
+}
+
+void GameAPI::ChatMessage(const char* message, const char* username, bool useFiltering)
+{
+	static auto fnAppendMessage = reinterpret_cast<void(__thiscall*)(Chatbox_o*, long fromUser, System_String_o*, System_String_o*, const MethodInfo*)>(
+		MEM::PatternScan("GameAssembly.dll", "40 53 55 56 57 41 54 48 83 EC 40 80 3D ? ? ? ? ?"));
+	
+	static auto colorSyntax1 = reinterpret_cast<System_String_o**>(
+		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? C6 05 ? ? ? ? ? 45 33 E4 44 38 25 ? ? ? ? 44 89 A4 24", -4));
+	static auto charGreaterThan = reinterpret_cast<System_String_o**>(
+		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? C6 05 ? ? ? ? ? 45 33 E4 44 38 25 ? ? ? ? 44 89 A4 24", -16));
+	static auto colorSyntax2 = reinterpret_cast<System_String_o**>(
+		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? C6 05 ? ? ? ? ? 45 33 E4 44 38 25 ? ? ? ? 44 89 A4 24", -40));
+	static auto charColon = reinterpret_cast<System_String_o**>(
+		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? C6 05 ? ? ? ? ? 45 33 E4 44 38 25 ? ? ? ? 44 89 A4 24", -52));
+	static auto charHashtag = reinterpret_cast<System_String_o**>(
+		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? C6 05 ? ? ? ? ? 45 33 E4 44 38 25 ? ? ? ? 44 89 A4 24", -64));
+
+	auto chatboxInstance = GameAPI::GetChatboxManager()->static_fields->Instance;
+
+	if (!chatboxInstance)
+		return;
+
+	if (!useFiltering) {
+		System_String_o* oColorSyntax1 = *colorSyntax1;
+		System_String_o* oCharGreaterThan = *charGreaterThan;
+		System_String_o* oColorSyntax2 = *colorSyntax2;
+		System_String_o* oCharColon = *charColon;
+		System_String_o* oCharHashtag = *charHashtag;
+
+		static auto placeholderStr = GameAPI::CreateString("`");
+
+		DWORD oldProtect = 0;
+
+		VirtualProtect(*colorSyntax1, sizeof(System_String_o*), PAGE_EXECUTE_READWRITE, &oldProtect);
+		VirtualProtect(*charGreaterThan, sizeof(System_String_o*), PAGE_EXECUTE_READWRITE, nullptr);
+		VirtualProtect(*colorSyntax2, sizeof(System_String_o*), PAGE_EXECUTE_READWRITE, nullptr);
+		VirtualProtect(*charColon, sizeof(System_String_o*), PAGE_EXECUTE_READWRITE, nullptr);
+		VirtualProtect(*charHashtag, sizeof(System_String_o*), PAGE_EXECUTE_READWRITE, nullptr);
+
+		*colorSyntax1 = placeholderStr;
+		*charGreaterThan = placeholderStr;
+		*colorSyntax2 = placeholderStr;
+		*charColon = placeholderStr;
+		*charHashtag = placeholderStr;
+
+		fnAppendMessage(chatboxInstance, 1, GameAPI::CreateString(message), GameAPI::CreateString(username), nullptr);
+
+		*colorSyntax1 = oColorSyntax1;
+		*charGreaterThan = oCharGreaterThan;
+		*colorSyntax2 = oColorSyntax2;
+		*charColon = oCharColon;
+		*charHashtag = oCharHashtag;
+
+		VirtualProtect(*charGreaterThan, sizeof(System_String_o*), oldProtect, nullptr);
+		VirtualProtect(*colorSyntax2, sizeof(System_String_o*), oldProtect, nullptr);
+		VirtualProtect(*charColon, sizeof(System_String_o*), oldProtect, nullptr);
+		VirtualProtect(*charHashtag, sizeof(System_String_o*), oldProtect, nullptr);
+		VirtualProtect(*colorSyntax1, sizeof(System_String_o*), oldProtect, nullptr);
+	} else
+		fnAppendMessage(chatboxInstance, 1, GameAPI::CreateString(message), GameAPI::CreateString(username), nullptr);
+}
+
 bool GameAPI::Raycast(UnityEngine_Vector3_o origin, UnityEngine_Vector3_o dir, UnityEngine_RaycastHit_o* hitInfo, float maxDistance, int layerMask)
 {
 	static auto fnRaycast = reinterpret_cast<bool(__thiscall*)(UnityEngine_Ray_o*, UnityEngine_RaycastHit_o*, float, int32_t, const MethodInfo*)>(
@@ -187,10 +311,26 @@ UnityEngine_Vector3_o GameAPI::GetForward(UnityEngine_Transform_o* pThis)
 	return out;
 }
 
+UnityEngine_Vector3_o GameAPI::GetRight(UnityEngine_Transform_o* pThis)
+{
+	static auto fnGetForward = reinterpret_cast<UnityEngine_Vector3_o * (__thiscall*)(UnityEngine_Vector3_o*, UnityEngine_Transform_o*, const MethodInfo*)>(
+		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC ? 33 C0 0F 57 C0 48 89 01 48 8B FA 89 41 ? 48 8B D9 48 8B 05 ? ? ? ? 0F 11 44 24 ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8D 54 24 ? 48 8B CF FF D0 33 D2 48 8D 4C 24 ? E8 ? ? ? ? 45 33 C9 4C 8D 44 24 ? 48 8D 54 24 ? 48 8D 4C 24 ? F2 0F 10 00 8B 40 ? F2 0F 11 44 24 ? 0F 10 44 24 ? 89 44 24 ? 66 0F 7F 44 24 ? E8 ? ? ? ? F2 0F 10 00 8B 40 ? F2 0F 11 03 89 43 ? 48 8B C3 48 8B 5C 24 ? 48 83 C4 ? 5F C3 CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF 48 8B 5C 24 ? 48 83 C4 ? 5F 48 FF E0 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 0F 57 C0 48 8B FA 48 8B D9 0F 11 01 48 85 C0"));
+	UnityEngine_Vector3_o out = {};
+	fnGetForward(&out, pThis, nullptr);
+	return out;
+}
+
+float GameAPI::DeltaTime()
+{
+	static auto fnGetDeltaTime = reinterpret_cast<float(__thiscall*)(const MethodInfo*)>(
+		MEM::PatternScan("GameAssembly.dll", "48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC"));
+	return fnGetDeltaTime(nullptr);
+}
+
 void GameAPI::Teleport(UnityEngine_Vector3_o pos)
 {
 	static auto fnSetPosition = reinterpret_cast<void(__thiscall*)(UnityEngine_Rigidbody_o*, UnityEngine_Vector3_o, const MethodInfo*)>(
-		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF FF D0 48 8B 5C 24 ? 48 83 C4 ? 5F C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF 48 8B 5C 24 ? 48 83 C4 ? 5F 48 FF E0 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF FF D0 48 8B 5C 24 ? 48 83 C4 ? 5F C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 0F B6 DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 0F B6 D3 48 8B CF 48 8B 5C 24 ? 48 83 C4 ? 5F 48 FF E0 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57"));
+		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF FF D0 48 8B 5C 24 ? 48 83 C4 ? 5F C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF 48 8B 5C 24 ? 48 83 C4 ? 5F 48 FF E0 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF FF D0 48 8B 5C 24 ? 48 83 C4 ? 5F C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 74 24"));
 
 	auto rb = GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerMovement->fields.rb;
 

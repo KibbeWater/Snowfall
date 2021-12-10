@@ -141,6 +141,7 @@
     <ClInclude Include="Thirdparty\MinHook\minhook.h" />
     <ClInclude Include="Thirdparty\MinHook\trampoline.h" />
     <ClInclude Include="Thirdparty\Ntdll\ntdll.h" />
+    <ClInclude Include="SDK\Vector3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -187,6 +188,7 @@
     <ClCompile Include="Thirdparty\MinHook\hde\hde64.cpp" />
     <ClCompile Include="Thirdparty\MinHook\hook.cpp" />
     <ClCompile Include="Thirdparty\MinHook\trampoline.cpp" />
+    <ClCompile Include="SDK\Vector3.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

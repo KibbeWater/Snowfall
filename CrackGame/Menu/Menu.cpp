@@ -2,8 +2,6 @@
 
 using namespace ImGui;
 
-float test = 1;
-
 void Menu::Render()
 {
 	static bool no_titlebar = false;
@@ -81,8 +79,18 @@ void Menu::Render()
 		{
 			if (ImGui::CollapsingHeader("General"))
 			{
-				ImGui::Checkbox("Disable Camera shake ", &F::bDisabledCamShake);
+				ImGui::Checkbox("Disable Camera shake", &F::bDisabledCamShake);
 				ImGui::Checkbox("Disable pre-game freeze", &F::bDisablePregameFreeze);
+				ImGui::Checkbox("Lagswitch", &F::bLagSwitch);
+				ImGui::Spacing();
+				if (ImGui::Button("Set Quest Progress"))
+					GameAPI::AddQuestProgress(1);
+				if (ImGui::Button("Reset Quest Countdown")) {
+					PlayerSave_o save = *GameAPI::GetSaveManager()->static_fields->_Instance_k__BackingField->fields.state;
+					save.fields.nextQuestAvailableTime.fields.dateData = 0;
+					save.fields.isQuestComplete = false;
+					save.fields.currentQuest++;
+				}
 			}
 			ImGui::Spacing();
 			if (ImGui::CollapsingHeader("Combat"))
@@ -103,6 +111,7 @@ void Menu::Render()
 				ImGui::Checkbox("AirJump", &F::bAirJump);
 				ImGui::Checkbox("Anti-Knockback", &F::bAntiKnockback);
 				ImGui::Checkbox("NoSlide", &F::bNoSlide);
+				ImGui::Checkbox("Click TP (Mouse3)", &F::bClickTP);
 			}
 			ImGui::Spacing();
 			if (ImGui::CollapsingHeader("Gamemodes"))
@@ -157,7 +166,7 @@ void Menu::Render()
 		}
 		#ifdef DEBUG
 		ImGui::Spacing();
-		if (ImGui::CollapsingHeader("Exploits (EXPERIMENTAL)"))
+		if (ImGui::CollapsingHeader("Developer (EXPERIMENTAL)"))
 		{
 			if (ImGui::Button("Respawn"))
 				GameAPI::RespawnPlayer(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.cameraRot);
@@ -167,7 +176,7 @@ void Menu::Render()
 					GameAPI::DamagePlayer(213, i, 69, 69, GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.cameraRot);
 				}
 			}
-			ImGui::Checkbox("Click TP (Mouse3)", &F::bClickTP);
+			ImGui::Checkbox("Fly", &F::bFly);
 		}
 		#endif
 

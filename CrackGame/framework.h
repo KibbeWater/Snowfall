@@ -17,6 +17,8 @@
 #include <algorithm>
 #include <vector>
 #include <unordered_map>
+#include <chrono>
+#include <ctime>
 
 // Config
 #include "config.h"
@@ -30,6 +32,9 @@
 #include "GameSDK/il2cpp.h"
 #include "GameSDK/Other.h"
 #include "GameSDK/Enums.h"
+
+// SDK
+#include "SDK/Vector3.h"
 
 // Helpers
 #include "Helpers/Math.h"

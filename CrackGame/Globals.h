@@ -15,6 +15,7 @@ namespace F {
 	//General
 	inline bool bDisabledCamShake = false;
 	inline bool bDisablePregameFreeze = false;
+	inline bool bLagSwitch = false;
 	
 	//Combat
 	inline bool bGodmode = false;
@@ -44,4 +45,5 @@ namespace F {
 
 	//Other
 	inline bool bClickTP = false;
+	inline bool bFly = false;
 }

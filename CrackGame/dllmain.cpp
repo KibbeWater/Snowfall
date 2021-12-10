@@ -17,6 +17,7 @@ INL bool IsShutdown(LPVOID lpParameter)
 
 DWORD WINAPI OnDllAttach(LPVOID lpParameter)
 {
+
     if (!Hook::Init())
         ::MessageBoxA(0, "Failed to initialize all hooks", "ERROR", MB_OK);
     ImplHookDX11_Init((HMODULE)lpParameter, FindWindow(0, L"Crab Game"));
