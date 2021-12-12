@@ -2,6 +2,18 @@
 
 using namespace ImGui;
 
+std::wstring s2ws(const std::string& s)
+{
+	int len;
+	int slength = (int)s.length() + 1;
+	len = MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, 0, 0);
+	wchar_t* buf = new wchar_t[len];
+	MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, buf, len);
+	std::wstring r(buf);
+	delete[] buf;
+	return r;
+}
+
 void Menu::Render()
 {
 	static bool no_titlebar = false;
@@ -79,14 +91,13 @@ void Menu::Render()
 		{
 			if (ImGui::CollapsingHeader("General"))
 			{
-				ImGui::Checkbox("Disable Camera shake", &F::bDisabledCamShake);
 				ImGui::Checkbox("Disable pre-game freeze", &F::bDisablePregameFreeze);
 				ImGui::Checkbox("Lagswitch", &F::bLagSwitch);
 				ImGui::Spacing();
-				if (ImGui::Button("Set Quest Progress"))
-					GameAPI::AddQuestProgress(1);
+				if (ImGui::Button("Complete Daily"))
+					GameAPI::CompleteDaily();
 				if (ImGui::Button("Reset Quest Countdown")) {
-					PlayerSave_o save = *GameAPI::GetSaveManager()->static_fields->_Instance_k__BackingField->fields.state;
+					PlayerSave_o save = *GameAPI::GetSaveManager()->static_fields->Instance->fields.state;
 					save.fields.nextQuestAvailableTime.fields.dateData = 0;
 					save.fields.isQuestComplete = false;
 					save.fields.currentQuest++;
@@ -168,6 +179,20 @@ void Menu::Render()
 		ImGui::Spacing();
 		if (ImGui::CollapsingHeader("Developer (EXPERIMENTAL)"))
 		{
+			if (ImGui::Button("Dump GameObjects")) {
+				auto m_pObjects = Unity::Object::FindObjectsOfType<Unity::CGameObject>("UnityEngine.GameObject");
+				ofstream file;
+				file.open("dump.txt");
+				for (uintptr_t u = 0U; m_pObjects->m_uMaxLength > u; ++u)
+				{
+					Unity::CGameObject* m_pObject = m_pObjects->m_tValues[u];
+
+					file << m_pObject->GetName()->ToString().c_str();
+					file << "\n";
+				}
+				file.close();
+			}
+				
 			if (ImGui::Button("Respawn"))
 				GameAPI::RespawnPlayer(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.cameraRot);
 			if (ImGui::Button("Spam packets")) {

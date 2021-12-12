@@ -59,7 +59,7 @@ SteamManager_c* GameAPI::GetSteammanager()
 PersistentPlayerData_c* GameAPI::GetPersistentData()
 {
 	static auto PersistentPlayerData_TypeInfo = reinterpret_cast<PersistentPlayerData_c**>(
-		MEM::PatternScanRel("GameAssembly.dll", "48 8B 88 ? ? ? ? 80 39 00 75 15 33 D2 48 8B CB 48 83 C4 20 5B E9 ? ? ? ? 48 83 C4 20 5B C3 33 D2 48 8B CB 48 83 C4 20 5B E9 ? ? ? ? E8 ? ? ? ?", -4));
+		MEM::PatternScanRel("GameAssembly.dll", "48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 80 7B ? ? 74 ? 48 8B 05 ? ? ? ? 48 8B 88 ? ? ? ? 80 39", 3));
 	return *PersistentPlayerData_TypeInfo;
 }
 
@@ -122,7 +122,7 @@ QuestManager_c* GameAPI::GetQuestManager()
 SaveManager_c* GameAPI::GetSaveManager()
 {
 	static auto SaveManager_TypeInfo = reinterpret_cast<SaveManager_c**>(
-		MEM::PatternScanRel("GameAssembly.dll", "48 8B 88 ? ? ? ? 48 8B 19 48 8B 0D ? ? ? ? F6 81 ? ? ? ? ? 74 0E 83 B9 ? ? ? ? ? 75 05 E8 ? ? ? ? 45 33 C0 33 D2 48 8B CB E8 ? ? ? ? 84 C0 0F 84 ? ? ? ? 80 3D ? ? ? ? ? 75 13 ", -4));
+		MEM::FromRelative(reinterpret_cast<PVOID*>(IL2CPP::Class::Utils::GetMethodPointer("SaveManager", "Awake")) + 53));
 	return *SaveManager_TypeInfo;
 }
 
@@ -187,55 +187,68 @@ void GameAPI::BanPlayer(long ID)
 	oBanPlayer(GameAPI::GetLobbyManager()->static_fields->Instance, ID, nullptr);
 }
 
-void GameAPI::AddQuestProgress(float progress)
+void GameAPI::CompleteDaily()
 {
-	static auto fnAddQuestProgress = reinterpret_cast<void(__thiscall*)(PlayerSave_o* pThis, float progress, const MethodInfo* pMethod)>(
-		MEM::PatternScan("GameAssembly.dll", "F3 0F 58 89"));
-
-	return fnAddQuestProgress(GameAPI::GetSaveManager()->static_fields->_Instance_k__BackingField->fields.state, progress, nullptr);
+	auto instance = GameAPI::GetSaveManager()->static_fields->Instance;
+	instance->fields.state->fields.questProgress = 1;
 }
 
-System_String_o* GameAPI::CreateString(const char* string) {
-	static auto fnCreateString = reinterpret_cast<System_String_o*(__thiscall*)(System_String_o*, const char*, const MethodInfo*)>(
-		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC 50 48 8B DA 48 8B F9 80 3D ? ? ? ? ?"));
-	return fnCreateString({}, string, nullptr);
+void GameAPI::Initialize()
+{
+	cachedMethods.clear();
+
+	auto classList = std::vector<Unity::il2cppClass*>();
+	IL2CPP::Class::FetchClasses(&classList, "Assembly-CSharp", nullptr);
+
+	
+	for (size_t i = 0; i < classList.size(); i++) {
+		auto methodList = std::vector<Unity::il2cppMethodInfo*>();
+		IL2CPP::Class::FetchMethods(classList[i], &methodList);
+		
+		for (size_t x = 0; x < methodList.size(); x++)
+			if (methodList[x]->m_pName[0] > 64 && methodList[x]->m_pName[0] < 123)
+				cachedMethods.push_back(methodList[x]);
+	}
 }
 
-void GameAPI::Prompt(const char* header, const char* content)
-{
-	static auto fnNewPrompt = reinterpret_cast<void(__thiscall*)(Prompt_o*, System_String_o*, System_String_o*, const MethodInfo*)>(
-		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? 33 D2 49 8B CE E8 ? ? ? ? 48 8B 05 ? ? ? ?", 1));
+Unity::il2cppMethodInfo* GameAPI::FindMethod(const char* methodName, int args) {
+	for (size_t i = 0; i < cachedMethods.size(); i++)
+		if (!strcmp(methodName, cachedMethods[i]->m_pName) && (args == -1 || cachedMethods[i]->m_uArgsCount == args))
+			return cachedMethods[i];
+		return nullptr;
+}
 
-	System_String_o* headerStr = GameAPI::CreateString(header);
-	System_String_o* contentStr = GameAPI::CreateString(content);
+void GameAPI::Prompt(const char* header, const char* content) {
+	static auto fnNewPrompt = reinterpret_cast<void(__thiscall*)(Prompt_o*, Unity::System_String*, Unity::System_String*, const MethodInfo*)>(
+		FindMethod("NewPrompt", 2)->m_pMethodPointer);
 
-	fnNewPrompt(GameAPI::GetPromptManager()->static_fields->Instance, headerStr, contentStr, nullptr);
+	fnNewPrompt(GameAPI::GetPromptManager()->static_fields->Instance, IL2CPP::String::New(header), IL2CPP::String::New(content), nullptr);
 }
 
 void GameAPI::Alert(const char* content)
 {
-	static auto fnNewAleart = reinterpret_cast<void(__thiscall*)(Alerts_o*, System_String_o*, const MethodInfo*)>(
-		MEM::PatternScanRel("GameAssembly.dll", "E9 ? ? ? ? E8 ? ? ? ? CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC 60 48 8B F9", 1));
+	static auto fnNewAlert = reinterpret_cast<void(__thiscall*)(Alerts_o*, Unity::System_String*, const MethodInfo*)>(
+		FindMethod("NewAlert", 1)->m_pMethodPointer);
 
-	System_String_o* contentStr = GameAPI::CreateString(content);
+	Unity::System_String* contentStr = IL2CPP::String::New(content);
 
-	fnNewAleart(GameAPI::GetAlertManager()->static_fields->Instance, contentStr, nullptr);
+	fnNewAlert(GameAPI::GetAlertManager()->static_fields->Instance, contentStr, nullptr);
 }
 
 void GameAPI::ChatMessage(const char* message, const char* username, bool useFiltering)
 {
-	static auto fnAppendMessage = reinterpret_cast<void(__thiscall*)(Chatbox_o*, long fromUser, System_String_o*, System_String_o*, const MethodInfo*)>(
+	static auto fnAppendMessage = reinterpret_cast<void(__thiscall*)(Chatbox_o*, long fromUser, Unity::System_String*, Unity::System_String*, const MethodInfo*)>(
 		MEM::PatternScan("GameAssembly.dll", "40 53 55 56 57 41 54 48 83 EC 40 80 3D ? ? ? ? ?"));
 	
-	static auto colorSyntax1 = reinterpret_cast<System_String_o**>(
+	static auto colorSyntax1 = reinterpret_cast<Unity::System_String**>(
 		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? C6 05 ? ? ? ? ? 45 33 E4 44 38 25 ? ? ? ? 44 89 A4 24", -4));
-	static auto charGreaterThan = reinterpret_cast<System_String_o**>(
+	static auto charGreaterThan = reinterpret_cast<Unity::System_String**>(
 		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? C6 05 ? ? ? ? ? 45 33 E4 44 38 25 ? ? ? ? 44 89 A4 24", -16));
-	static auto colorSyntax2 = reinterpret_cast<System_String_o**>(
+	static auto colorSyntax2 = reinterpret_cast<Unity::System_String**>(
 		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? C6 05 ? ? ? ? ? 45 33 E4 44 38 25 ? ? ? ? 44 89 A4 24", -40));
-	static auto charColon = reinterpret_cast<System_String_o**>(
+	static auto charColon = reinterpret_cast<Unity::System_String**>(
 		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? C6 05 ? ? ? ? ? 45 33 E4 44 38 25 ? ? ? ? 44 89 A4 24", -52));
-	static auto charHashtag = reinterpret_cast<System_String_o**>(
+	static auto charHashtag = reinterpret_cast<Unity::System_String**>(
 		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? C6 05 ? ? ? ? ? 45 33 E4 44 38 25 ? ? ? ? 44 89 A4 24", -64));
 
 	auto chatboxInstance = GameAPI::GetChatboxManager()->static_fields->Instance;
@@ -244,21 +257,21 @@ void GameAPI::ChatMessage(const char* message, const char* username, bool useFil
 		return;
 
 	if (!useFiltering) {
-		System_String_o* oColorSyntax1 = *colorSyntax1;
-		System_String_o* oCharGreaterThan = *charGreaterThan;
-		System_String_o* oColorSyntax2 = *colorSyntax2;
-		System_String_o* oCharColon = *charColon;
-		System_String_o* oCharHashtag = *charHashtag;
+		Unity::System_String* oColorSyntax1 = *colorSyntax1;
+		Unity::System_String* oCharGreaterThan = *charGreaterThan;
+		Unity::System_String* oColorSyntax2 = *colorSyntax2;
+		Unity::System_String* oCharColon = *charColon;
+		Unity::System_String* oCharHashtag = *charHashtag;
 
-		static auto placeholderStr = GameAPI::CreateString("`");
+		static auto placeholderStr = IL2CPP::String::New("`");
 
 		DWORD oldProtect = 0;
 
-		VirtualProtect(*colorSyntax1, sizeof(System_String_o*), PAGE_EXECUTE_READWRITE, &oldProtect);
-		VirtualProtect(*charGreaterThan, sizeof(System_String_o*), PAGE_EXECUTE_READWRITE, nullptr);
-		VirtualProtect(*colorSyntax2, sizeof(System_String_o*), PAGE_EXECUTE_READWRITE, nullptr);
-		VirtualProtect(*charColon, sizeof(System_String_o*), PAGE_EXECUTE_READWRITE, nullptr);
-		VirtualProtect(*charHashtag, sizeof(System_String_o*), PAGE_EXECUTE_READWRITE, nullptr);
+		VirtualProtect(*colorSyntax1, sizeof(Unity::System_String*), PAGE_EXECUTE_READWRITE, &oldProtect);
+		VirtualProtect(*charGreaterThan, sizeof(Unity::System_String*), PAGE_EXECUTE_READWRITE, nullptr);
+		VirtualProtect(*colorSyntax2, sizeof(Unity::System_String*), PAGE_EXECUTE_READWRITE, nullptr);
+		VirtualProtect(*charColon, sizeof(Unity::System_String*), PAGE_EXECUTE_READWRITE, nullptr);
+		VirtualProtect(*charHashtag, sizeof(Unity::System_String*), PAGE_EXECUTE_READWRITE, nullptr);
 
 		*colorSyntax1 = placeholderStr;
 		*charGreaterThan = placeholderStr;
@@ -266,7 +279,7 @@ void GameAPI::ChatMessage(const char* message, const char* username, bool useFil
 		*charColon = placeholderStr;
 		*charHashtag = placeholderStr;
 
-		fnAppendMessage(chatboxInstance, 1, GameAPI::CreateString(message), GameAPI::CreateString(username), nullptr);
+		fnAppendMessage(chatboxInstance, 1, IL2CPP::String::New(message), IL2CPP::String::New(username), nullptr);
 
 		*colorSyntax1 = oColorSyntax1;
 		*charGreaterThan = oCharGreaterThan;
@@ -274,25 +287,18 @@ void GameAPI::ChatMessage(const char* message, const char* username, bool useFil
 		*charColon = oCharColon;
 		*charHashtag = oCharHashtag;
 
-		VirtualProtect(*charGreaterThan, sizeof(System_String_o*), oldProtect, nullptr);
-		VirtualProtect(*colorSyntax2, sizeof(System_String_o*), oldProtect, nullptr);
-		VirtualProtect(*charColon, sizeof(System_String_o*), oldProtect, nullptr);
-		VirtualProtect(*charHashtag, sizeof(System_String_o*), oldProtect, nullptr);
-		VirtualProtect(*colorSyntax1, sizeof(System_String_o*), oldProtect, nullptr);
+		VirtualProtect(*charGreaterThan, sizeof(Unity::System_String*), oldProtect, nullptr);
+		VirtualProtect(*colorSyntax2, sizeof(Unity::System_String*), oldProtect, nullptr);
+		VirtualProtect(*charColon, sizeof(Unity::System_String*), oldProtect, nullptr);
+		VirtualProtect(*charHashtag, sizeof(Unity::System_String*), oldProtect, nullptr);
+		VirtualProtect(*colorSyntax1, sizeof(Unity::System_String*), oldProtect, nullptr);
 	} else
-		fnAppendMessage(chatboxInstance, 1, GameAPI::CreateString(message), GameAPI::CreateString(username), nullptr);
+		fnAppendMessage(chatboxInstance, 1, IL2CPP::String::New(message), IL2CPP::String::New(username), nullptr);
 }
 
 bool GameAPI::Raycast(UnityEngine_Vector3_o origin, UnityEngine_Vector3_o dir, UnityEngine_RaycastHit_o* hitInfo, float maxDistance, int layerMask)
 {
-	static auto fnRaycast = reinterpret_cast<bool(__thiscall*)(UnityEngine_Ray_o*, UnityEngine_RaycastHit_o*, float, int32_t, const MethodInfo*)>(
-		MEM::PatternScan("GameAssembly.dll", "48 8B C4 48 89 58 ? 55 56 57 41 56"));
-
-	UnityEngine_Ray_o ray = {};
-	ray.fields.m_Origin = origin;
-	ray.fields.m_Direction = dir;
-
-	return fnRaycast(&ray, hitInfo, maxDistance, layerMask, nullptr);
+	return false;
 }
 
 UnityEngine_Vector3_o GameAPI::GetPosition(UnityEngine_Transform_o* pThis)

@@ -13,6 +13,7 @@ namespace Obfuscation
 }
 
 namespace GameAPI {
+	inline std::vector<Unity::il2cppMethodInfo*> cachedMethods = std::vector<Unity::il2cppMethodInfo*>();
 
 	// Managers
 	GameManager_c* GetGamemanager();
@@ -35,16 +36,15 @@ namespace GameAPI {
 	ItemData_o* GetItemByID(int ID);
 	void ForceGiveItem(ItemData_o* item) noexcept;
 	void BanPlayer(long ID);
-	void AddQuestProgress(float progress);
 	
 	// CrackGame API
+	void Initialize();
+	Unity::il2cppMethodInfo* FindMethod(const char* methodName, int args = -1);
 	void Prompt(const char* header, const char* content);
 	void Alert(const char* content);
 	void ChatMessage(const char* message, const char* username, bool useFiltering = false);
 	void Teleport(UnityEngine_Vector3_o pos);
-
-	// IL2CPP Functions
-	System_String_o* CreateString(const char* string);
+	void CompleteDaily();
 
 	// Unity game functions
 	bool Raycast(UnityEngine_Vector3_o origin, UnityEngine_Vector3_o dir, UnityEngine_RaycastHit_o* hitInfo, float maxDistance, int layerMask);
