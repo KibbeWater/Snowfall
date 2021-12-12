@@ -188,7 +188,6 @@ void Menu::Render()
 					Unity::CGameObject* m_pObject = m_pObjects->m_tValues[u];
 
 					file << m_pObject->GetName()->ToString().c_str();
-
 					file << "\n";
 				}
 				file.close();
