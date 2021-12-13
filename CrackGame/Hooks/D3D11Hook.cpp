@@ -55,27 +55,28 @@ D3D11_HOOK_API void ImplHookDX11_Present(ID3D11Device* device, ID3D11DeviceConte
 	}
 
 	{
-		//Temporary solution, just wanted it to work for now
-		static bool hasTeleported = false;
-		if (F::bClickTP) {
-			if (!hasTeleported && GetAsyncKeyState(VK_MBUTTON) & 0x01) {
-				auto input = GameAPI::GetPlayerInput();
-				auto pos = GameAPI::GetPosition(input->static_fields->_Instance_k__BackingField->fields.playerCam);
-				auto rot = GameAPI::GetForward(input->static_fields->_Instance_k__BackingField->fields.playerCam);
+		////Temporary solution, just wanted it to work for now
+		//static bool hasTeleported = false;
+		//if (F::bClickTP) {
+		//	if (!hasTeleported && GetAsyncKeyState(VK_MBUTTON) & 0x01) {
+		//		auto m_pPlayer = Unity::GameObject::Find("Player");
+		//		auto curCam = Unity::Camera::GetCurrent()->GetMemberValue<Unity::CGameObject*>("gameObject");
+		//		auto pos = curCam->GetTransform()->GetPosition();
+		//		auto rot = curCam->GetTransform()->GetMemberValue<Unity::Vector3>("forward");
 
-				UnityEngine_RaycastHit_o hit = {};
-				if (GameAPI::Raycast(pos, rot, &hit, 1000, GameAPI::GetGamemanager()->static_fields->Instance->fields.whatIsHittableBullet.fields.m_Mask)) {
-					auto tpPos = hit.fields.m_Point;
-					tpPos.fields.y += 1;
-					GameAPI::Teleport(tpPos);
-				}
+		//		UnityEngine_RaycastHit_o hit = {};
+		//		if (IL2CPP::Class::Utils::) {
+		//			auto tpPos = hit.fields.m_Point;
+		//			tpPos.fields.y += 1;
+		//			GameAPI::Teleport(tpPos);
+		//		}
 
-				hasTeleported = true;
-			}
-			else if (hasTeleported && !(GetAsyncKeyState(VK_MBUTTON) & 0x01)) {
-				hasTeleported = false;
-			}
-		}
+		//		hasTeleported = true;
+		//	}
+		//	else if (hasTeleported && !(GetAsyncKeyState(VK_MBUTTON) & 0x01)) {
+		//		hasTeleported = false;
+		//	}
+		//}
 	}
 
 	ImGui::EndFrame();

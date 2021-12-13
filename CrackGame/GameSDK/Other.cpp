@@ -59,7 +59,7 @@ SteamManager_c* GameAPI::GetSteammanager()
 PersistentPlayerData_c* GameAPI::GetPersistentData()
 {
 	static auto PersistentPlayerData_TypeInfo = reinterpret_cast<PersistentPlayerData_c**>(
-		MEM::PatternScanRel("GameAssembly.dll", "48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 80 7B ? ? 74 ? 48 8B 05 ? ? ? ? 48 8B 88 ? ? ? ? 80 39", 3));
+		MEM::FromRelative(reinterpret_cast<PVOID*>(reinterpret_cast<uintptr_t>(IL2CPP::Class::Utils::GetMethodPointer("PlayerInput", "Update")) + 0x21)));
 	return *PersistentPlayerData_TypeInfo;
 }
 
@@ -94,7 +94,7 @@ LobbyManager_c* GameAPI::GetLobbyManager()
 Prompt_c* GameAPI::GetPromptManager()
 {
 	static auto PromptManager_TypeInfo = reinterpret_cast<Prompt_c**>(
-		MEM::PatternScanRel("GameAssembly.dll", "48 8B 91 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B 1A 48 8D 54 24 ? 89 44 24 ? E8 ? ? ? ? 48 8B 0D ? ? ? ? 45 33 C0 48 8B D0 E8 ? ? ? ? 48 85 DB 74 ? 48 8B 15 ? ? ? ? 45 33 C9 4C 8B C0 48 8B CB E8 ? ? ? ? 48 83 C4 ? 5B C3 E8 ? ? ? ? CC CC CC CC CC CC 40 53", -4));
+		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 48 8B 05 ? ? ? ? F6 80 ? ? ? ? ? 74 ? 83 B8 ? ? ? ? ? 75 ? 48 8B C8 E8 ? ? ? ? 48 8B 05 ? ? ? ? 48 8B 80 ? ? ? ? 48 8B 08 48 85 C9 0F 84 ? ? ? ? 33 D2 E8 ? ? ? ? 48 8B 0D ? ? ? ? F6 81 ? ? ? ? ? 74 ? 83 B9 ? ? ? ? ? 75 ? E8 ? ? ? ? 48 8B 0D ? ? ? ? 33 D2 E8 ? ? ? ? 48 85 DB 74 ? 45 33 C0 B2 ? 48 8B CB E8 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B 91 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B 1A 48 8D 54 24 ? 89 44 24 ? E8 ? ? ? ? 48 8B 0D ? ? ? ? 45 33 C0 48 8B D0 E8 ? ? ? ? 48 85 DB 74 ? 48 8B 15 ? ? ? ? 45 33 C9 4C 8B C0 48 8B CB E8 ? ? ? ? 48 83 C4 ? 5B C3 E8 ? ? ? ? CC CC CC CC CC CC 40 53", -4));
 	return *PromptManager_TypeInfo;
 }
 
@@ -122,7 +122,7 @@ QuestManager_c* GameAPI::GetQuestManager()
 SaveManager_c* GameAPI::GetSaveManager()
 {
 	static auto SaveManager_TypeInfo = reinterpret_cast<SaveManager_c**>(
-		MEM::FromRelative(reinterpret_cast<PVOID*>(IL2CPP::Class::Utils::GetMethodPointer("SaveManager", "Awake")) + 53));
+		MEM::FromRelative(reinterpret_cast<PVOID*>(reinterpret_cast<uintptr_t>(IL2CPP::Class::Utils::GetMethodPointer("SaveManager", "Awake")) + 0x35)));
 	return *SaveManager_TypeInfo;
 }
 
@@ -187,8 +187,7 @@ void GameAPI::BanPlayer(long ID)
 	oBanPlayer(GameAPI::GetLobbyManager()->static_fields->Instance, ID, nullptr);
 }
 
-void GameAPI::CompleteDaily()
-{
+void GameAPI::CompleteDaily() {
 	auto instance = GameAPI::GetSaveManager()->static_fields->Instance;
 	instance->fields.state->fields.questProgress = 1;
 }
@@ -222,7 +221,10 @@ void GameAPI::Prompt(const char* header, const char* content) {
 	static auto fnNewPrompt = reinterpret_cast<void(__thiscall*)(Prompt_o*, Unity::System_String*, Unity::System_String*, const MethodInfo*)>(
 		FindMethod("NewPrompt", 2)->m_pMethodPointer);
 
-	fnNewPrompt(GameAPI::GetPromptManager()->static_fields->Instance, IL2CPP::String::New(header), IL2CPP::String::New(content), nullptr);
+	auto sHeader = IL2CPP::String::New(header);
+	auto sContent = IL2CPP::String::New(content);
+	
+	fnNewPrompt(GameAPI::GetPromptManager()->static_fields->Instance, sHeader, sContent, nullptr);
 }
 
 void GameAPI::Alert(const char* content)

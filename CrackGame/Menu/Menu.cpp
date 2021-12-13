@@ -97,10 +97,18 @@ void Menu::Render()
 				if (ImGui::Button("Complete Daily"))
 					GameAPI::CompleteDaily();
 				if (ImGui::Button("Reset Quest Countdown")) {
+					static auto fnSave = reinterpret_cast<void(__thiscall*)(SaveManager_o*, const MethodInfo*)>(
+						IL2CPP::Class::Utils::GetMethodPointer("SaveManager", "Save", 0));
+					static auto fnLoad = reinterpret_cast<void(__thiscall*)(SaveManager_o*, const MethodInfo*)>(
+						IL2CPP::Class::Utils::GetMethodPointer("SaveManager", "Load", 0));
+
 					PlayerSave_o save = *GameAPI::GetSaveManager()->static_fields->Instance->fields.state;
 					save.fields.nextQuestAvailableTime.fields.dateData = 0;
 					save.fields.isQuestComplete = false;
-					save.fields.currentQuest++;
+					save.fields.questProgress = 0;
+
+					fnSave(GameAPI::GetSaveManager()->static_fields->Instance, nullptr);
+					fnLoad(GameAPI::GetSaveManager()->static_fields->Instance, nullptr);
 				}
 			}
 			ImGui::Spacing();
@@ -122,7 +130,7 @@ void Menu::Render()
 				ImGui::Checkbox("AirJump", &F::bAirJump);
 				ImGui::Checkbox("Anti-Knockback", &F::bAntiKnockback);
 				ImGui::Checkbox("NoSlide", &F::bNoSlide);
-				ImGui::Checkbox("Click TP (Mouse3)", &F::bClickTP);
+				//::Checkbox("Click TP (Mouse3)", &F::bClickTP);
 			}
 			ImGui::Spacing();
 			if (ImGui::CollapsingHeader("Gamemodes"))
@@ -180,15 +188,30 @@ void Menu::Render()
 		if (ImGui::CollapsingHeader("Developer (EXPERIMENTAL)"))
 		{
 			if (ImGui::Button("Dump GameObjects")) {
-				auto m_pObjects = Unity::Object::FindObjectsOfType<Unity::CGameObject>("UnityEngine.GameObject");
+				auto m_pObjects = Unity::Object::FindObjectsOfType<Unity::CGameObject>(UNITY_GAMEOBJECT_CLASS);
 				ofstream file;
 				file.open("dump.txt");
 				for (uintptr_t u = 0U; m_pObjects->m_uMaxLength > u; ++u)
 				{
 					Unity::CGameObject* m_pObject = m_pObjects->m_tValues[u];
 
-					file << m_pObject->GetName()->ToString().c_str();
-					file << "\n";
+					auto name = m_pObject->GetName()->ToString();
+					if (!strcmp(name.c_str(), "Player")) {
+						file << m_pObject->GetName()->ToString().c_str();
+						file << "\n";
+						auto components = m_pObject->GetComponents(UNITY_COMPONENT_CLASS);
+						
+						for (size_t i = 0; components->m_uMaxLength > i; i++) {
+							auto methods = std::vector<Unity::il2cppFieldInfo*>();
+							components->m_tValues[i]->FetchFields(&methods);
+							for (size_t x = 0; x < methods.size(); x++) {
+								file << "		" << methods[x]->m_pType << " " << methods[x]->m_pName;
+								file << "\n";
+							}
+							
+						}
+					}
+					
 				}
 				file.close();
 			}

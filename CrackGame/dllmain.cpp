@@ -20,14 +20,7 @@ DWORD WINAPI OnDllAttach(LPVOID lpParameter)
     IL2CPP::Initialize();
     GameAPI::Initialize();
 
-    std::wstringstream ss;
-    ss << IL2CPP::Class::Utils::GetMethodPointer("SaveManager", "Awake");
-    std::wstring name = ss.str();
-
-    OutputDebugString(L"Output is: ");
-    OutputDebugString(ss.str().c_str());
-
-    std::cout << "Allocated console window!" << std::endl;
+    GameAPI::Prompt("Snowfall", "Loaded sucessfully");
 
     if (!Hook::Init())
         ::MessageBoxA(0, "Failed to initialize all hooks", "ERROR", MB_OK);
