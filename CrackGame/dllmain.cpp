@@ -17,6 +17,10 @@ INL bool IsShutdown(LPVOID lpParameter)
 
 DWORD WINAPI OnDllAttach(LPVOID lpParameter)
 {
+    IL2CPP::Initialize();
+    GameAPI::Initialize();
+
+    GameAPI::Prompt("Snowfall", "Loaded sucessfully");
 
     if (!Hook::Init())
         ::MessageBoxA(0, "Failed to initialize all hooks", "ERROR", MB_OK);

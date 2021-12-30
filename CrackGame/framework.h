@@ -27,6 +27,8 @@
 // Thirdparty
 #include "Thirdparty/Ntdll/ntdll.h"
 #include "Thirdparty/MinHook/MinHook.h"
+#include "Thirdparty/Resolver/Main.hpp"
+#include "Thirdparty/Resolver/Includes.hpp"
 
 // GameSDK
 #include "GameSDK/il2cpp.h"
