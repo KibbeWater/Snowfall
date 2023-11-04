@@ -42,32 +42,39 @@ void Obfuscation::EncryptFloat(CodeStage_AntiCheat_ObscuredTypes_ObscuredFloat_o
 	obscuredInt->fields.hiddenValue = fnXorFloatToInt(value, obscuredInt->fields.currentCryptoKey, nullptr);
 }
 
-GameManager_c* GameAPI::GetGamemanager()
-{
-	static auto GameManager_TypeInfo = reinterpret_cast<GameManager_c**>(
-		MEM::PatternScanRel("GameAssembly.dll", "48 8B 91 ? ? ? ? 48 8B 0A 48 85 C9 74 2C F2 0F 10 00 4C 8D 44 24 ? 8B 40 08 45 33 C9 48 8B D7 F2 0F 11 44 24 ? 89 44 24 28", -4));
-	return *GameManager_TypeInfo;
+long Packet::ReadLong(Packet_o* packet) {
+	return *reinterpret_cast<long*>(&packet->fields.readableBuffer->m_Items + packet->fields.readPos);
 }
 
-SteamManager_c* GameAPI::GetSteammanager()
+void Packet::ResetPacket(Packet_o* packet) {
+	packet->fields.readPos = 0;
+}
+
+GameManager_c* GameAPI::GetGamemanager()
 {
+	static auto SpawnSpectator = GameAPI::FindMethod("SpawnSpectator", 1);
+	return reinterpret_cast<GameManager_c*>(SpawnSpectator->m_pClass);
+}
+
+PlayerServerCommunication_c* GameAPI::GetServerCommunicator() {
+	static auto PlayerServerCommunication = FindClassByField("idToDistance", "ForceMovementUpdate");
+	return reinterpret_cast<PlayerServerCommunication_c*>(PlayerServerCommunication);
+}
+
+SteamManager_c* GameAPI::GetSteammanager() {
 	static auto SteamManager_TypeInfo = reinterpret_cast<SteamManager_c**>(
 		MEM::PatternScanRel("GameAssembly.dll", "48 8B 89 ? ? ? ? 48 89 19 48 8B D3 E8 ? ? ? ? 48 8B 15 ? ? ? ? 48 89 53 18 48 8D 4B 18 E8 ? ? ? ? 90 33 C9", -4));
 	return *SteamManager_TypeInfo;
 }
 
-PersistentPlayerData_c* GameAPI::GetPersistentData()
-{
-	static auto PersistentPlayerData_TypeInfo = reinterpret_cast<PersistentPlayerData_c**>(
-		MEM::FromRelative(reinterpret_cast<PVOID*>(reinterpret_cast<uintptr_t>(IL2CPP::Class::Utils::GetMethodPointer("PlayerInput", "Update")) + 0x21)));
-	return *PersistentPlayerData_TypeInfo;
+PersistentPlayerData_c* GameAPI::GetPersistentData() {
+	static auto PersistentPlayerData = FindClassByField("hnsFrozen", "Awake");
+	return reinterpret_cast<PersistentPlayerData_c*>(PersistentPlayerData);
 }
 
-PlayerInventory_c* GameAPI::GetInventory()
-{
-	static auto PlayerInventory_TypeInfo = reinterpret_cast<PlayerInventory_c**>(
-		MEM::PatternScanRel("GameAssembly.dll", "48 8B 80 ? ? ? ? 48 8B 0D ? ? ? ? 8B 50 ? E8 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B D0 48 8B 89 ? ? ? ? 48 89 01 E8 ? ? ? ? 48 8B 0D ? ? ? ? E8 ? ? ? ? 48 8B 15 ? ? ? ? 48 8B C8 48 8B D8 E8 ? ? ? ? 48 8D 4F ? 48 8B D3 48 89 19 48 8B 5C 24 ? 48 83 C4 ? 5F E9 ? ? ? ? CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 80 3D ? ? ? ? ? 8B FA", -4));
-	return *PlayerInventory_TypeInfo;
+PlayerInventory_c* GameAPI::GetInventory() {
+	static auto LockInventory = GameAPI::FindMethod("LockInventory", 1);
+	return reinterpret_cast<PlayerInventory_c*>(LockInventory->m_pClass);
 }
 
 ItemManager_c* GameAPI::GetItemMgr()
@@ -79,37 +86,48 @@ ItemManager_c* GameAPI::GetItemMgr()
 
 PlayerInput_c* GameAPI::GetPlayerInput()
 {
-	static auto PlayerManager_TypeInfo = reinterpret_cast<PlayerInput_c**>(
-		MEM::PatternScanRel("GameAssembly.dll", "80 3D ? ? ? ? ? 75 1A 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8B 05 ? ? ? ? C6 05 ? ? ? ? ? F6 80 ? ? ? ? ? 74 18 83 B8 ? ? ? ? ? 75 0F 48 8B C8 E8 ? ? ? ? 48 8B 05 ? ? ? ? 48 8B 88 ? ? ? ? 48 8B D3 ", -4));
-	return *PlayerManager_TypeInfo;
+	auto StopInput = GameAPI::FindMethod("StopInput", 0);
+	auto PlayerInput = reinterpret_cast<PlayerInput_c*>(StopInput->m_pClass);
+
+	return PlayerInput;
 }
 
 LobbyManager_c* GameAPI::GetLobbyManager()
 {
-	static auto LobbyManager_TypeInfo = reinterpret_cast<LobbyManager_c**>(
-		MEM::PatternScanRel("GameAssembly.dll", "48 8B 88 ? ? ? ? 48 8B D7 48 83 C1 10", -4));
-	return *LobbyManager_TypeInfo;
+	auto LobbyLoop = GameAPI::FindMethod("LobbyLoop", 0);
+	auto LobbyManager = reinterpret_cast<LobbyManager_c*>(LobbyLoop->m_pClass);
+
+	return LobbyManager;
+}
+
+GameLoop_c* GameAPI::GetGameLoopManager() {
+	auto StartGames = GameAPI::FindMethod("StartGames", 0);
+	auto GameLoop = reinterpret_cast<GameLoop_c*>(StartGames->m_pClass);
+
+	return GameLoop;
 }
 
 Prompt_c* GameAPI::GetPromptManager()
 {
-	static auto PromptManager_TypeInfo = reinterpret_cast<Prompt_c**>(
-		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 48 8B 05 ? ? ? ? F6 80 ? ? ? ? ? 74 ? 83 B8 ? ? ? ? ? 75 ? 48 8B C8 E8 ? ? ? ? 48 8B 05 ? ? ? ? 48 8B 80 ? ? ? ? 48 8B 08 48 85 C9 0F 84 ? ? ? ? 33 D2 E8 ? ? ? ? 48 8B 0D ? ? ? ? F6 81 ? ? ? ? ? 74 ? 83 B9 ? ? ? ? ? 75 ? E8 ? ? ? ? 48 8B 0D ? ? ? ? 33 D2 E8 ? ? ? ? 48 85 DB 74 ? 45 33 C0 B2 ? 48 8B CB E8 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B 91 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B 1A 48 8D 54 24 ? 89 44 24 ? E8 ? ? ? ? 48 8B 0D ? ? ? ? 45 33 C0 48 8B D0 E8 ? ? ? ? 48 85 DB 74 ? 48 8B 15 ? ? ? ? 45 33 C9 4C 8B C0 48 8B CB E8 ? ? ? ? 48 83 C4 ? 5B C3 E8 ? ? ? ? CC CC CC CC CC CC 40 53", -4));
-	return *PromptManager_TypeInfo;
+	auto NewPrompt = GameAPI::FindMethod("NewPrompt", 2);
+	auto Prompt = reinterpret_cast<Prompt_c*>(NewPrompt->m_pClass);
+
+	return Prompt;
 }
 
 Alerts_c* GameAPI::GetAlertManager()
 {
-	static auto AlertManager_TypeInfo = reinterpret_cast<Alerts_c**>(
-		MEM::PatternScanRel("GameAssembly.dll", "48 8B 88 ? ? ? ? 48 8B 09 48 85 C9 74 13 48 8B 15 ? ? ? ? 45 33 C0 48 83 C4 28 E9 ? ? ? ? E8 ? ? ? ? CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC 60 80 3D ? ? ? ? ?", -4));
-	return *AlertManager_TypeInfo;
+	auto NewAlert = GameAPI::FindMethod("NewAlert", 1);
+	auto Alert = reinterpret_cast<Alerts_c*>(NewAlert->m_pClass);
+
+	return Alert;
 }
 
-Chatbox_c* GameAPI::GetChatboxManager()
-{
-	static auto ChatboxManager_TypeInfo = reinterpret_cast<Chatbox_c**>(
-		MEM::PatternScanRel("GameAssembly.dll", "48 8B D7 48 8B 88 ? ? ? ? 48 89 39 E8 ? ? ? ? 80 3D ? ? ? ? ? 75 1F 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 80 BF ? ? ? ? ? 48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 4C 89 64 24 ?", -4));
-	return *ChatboxManager_TypeInfo;
+Chatbox_c* GameAPI::GetChatboxManager() {
+	static auto AppendMessage = GameAPI::FindMethod("AppendMessage", 3);
+	auto Chatbox = reinterpret_cast<Chatbox_c*>(AppendMessage->m_pClass);
+
+	return Chatbox;
 }
 
 QuestManager_c* GameAPI::GetQuestManager()
@@ -156,35 +174,142 @@ void GameAPI::TagPlayer(GameModeBombTag_o* pThis, long tagger, long tagged)
 	return fnTagPlayer(pThis, tagger, tagged, nullptr);
 }
 
-void GameAPI::DamagePlayer(long hurtPlayerId, int damage, int itemID, int objectID, UnityEngine_Vector3_o dmgDir)
+void GameAPI::DamagePlayer(unsigned long hurtPlayerId, int damage, UnityEngine_Vector3_o dmgDir, int itemID, int objectID)
 {
-	static auto fnDamagePlayer = reinterpret_cast<void(__thiscall*)(long, int, UnityEngine_Vector3_o, int, int, const MethodInfo*)>(
-		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 41 54 41 56 41 57 48 83 EC 50 45 8B E1 "));
+	static auto fnDamagePlayer = reinterpret_cast<void(__thiscall*)(unsigned long, int, UnityEngine_Vector3_o, int, int, const MethodInfo*)>(GameAPI::FindMethod("DamagePlayer", 5)->m_pMethodPointer);
 
 	return fnDamagePlayer(hurtPlayerId, damage, dmgDir, itemID, objectID, nullptr);
 }
 
-ItemData_o* GameAPI::GetItemByID(int ID)
-{
-	static auto fnGetItemByID = reinterpret_cast<ItemData_o*(__thiscall*)(int, const MethodInfo*)>(
-		MEM::PatternScan("GameAssembly.dll", "40 53 48 83 EC ? 80 3D ? ? ? ? ? 8B D9 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05"));
+void GameAPI::PunchPlayer(unsigned long punchTargetId, UnityEngine_Vector3_o dmgDir) {
+	static auto fnPunchPlayer = reinterpret_cast<void(__thiscall*)(unsigned long, UnityEngine_Vector3_o, const MethodInfo*)>(
+		IL2CPP::Class::Utils::GetMethodPointer(
+			GameAPI::FindMethod("SendSpectating", 1)->m_pClass,
+			"PunchPlayer"
+		)
+	);
 
-	return fnGetItemByID(ID, nullptr);
+	return fnPunchPlayer(punchTargetId, dmgDir, nullptr);
 }
 
-void GameAPI::ForceGiveItem(ItemData_o* item) noexcept
-{
+ItemData_o* GameAPI::GetItemByID(int ID) {
+	static auto fnGetItemById = reinterpret_cast<ItemData_o*(__thiscall*)(int, const MethodInfo*)>(
+		GameAPI::FindMethod("GetItemById", 1)->m_pMethodPointer);
+
+	return fnGetItemById(ID, nullptr);
+}
+
+void GameAPI::ForceGiveItem(ItemData_o* item) noexcept {
 	static auto fnForceGiveItem = reinterpret_cast<void(__thiscall*)(PlayerInventory_o*, ItemData_o*, const MethodInfo*)>(
-		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC ? 80 3D ? ? ? ? ? 48 8B DA 48 8B F9 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 48 89 74 24 ? 4C 89 74 24 ? 48 85 DB 0F 84 ? ? ? ? 48 8B 05 ? ? ? ? 8B 73 ? F6 80 ? ? ? ? ? 74 ? 83 B8 ? ? ? ? ? 75 ? 48 8B C8 E8 ? ? ? ? 48 8B 05 ? ? ? ? 48 8B 80 ? ? ? ? 45 33 C0 8B CE 48 8B 10 E8 ? ? ? ? 48 8B 0D ? ? ? ? 48 63 F0 48 8B 91 ? ? ? ? 4C 8B 32 4D 85 F6 0F 84 ? ? ? ? 49 8B 16 48 8B CB 48 8B 52 ? E8 ? ? ? ? 48 85 C0 0F 84 ? ? ? ? 48 8B C6 41 3B 76 ? 0F 83 ? ? ? ? 48 83 C0 ? 48 89 6C 24 ? 49 8D 0C C6 48 8B D3 48 89 19 E8 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B 6F ? F6 81 ? ? ? ? ? 74 ? 83 B9 ? ? ? ? ? 75 ? E8 ? ? ? ? 45 33 C0 33 D2 48 8B CD E8 ? ? ? ? 84 C0 74 ? 89 77 ? 8B D6 EB ? 8B 57 ? 3B F2 75 ? 45 33 C0 48 8B CF E8 ? ? ? ? 48 8B 05 ? ? ? ? 48 8B 88 ? ? ? ? 48 8B 29 48 8B 0D ? ? ? ? F6 81 ? ? ? ? ? 74 ? 83 B9 ? ? ? ? ? 75 ? E8 ? ? ? ? 33 D2 48 8B CD E8 ? ? ? ? 48 8B 6C 24 ? 84 C0 74 ? 48 8B 05 ? ? ? ? 48 8B 88 ? ? ? ? 48 8B 09 48 85 C9 74 ? 45 33 C9 44 8B C6 48 8B D3 E8 ? ? ? ? 33 D2 48 8B CF 4C 8B 74 24 ? 48 8B 74 24 ? 48 8B 5C 24 ? 48 83 C4 ? 5F E9 ? ? ? ? E8 ? ? ? ? CC E8 ? ? ? ? 48 8B C8 33 D2 E8 ? ? ? ? CC E8 ? ? ? ? 48 8B C8 33 D2 E8 ? ? ? ? CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC ? 80 3D ? ? ? ? ? 48 8B D9"));
+		IL2CPP::Class::Utils::GetMethodPointer(GameAPI::FindMethod("LockInventory", 1)->m_pClass, "ForceGiveItem"));
 
-	return fnForceGiveItem(GameAPI::GetInventory()->static_fields->Instance, item, nullptr);
+	auto inventory = GameAPI::GetInventory();
+
+	return fnForceGiveItem(inventory->static_fields->Instance, item, nullptr);
 }
 
-void GameAPI::BanPlayer(long ID)
-{
+void GameAPI::BanPlayer(long ID) {
 	static auto oBanPlayer = static_cast<decltype(&Hook::LobbyManager::hkBanPlayer)>(Hook::LobbyManager::pBanPlayer);
 
 	oBanPlayer(GameAPI::GetLobbyManager()->static_fields->Instance, ID, nullptr);
+}
+
+bool GameAPI::TrySnowballReload() {
+	std::string m_sObjectSubstring = "SnowballPile";
+
+	Unity::il2cppClass* m_pSystemTypeClass = IL2CPP::Class::Find("UnityEngine.GameObject");
+	auto m_pSystemType = IL2CPP::Class::GetSystemType(m_pSystemTypeClass);
+	auto m_pObjects = Unity::Object::FindObjectsOfType<Unity::CGameObject>(m_pSystemType);
+
+	auto myPos = new Vector3(reinterpret_cast<Unity::CTransform*>(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerCam)->GetPosition());
+	static float maxDist = 12.0;
+
+	for (uintptr_t u = 0U; m_pObjects->m_uMaxLength > u; ++u) {
+		Unity::CGameObject* m_pObject = m_pObjects->At(u);
+		if (!m_pObject) continue; // Just in-case
+
+		// Obtaining object name and then converting it to std::string
+		std::string m_sObjectName = m_pObject->GetName()->ToString();
+		if (m_sObjectName.find(m_sObjectSubstring) != std::string::npos) {
+			auto pilePos = new Vector3(m_pObject->GetTransform()->GetPosition());
+			auto dist = pilePos->distanceTo(*myPos);
+			if (dist <= maxDist && M::pSnowballPileInteract != nullptr) {
+				static Unity::il2cppClass* m_pSystemTypeClass = reinterpret_cast<Unity::il2cppClass*>(M::pSnowballPileInteract->klass);
+				auto m_pSystemType = IL2CPP::Class::GetSystemType(m_pSystemTypeClass);
+
+				auto components = m_pObject->GetComponents(m_pSystemType);
+				if (components->m_uMaxLength <= 0) continue;
+				auto component = components->At(0);
+
+				SnowballPileInteract_o* pile = reinterpret_cast<SnowballPileInteract_o*>(component);
+
+				static auto fnTryInteract = reinterpret_cast<void(UNITY_CALLING_CONVENTION)(SnowballPileInteract_o*)>(
+					IL2CPP::Class::Utils::GetMethodPointer(m_pSystemTypeClass, "TryInteract"));
+				
+				fnTryInteract(pile);
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+void GameAPI::BreakAll() {
+	static auto cGlassBreak = GameAPI::FindMethod("MakeSolid", 0)->m_pClass;
+	auto m_pSystemType = IL2CPP::Class::GetSystemType(cGlassBreak);
+	auto m_pComponents = Unity::Object::FindObjectsOfType<Unity::CComponent>(m_pSystemType);
+
+	for (uintptr_t u = 0U; m_pComponents->m_uMaxLength > u; ++u) {
+		Unity::CComponent* m_pComponent = m_pComponents->At(u);
+		if (!m_pComponent) continue; // Just in-case
+
+		static auto fnTryInteract = reinterpret_cast<void(UNITY_CALLING_CONVENTION)(GlassBreak_o*)>(
+			IL2CPP::Class::Utils::GetMethodPointer(cGlassBreak, "TryInteract"));
+
+		fnTryInteract(reinterpret_cast<GlassBreak_o*>(m_pComponent));
+	}
+}
+
+void GameAPI::TakeAllTiles() {
+	static auto cTile = GameAPI::FindMethod("SetTileId", 1)->m_pClass;
+	auto m_pSystemType = IL2CPP::Class::GetSystemType(cTile);
+	auto m_pComponents = Unity::Object::FindObjectsOfType<Unity::CComponent>(m_pSystemType);
+
+	for (uintptr_t u = 0U; m_pComponents->m_uMaxLength > u; ++u) {
+		Unity::CComponent* m_pComponent = m_pComponents->At(u);
+		if (!m_pComponent) continue; // Just in-case
+		
+		auto obj = m_pComponent->GetMemberValue<Unity::CGameObject*>("gameObject");
+		G::vPositionOverrideQueue.push_back(new Vector3(obj->GetTransform()->GetPosition()));
+		/* Teleport((Vector3(obj->GetTransform()->GetPosition()) - Vector3(0,.5,0)).ToEngine());
+		Sleep(100); */
+	}
+}
+
+void GameAPI::DropItem(int slot) {
+	static auto cPlayerInventory = GameAPI::FindMethod("TryDropItem", 1)->m_pClass;
+	static auto fnTryDropItem = reinterpret_cast<void(IL2CPP_CALLING_CONVENTION)(PlayerInventory_o*, int)>(
+		IL2CPP::Class::Utils::GetMethodPointer(cPlayerInventory, "TryDropItem"));
+
+	fnTryDropItem(GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerInventory, slot);
+}
+
+std::vector<ItemData_o*> GameAPI::GetItems() {
+	std::vector<ItemData_o*> items = std::vector<ItemData_o*>();
+
+	auto inv = GetInventory()->static_fields->inventory;
+	for (size_t i = 0; i < inv->max_length; i++)
+		items.push_back(inv->m_Items[i]);
+	return items;
+}
+
+ItemData_o* GameAPI::FindItemById(int itemId) {
+	auto items = GetItems();
+	ItemData_o* selItem = nullptr;
+	for (size_t i = 0; i < items.size(); i++)
+		if (items.at(i)->fields.itemID == itemId)
+			selItem = items.at(i);
+	return selItem;
 }
 
 void GameAPI::CompleteDaily() {
@@ -192,13 +317,85 @@ void GameAPI::CompleteDaily() {
 	instance->fields.state->fields.questProgress = 1;
 }
 
-void GameAPI::Initialize()
-{
+void GameAPI::CSendPosition(UnityEngine_Vector3_o* vec) {
+	static auto PlayerServerCommunication = FindClassByField("idToDistance", "ForceMovementUpdate");
+
+	/* static auto fnForceMovementUpdate = reinterpret_cast<void(IL2CPP_CALLING_CONVENTION)(const MethodInfo*)>(
+			IL2CPP::Class::Utils::GetMethodPointer(PlayerServerCommunication, "ForceMovementUpdate")); */
+
+
+
+			/* static auto cClientSend = reinterpret_cast<Unity::CComponent*>(GameAPI::FindMethod("SendSpectating", 1)->m_pClass); */
+			/* static auto fnPlayerPosition = reinterpret_cast<void(IL2CPP_CALLING_CONVENTION)(UnityEngine_Vector3_o*, uint64_t)>(
+				IL2CPP::Class::Utils::GetMethodPointer(cClientSend, "PlayerPosition")); */
+
+				/* static auto fnForceMovementUpdate = reinterpret_cast<void(IL2CPP_CALLING_CONVENTION)(const MethodInfo*)>(
+					IL2CPP::Class::Utils::GetMethodPointer(PlayerServerCommunication, "ForceMovementUpdate")); */
+
+					/* static auto cPlayerServerCommunication = reinterpret_cast<Unity::CComponent*>(GameAPI::FindMethod("SendSpectating", 1)->m_pClass); */
+
+	auto pos = (new Vector3(*vec))->ToEngine(); // 40 55 56 41 57 48 83 EC 30 80 3D ? ? ? ? ? 41 8B F0 4C 8B FA 48 8B E9 75 37 48 8D 0D ? ? ? ? E8 ? ? ? ? 
+
+	static auto fnSendPositionToAll = reinterpret_cast<void(IL2CPP_CALLING_CONVENTION)(PlayerServerCommunication_o*, UnityEngine_Vector3_o*, ERenderDistance)>(
+		MEM::PatternScan("GameAssembly.dll", "40 55 56 41 57 48 83 EC 30 80 3D ? ? ? ? ? 41 8B F0 4C 8B FA 48 8B E9 75 37 48 8D 0D ? ? ? ? E8 ? ? ? ?"));
+
+	/* cPlayerServerCommunication->CallMethod<void, Unity::Vector3*, ERenderDistance>("");
+	cClientSend->CallMethod<void, Unity::Vector3*>("PlayerPosition", pos); */
+
+	// Teleport(vec);
+	// fnForceMovementUpdate(nullptr);
+	// fnPlayerPosition(vec, GetSteamID());
+	// G::vPositionOverrideQueue.push_back(new Vector3(vec));
+	return fnSendPositionToAll(reinterpret_cast<PlayerServerCommunication_o*>(PlayerServerCommunication), &pos, ERenderDistance::RENDER_FAR);
+}
+
+void GameAPI::ForceMovementUpdate() {
+	static auto PlayerServerCommunication = FindClassByField("idToDistance", "ForceMovementUpdate");
+
+	static auto fnForceMovementUpdate = reinterpret_cast<void(IL2CPP_CALLING_CONVENTION)(void)>(
+			IL2CPP::Class::Utils::GetMethodPointer(PlayerServerCommunication, "ForceMovementUpdate"));
+
+	fnForceMovementUpdate();
+}
+
+uint64_t GameAPI::GetSteamID() {
+	static uint64_t mySteamID = GameAPI::GetSteammanager()->static_fields->Instance->fields._PlayerSteamId_k__BackingField.fields.m_SteamID;
+	return mySteamID;
+}
+
+Unity::Vector3* GameAPI::GetPlayerCamOffset() {
+	auto m_vPlayerPos = Unity::GameObject::Find("Player")->GetTransform()->GetPosition();
+	auto curCamPos = reinterpret_cast<Unity::CTransform*>(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerCam)->GetPosition();
+	return new Unity::Vector3(m_vPlayerPos.x - curCamPos.x, m_vPlayerPos.y - curCamPos.y, m_vPlayerPos.z - curCamPos.z);
+}
+
+void GameAPI::UseItem() {
+	static auto cPlayerInventory = GameAPI::FindMethod("LockInventory", 1)->m_pClass;
+	static auto fnUseItem = reinterpret_cast<void(IL2CPP_CALLING_CONVENTION)(PlayerInventory_o*)>(
+		IL2CPP::Class::Utils::GetMethodPointer(cPlayerInventory, "UseItem"));
+	
+	fnUseItem(GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerInventory);
+}
+
+EGameModes GameAPI::GetGamemode() {
+	return (EGameModes)GameAPI::GetGamemanager()->static_fields->Instance->fields.gameMode->fields.type;
+}
+
+void GameAPI::StartGames() {
+	static auto fnStartGames = reinterpret_cast<void(IL2CPP_CALLING_CONVENTION)(GameLoop_o*)>(
+		IL2CPP::Class::Utils::GetMethodPointer(reinterpret_cast<Unity::il2cppClass*>(GetGameLoopManager()), "StartGames"));
+	fnStartGames(GetGameLoopManager()->static_fields->Instance);
+}
+
+void GameAPI::Log(std::string message) {
+	GameAPI::AppendMessage(1, IL2CPP::String::New(message), IL2CPP::String::New("[Snowfall]"));
+}
+
+void GameAPI::Initialize() {
 	cachedMethods.clear();
 
 	auto classList = std::vector<Unity::il2cppClass*>();
 	IL2CPP::Class::FetchClasses(&classList, "Assembly-CSharp", nullptr);
-
 	
 	for (size_t i = 0; i < classList.size(); i++) {
 		auto methodList = std::vector<Unity::il2cppMethodInfo*>();
@@ -208,6 +405,9 @@ void GameAPI::Initialize()
 			if (methodList[x]->m_pName[0] > 64 && methodList[x]->m_pName[0] < 123)
 				cachedMethods.push_back(methodList[x]);
 	}
+
+	REGISTER_COMMAND(test);
+	REGISTER_COMMAND(profile);
 }
 
 Unity::il2cppMethodInfo* GameAPI::FindMethod(const char* methodName, int args) {
@@ -217,18 +417,29 @@ Unity::il2cppMethodInfo* GameAPI::FindMethod(const char* methodName, int args) {
 		return nullptr;
 }
 
+Unity::il2cppClass* GameAPI::FindClassByField(const char* fieldName, const char* methodName) {
+	for (size_t i = 0; i < GameAPI::cachedMethods.size(); i++)
+		if (strcmp(methodName, "") == 0 || strcmp(methodName, GameAPI::cachedMethods[i]->m_pName) == 0) {
+			auto fields = std::vector<Unity::il2cppFieldInfo*>();
+			IL2CPP::Class::FetchFields(GameAPI::cachedMethods[i]->m_pClass, &fields);
+
+			for (size_t x = 0; x < fields.size(); x++)
+				if (!strcmp(fieldName, fields[x]->m_pName))
+					return fields[x]->m_pParentClass;
+		}
+	return nullptr;
+}
+
 void GameAPI::Prompt(const char* header, const char* content) {
-	static auto fnNewPrompt = reinterpret_cast<void(__thiscall*)(Prompt_o*, Unity::System_String*, Unity::System_String*, const MethodInfo*)>(
-		FindMethod("NewPrompt", 2)->m_pMethodPointer);
+	static auto cPrompt = reinterpret_cast<Unity::CComponent*>(FindMethod("NewPrompt", 2)->m_pClass);
 
 	auto sHeader = IL2CPP::String::New(header);
 	auto sContent = IL2CPP::String::New(content);
 	
-	fnNewPrompt(GameAPI::GetPromptManager()->static_fields->Instance, sHeader, sContent, nullptr);
+	cPrompt->CallMethodSafe<void*, Unity::System_String*, Unity::System_String*>("NewPrompt", sHeader, sContent);
 }
 
-void GameAPI::Alert(const char* content)
-{
+void GameAPI::Alert(const char* content) {
 	static auto fnNewAlert = reinterpret_cast<void(__thiscall*)(Alerts_o*, Unity::System_String*, const MethodInfo*)>(
 		FindMethod("NewAlert", 1)->m_pMethodPointer);
 
@@ -237,110 +448,96 @@ void GameAPI::Alert(const char* content)
 	fnNewAlert(GameAPI::GetAlertManager()->static_fields->Instance, contentStr, nullptr);
 }
 
-void GameAPI::ChatMessage(const char* message, const char* username, bool useFiltering)
-{
-	static auto fnAppendMessage = reinterpret_cast<void(__thiscall*)(Chatbox_o*, long fromUser, Unity::System_String*, Unity::System_String*, const MethodInfo*)>(
-		MEM::PatternScan("GameAssembly.dll", "40 53 55 56 57 41 54 48 83 EC 40 80 3D ? ? ? ? ?"));
+void GameAPI::AppendMessage(uint64_t fromUser, Unity::System_String* message, Unity::System_String* fromUsername) {
+	static auto fnAppendMessage = reinterpret_cast<void(IL2CPP_CALLING_CONVENTION)(Chatbox_o*, uint64_t, Unity::System_String*, Unity::System_String*)>(
+		FindMethod("AppendMessage", 3)->m_pMethodPointer);
+
+	fnAppendMessage(GetChatboxManager()->static_fields->Instance, fromUser, message, fromUsername);
+}
+
+void GameAPI::SendChatMessage(std::string message) {
+	static auto fnSendChatMessage = reinterpret_cast<void(IL2CPP_CALLING_CONVENTION)(Unity::System_String*)>(
+		FindMethod("SendChatMessage", 1)->m_pMethodPointer);
+
+	fnSendChatMessage(IL2CPP::String::New(message));
+}
+
+bool GameAPI::Raycast(UnityEngine_Vector3_o origin, UnityEngine_Vector3_o dir, UnityEngine_RaycastHit_o* hitInfo, float maxDistance, int layerMask) {
+	static auto Physics = IL2CPP::Class::Find("UnityEngine.Physics");
+	void* Raycast = IL2CPP::Class::Utils::GetMethodPointer(Physics, "Raycast", 6);
+
+	static auto raycastMethod = reinterpret_cast<bool(__thiscall*)(UnityEngine_Vector3_o*, UnityEngine_Vector3_o*, UnityEngine_RaycastHit_o*, float, int, int, const MethodInfo*)>(Raycast);
+	return raycastMethod(&origin, &dir, hitInfo, maxDistance, layerMask, 0, nullptr);
+}
+
+float GameAPI::DeltaTime() {
+	static auto Time = IL2CPP::Class::Find("UnityEngine.Time");
+	void* deltaTime = IL2CPP::Class::Utils::GetMethodPointer(Time, "get_deltaTime");
+	static auto fnGetDeltaTime = reinterpret_cast<float(__thiscall*)(void)>(deltaTime);
+	return fnGetDeltaTime();
+}
+
+void GameAPI::Teleport(UnityEngine_Vector3_o pos) {
+	static auto Physics = IL2CPP::Class::Find("UnityEngine.Physics");
+	void* Raycast = IL2CPP::Class::Utils::GetMethodPointer(Physics, "Raycast", 5);
+	auto rb = reinterpret_cast<Unity::CRigidbody*>(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerMovement->fields.rb);
+	auto enginePos = new Vector3(pos);
+
+	rb->SetVelocity(Unity::Vector3());
+	rb->GetMemberValue<Unity::CGameObject*>("gameObject")->GetTransform()->SetPosition(*(enginePos->ToUnity()));
+}
+
+CommandResult* Commands::test(const std::vector<std::string>& args) {
+	for (const std::string& arg : args) {
+		GameAPI::Log("Argument: " + arg);
+	}
+
+	CommandResult* result = new CommandResult;
+	result->result = true;
+	result->error = nullptr;
+
+	return result;
+}
+
+CommandResult* Commands::profile(const std::vector<std::string>& args) {
+	CommandResult* result = new CommandResult;
+	result->error = nullptr;
+	result->result = false;
+
+	if (args.size() <= 0) {
+		result->error = "Invalid usage: profile <player#>";
+		return result;
+	}
 	
-	static auto colorSyntax1 = reinterpret_cast<Unity::System_String**>(
-		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? C6 05 ? ? ? ? ? 45 33 E4 44 38 25 ? ? ? ? 44 89 A4 24", -4));
-	static auto charGreaterThan = reinterpret_cast<Unity::System_String**>(
-		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? C6 05 ? ? ? ? ? 45 33 E4 44 38 25 ? ? ? ? 44 89 A4 24", -16));
-	static auto colorSyntax2 = reinterpret_cast<Unity::System_String**>(
-		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? C6 05 ? ? ? ? ? 45 33 E4 44 38 25 ? ? ? ? 44 89 A4 24", -40));
-	static auto charColon = reinterpret_cast<Unity::System_String**>(
-		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? C6 05 ? ? ? ? ? 45 33 E4 44 38 25 ? ? ? ? 44 89 A4 24", -52));
-	static auto charHashtag = reinterpret_cast<Unity::System_String**>(
-		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? C6 05 ? ? ? ? ? 45 33 E4 44 38 25 ? ? ? ? 44 89 A4 24", -64));
+	auto strPlayerId = args.front();
+	auto playerId = std::stol(strPlayerId);
 
-	auto chatboxInstance = GameAPI::GetChatboxManager()->static_fields->Instance;
+	if (playerId == 0) {
+		auto err = ("The value \"" + strPlayerId + "\" is not a valid player ID").c_str();
+		result->error = err;
+		return result;
+	}
 
-	if (!chatboxInstance)
-		return;
+	auto lookup = GameAPI::GetLobbyManager()->static_fields->Instance->fields.UIDToSteamId;
 
-	if (!useFiltering) {
-		Unity::System_String* oColorSyntax1 = *colorSyntax1;
-		Unity::System_String* oCharGreaterThan = *charGreaterThan;
-		Unity::System_String* oColorSyntax2 = *colorSyntax2;
-		Unity::System_String* oCharColon = *charColon;
-		Unity::System_String* oCharHashtag = *charHashtag;
+	if (!lookup->m_Items[playerId-1]) {
+		auto err = ("The value \"" + strPlayerId + "\" is not a valid player ID").c_str();
+		result->error = err;
+		return result;
+	}
 
-		static auto placeholderStr = IL2CPP::String::New("`");
 
-		DWORD oldProtect = 0;
+	GameAPI::Log(std::string("Player SteamID is: " + to_string(lookup->m_Items[playerId - 1])));
+	system(std::string("start https://steamcommunity.com/profiles/" + to_string(lookup->m_Items[playerId - 1])).c_str());
 
-		VirtualProtect(*colorSyntax1, sizeof(Unity::System_String*), PAGE_EXECUTE_READWRITE, &oldProtect);
-		VirtualProtect(*charGreaterThan, sizeof(Unity::System_String*), PAGE_EXECUTE_READWRITE, nullptr);
-		VirtualProtect(*colorSyntax2, sizeof(Unity::System_String*), PAGE_EXECUTE_READWRITE, nullptr);
-		VirtualProtect(*charColon, sizeof(Unity::System_String*), PAGE_EXECUTE_READWRITE, nullptr);
-		VirtualProtect(*charHashtag, sizeof(Unity::System_String*), PAGE_EXECUTE_READWRITE, nullptr);
-
-		*colorSyntax1 = placeholderStr;
-		*charGreaterThan = placeholderStr;
-		*colorSyntax2 = placeholderStr;
-		*charColon = placeholderStr;
-		*charHashtag = placeholderStr;
-
-		fnAppendMessage(chatboxInstance, 1, IL2CPP::String::New(message), IL2CPP::String::New(username), nullptr);
-
-		*colorSyntax1 = oColorSyntax1;
-		*charGreaterThan = oCharGreaterThan;
-		*colorSyntax2 = oColorSyntax2;
-		*charColon = oCharColon;
-		*charHashtag = oCharHashtag;
-
-		VirtualProtect(*charGreaterThan, sizeof(Unity::System_String*), oldProtect, nullptr);
-		VirtualProtect(*colorSyntax2, sizeof(Unity::System_String*), oldProtect, nullptr);
-		VirtualProtect(*charColon, sizeof(Unity::System_String*), oldProtect, nullptr);
-		VirtualProtect(*charHashtag, sizeof(Unity::System_String*), oldProtect, nullptr);
-		VirtualProtect(*colorSyntax1, sizeof(Unity::System_String*), oldProtect, nullptr);
-	} else
-		fnAppendMessage(chatboxInstance, 1, IL2CPP::String::New(message), IL2CPP::String::New(username), nullptr);
+	result->result = true;
+	return result;
 }
 
-bool GameAPI::Raycast(UnityEngine_Vector3_o origin, UnityEngine_Vector3_o dir, UnityEngine_RaycastHit_o* hitInfo, float maxDistance, int layerMask)
-{
-	return false;
-}
+//CommandResult* Commands::
 
-UnityEngine_Vector3_o GameAPI::GetPosition(UnityEngine_Transform_o* pThis)
-{
-	static auto fnGetPosition = reinterpret_cast<UnityEngine_Vector3_o(__thiscall*)(UnityEngine_Transform_o*, const MethodInfo*)>(
-		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC ? 33 C0 48 8B FA 48 89 01 48 8B D9 89 41 ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF FF D0 48 8B C3 48 8B 5C 24 ? 48 83 C4 ? 5F C3 CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 33 C0"));
-	return fnGetPosition(pThis, nullptr);
-}
-
-UnityEngine_Vector3_o GameAPI::GetForward(UnityEngine_Transform_o* pThis)
-{
-	static auto fnGetForward = reinterpret_cast<UnityEngine_Vector3_o*(__thiscall*)(UnityEngine_Vector3_o*, UnityEngine_Transform_o*, const MethodInfo*)>(
-		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC ? 33 C0 0F 57 C0 48 89 01 48 8B FA 89 41 ? 48 8B D9 48 8B 05 ? ? ? ? 0F 11 44 24 ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8D 54 24 ? 48 8B CF FF D0 33 D2 48 8D 4C 24 ? E8 ? ? ? ? 45 33 C9 4C 8D 44 24 ? 48 8D 54 24 ? 48 8D 4C 24 ? F2 0F 10 00 8B 40 ? F2 0F 11 44 24 ? 0F 10 44 24 ? 89 44 24 ? 66 0F 7F 44 24 ? E8 ? ? ? ? F2 0F 10 00 8B 40 ? F2 0F 11 03 89 43 ? 48 8B C3 48 8B 5C 24 ? 48 83 C4 ? 5F C3 CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF 48 8B 5C 24 ? 48 83 C4 ? 5F 48 FF E0 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 33 C0"));
-	UnityEngine_Vector3_o out = {};
-	fnGetForward(&out, pThis, nullptr);
-	return out;
-}
-
-UnityEngine_Vector3_o GameAPI::GetRight(UnityEngine_Transform_o* pThis)
-{
-	static auto fnGetForward = reinterpret_cast<UnityEngine_Vector3_o * (__thiscall*)(UnityEngine_Vector3_o*, UnityEngine_Transform_o*, const MethodInfo*)>(
-		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC ? 33 C0 0F 57 C0 48 89 01 48 8B FA 89 41 ? 48 8B D9 48 8B 05 ? ? ? ? 0F 11 44 24 ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8D 54 24 ? 48 8B CF FF D0 33 D2 48 8D 4C 24 ? E8 ? ? ? ? 45 33 C9 4C 8D 44 24 ? 48 8D 54 24 ? 48 8D 4C 24 ? F2 0F 10 00 8B 40 ? F2 0F 11 44 24 ? 0F 10 44 24 ? 89 44 24 ? 66 0F 7F 44 24 ? E8 ? ? ? ? F2 0F 10 00 8B 40 ? F2 0F 11 03 89 43 ? 48 8B C3 48 8B 5C 24 ? 48 83 C4 ? 5F C3 CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF 48 8B 5C 24 ? 48 83 C4 ? 5F 48 FF E0 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 0F 57 C0 48 8B FA 48 8B D9 0F 11 01 48 85 C0"));
-	UnityEngine_Vector3_o out = {};
-	fnGetForward(&out, pThis, nullptr);
-	return out;
-}
-
-float GameAPI::DeltaTime()
-{
-	static auto fnGetDeltaTime = reinterpret_cast<float(__thiscall*)(const MethodInfo*)>(
-		MEM::PatternScan("GameAssembly.dll", "48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC ? 48 8B 05 ? ? ? ? 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 83 C4 ? 48 FF E0 CC CC CC CC CC CC 48 83 EC"));
-	return fnGetDeltaTime(nullptr);
-}
-
-void GameAPI::Teleport(UnityEngine_Vector3_o pos)
-{
-	static auto fnSetPosition = reinterpret_cast<void(__thiscall*)(UnityEngine_Rigidbody_o*, UnityEngine_Vector3_o, const MethodInfo*)>(
-		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF FF D0 48 8B 5C 24 ? 48 83 C4 ? 5F C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF 48 8B 5C 24 ? 48 83 C4 ? 5F 48 FF E0 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 ? 57 48 83 EC ? 48 8B 05 ? ? ? ? 48 8B DA 48 8B F9 48 85 C0 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 89 05 ? ? ? ? 48 8B D3 48 8B CF FF D0 48 8B 5C 24 ? 48 83 C4 ? 5F C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 89 74 24"));
-
-	auto rb = GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerMovement->fields.rb;
-
-	fnSetPosition(rb, pos, nullptr);
+int Steamworks::Matchmaking::GetNumLobbyMembers(){//SteamworksNative_CSteamID_o steamId) {
+	static auto fnGetNumLobbyMembers = reinterpret_cast<void(IL2CPP_CALLING_CONVENTION)(SteamworksNative_CSteamID_o, const MethodInfo*)>(
+		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? 85 C0 7E 1D", -3));
+	return 0;
 }

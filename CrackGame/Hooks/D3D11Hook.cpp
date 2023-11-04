@@ -1,8 +1,5 @@
 #include "pch.h"
 
-#include <d3d11.h>
-#include <mutex>
-
 #pragma comment(lib, "d3d11.lib")
 
 // KeyBoard Options.
@@ -56,27 +53,27 @@ D3D11_HOOK_API void ImplHookDX11_Present(ID3D11Device* device, ID3D11DeviceConte
 
 	{
 		////Temporary solution, just wanted it to work for now
-		//static bool hasTeleported = false;
-		//if (F::bClickTP) {
-		//	if (!hasTeleported && GetAsyncKeyState(VK_MBUTTON) & 0x01) {
-		//		auto m_pPlayer = Unity::GameObject::Find("Player");
-		//		auto curCam = Unity::Camera::GetCurrent()->GetMemberValue<Unity::CGameObject*>("gameObject");
-		//		auto pos = curCam->GetTransform()->GetPosition();
-		//		auto rot = curCam->GetTransform()->GetMemberValue<Unity::Vector3>("forward");
+		static bool hasTeleported = false;
+		if (F::bClickTP) {
+			if (!hasTeleported && GetAsyncKeyState(VK_MBUTTON) & 0x01) {
+				auto m_pPlayer = Unity::GameObject::Find("Player");
 
-		//		UnityEngine_RaycastHit_o hit = {};
-		//		if (IL2CPP::Class::Utils::) {
-		//			auto tpPos = hit.fields.m_Point;
-		//			tpPos.fields.y += 1;
-		//			GameAPI::Teleport(tpPos);
-		//		}
+				auto curCam = reinterpret_cast<Unity::CTransform*>(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerCam);
+				auto pos = new Vector3(curCam->GetPosition());
+				auto fwd = new Vector3(curCam->GetMemberValue<Unity::Vector3>("forward"));
 
-		//		hasTeleported = true;
-		//	}
-		//	else if (hasTeleported && !(GetAsyncKeyState(VK_MBUTTON) & 0x01)) {
-		//		hasTeleported = false;
-		//	}
-		//}
+				UnityEngine_RaycastHit_o hit = {};
+				if (GameAPI::Raycast(pos->ToEngine(), fwd->ToEngine(), &hit, 1000, GameAPI::GetGamemanager()->static_fields->Instance->fields.whatIsHittableBullet.fields.m_Mask)) {
+					auto tpPos = new Vector3(hit.fields.m_Point);
+					tpPos->y++;
+					m_pPlayer->GetTransform()->SetPosition(*tpPos->ToUnity());
+				}
+
+				hasTeleported = true;
+			} else if (hasTeleported && !(GetAsyncKeyState(VK_MBUTTON) & 0x01)) {
+				hasTeleported = false;
+			}
+		}
 	}
 
 	ImGui::EndFrame();
@@ -121,6 +118,8 @@ HRESULT __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT SyncInterval, UIN
 				GameAPI::SetLockState(oldLockState);
 		}
 	}
+
+	F::bLagSwitch = GetAsyncKeyState(0x51) & 0x8000; // Is Q being pressed rn bro? (I'm de-pressed lol)
 
 	ImplHookDX11_Present(g_pd3dDevice, g_pd3dContext, g_pSwapChain);
 

@@ -8,7 +8,6 @@ void __stdcall Hook::LobbyManager::hkStartLobby(LobbyManager_o* pThis, const Met
 	if (F::bMaxPlayersOverride)
 		pThis->fields.gameSettings->fields.maxPlayers = F::iMaxPlayersCount;
 
-
 	//Call original function
 	oStartLobby(pThis, pMethod);
 }
@@ -17,7 +16,7 @@ void __stdcall Hook::LobbyManager::hkBanPlayer(LobbyManager_o* pThis, long ID, c
 {
 	static auto oBanPlayer = static_cast<decltype(&hkBanPlayer)>(pBanPlayer);
 
-	static long myID = GameAPI::GetSteammanager()->static_fields->Instance->fields._PlayerSteamId_k__BackingField.fields.m_SteamID;
+	static long myID = GameAPI::GetSteamID();
 	if (G::bAnticheatDisabler && myID == ID)
 		return;
 	

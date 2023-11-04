@@ -93,33 +93,26 @@ void Menu::Render()
 			{
 				ImGui::Checkbox("Disable pre-game freeze", &F::bDisablePregameFreeze);
 				ImGui::Checkbox("Lagswitch", &F::bLagSwitch);
+				ImGui::Checkbox("Auto-Clicker", &F::bAutoClicker);
 				ImGui::Spacing();
 				if (ImGui::Button("Complete Daily"))
 					GameAPI::CompleteDaily();
-				if (ImGui::Button("Reset Quest Countdown")) {
-					static auto fnSave = reinterpret_cast<void(__thiscall*)(SaveManager_o*, const MethodInfo*)>(
-						IL2CPP::Class::Utils::GetMethodPointer("SaveManager", "Save", 0));
-					static auto fnLoad = reinterpret_cast<void(__thiscall*)(SaveManager_o*, const MethodInfo*)>(
-						IL2CPP::Class::Utils::GetMethodPointer("SaveManager", "Load", 0));
-
-					PlayerSave_o save = *GameAPI::GetSaveManager()->static_fields->Instance->fields.state;
-					save.fields.nextQuestAvailableTime.fields.dateData = 0;
-					save.fields.isQuestComplete = false;
-					save.fields.questProgress = 0;
-
-					fnSave(GameAPI::GetSaveManager()->static_fields->Instance, nullptr);
-					fnLoad(GameAPI::GetSaveManager()->static_fields->Instance, nullptr);
-				}
+				ImGui::Checkbox("Chatspammer", &F::bChatSpammer);
+				ImGui::InputText("Spam Text", F::sSpammerMsg, IM_ARRAYSIZE(F::sSpammerMsg));
 			}
 			ImGui::Spacing();
 			if (ImGui::CollapsingHeader("Combat"))
 			{
 				ImGui::Checkbox("Godmode", &F::bGodmode);
 				ImGui::Checkbox("Fast Swing", &F::bFastSwing);
+				ImGui::Checkbox("No Throw Cooldown", &F::bFastThrow);
+				ImGui::Checkbox("Auto Snowball Refill", &F::bAutoSnowballRefill);
 				ImGui::Checkbox("Infinite Ammo", &F::bInfAmmo);
-				ImGui::Checkbox("Reach", &F::bReach);
+				ImGui::Checkbox("No Recoil", &F::bNoRecoil);
+				ImGui::Checkbox("Rapid Fire", &F::bRapidFire);
+				/*ImGui::Checkbox("Reach", &F::bReach);
 				if (F::bReach)
-					ImGui::SliderFloat("Reach Slider", &F::fReachDist, 2.5, 100);
+					ImGui::SliderFloat("Reach Slider", &F::fReachDist, 2.5, 100);*/
 			}
 			ImGui::Spacing();
 			if (ImGui::CollapsingHeader("Movement"))
@@ -129,8 +122,10 @@ void Menu::Render()
 					ImGui::SliderInt("Speed", &F::iSpeedPercent, 100, 1000);
 				ImGui::Checkbox("AirJump", &F::bAirJump);
 				ImGui::Checkbox("Anti-Knockback", &F::bAntiKnockback);
-				ImGui::Checkbox("NoSlide", &F::bNoSlide);
-				//::Checkbox("Click TP (Mouse3)", &F::bClickTP);
+				if (F::bAntiKnockback)
+					ImGui::Checkbox("Advanced Anti-Knockback", &F::bAdvancedAntiKB);
+				/*ImGui::Checkbox("NoSlide", &F::bNoSlide);*/
+				ImGui::Checkbox("Click TP (Mouse3)", &F::bClickTP);
 			}
 			ImGui::Spacing();
 			if (ImGui::CollapsingHeader("Gamemodes"))
@@ -140,26 +135,36 @@ void Menu::Render()
 					ImGui::Checkbox("Red Light freeze", &F::bRedGreenProtection);
 					ImGui::TreePop();
 				}
+				#ifdef _DEBUG
 				if (ImGui::TreeNode("Bomb Tag"))
 				{
 					ImGui::Checkbox("Anti-Bomb Tag", &F::bAntiBombTag);
 					ImGui::TreePop();
 				}
+				#endif
 				if (ImGui::TreeNode("Dorms"))
 				{
 					ImGui::Checkbox("Lights always on", &F::bLightsAlwaysOn);
 					ImGui::TreePop();
 				}
+				#ifdef _DEBUG
+				if (ImGui::TreeNode("Glass Break")) {
+					ImGui::Checkbox("Prevent glass breaking", &F::bPreventGlassBreak);
+					if (ImGui::Button("Break Glass"))
+						GameAPI::BreakAll();
+					ImGui::TreePop();
+				}
+				#endif
 			}
 			ImGui::Spacing();
 			if (ImGui::CollapsingHeader("Item Giver"))
 			{
 				static const char* curItem = "Rifle (BANNABLE)";
 				static int selectedWeapon = 0;
-				const char* items[] = { "Rifle (BANNABLE)", "Pistol", "Shotgun (BANNABLE)", "Bat", "Bomb", "Katana", "Knife", "Pipe", "Stick" };
+				const char* items[] = { "Rifle (BANNABLE)", "Pistol", "Revolver", "Shotgun (BANNABLE)", "Bat", "Bomb", "Katana", "Knife", "Pipe", "Snowball", "Stick" };
 
 				if (ImGui::BeginCombo("Weapon", curItem)) {
-					for (int n = 0; n < IM_ARRAYSIZE(items); n++) { //Loop through all weapons
+					for (int n = 0; n < IM_ARRAYSIZE(items); n++) { // Loop through all weapons
 						bool isSelected = (curItem == items[n]);
 						if (ImGui::Selectable(items[n], isSelected)) {
 							curItem = items[n];
@@ -172,63 +177,67 @@ void Menu::Render()
 				}
 
 				if (ImGui::Button("Give Weapon")) {
-					GameAPI::ForceGiveItem(GameAPI::GetItemByID(selectedWeapon));
+					auto item = GameAPI::GetItemByID(selectedWeapon);
+					GameAPI::ForceGiveItem(item);
 				}
 			}
 			ImGui::Spacing();
 			if (ImGui::CollapsingHeader("Lobby"))
 			{
+				ImGui::Checkbox("Command Handler", &F::bCommandHandler);
 				ImGui::Checkbox("Max Player Override", &F::bMaxPlayersOverride);
 				if (F::bMaxPlayersOverride)
 					ImGui::SliderInt("Max Players", &F::iMaxPlayersCount, 40, 5000);
+				if (ImGui::Button("Start Game"))
+					GameAPI::StartGames();
 			}
 		}
-		#ifdef DEBUG
+		#ifdef _DEBUG
 		ImGui::Spacing();
 		if (ImGui::CollapsingHeader("Developer (EXPERIMENTAL)"))
 		{
+			ImGui::Checkbox("Debug Logging", &F::bDebug);
+			ImGui::Checkbox("Crasher", &F::bCrasher);
+			ImGui::Checkbox("Fake Player Count", &F::bFakePlayers);
+			if (F::bFakePlayers)
+				ImGui::SliderInt("Fake Players", &F::iFakePlayers, 0, 1000);
+			if (ImGui::Button("Tiles"))
+				GameAPI::TakeAllTiles();
 			if (ImGui::Button("Dump GameObjects")) {
-				auto m_pObjects = Unity::Object::FindObjectsOfType<Unity::CGameObject>(UNITY_GAMEOBJECT_CLASS);
+				Unity::il2cppClass* m_pSystemTypeClass = IL2CPP::Class::Find("UnityEngine.GameObject");
+				auto m_pSystemType = IL2CPP::Class::GetSystemType(m_pSystemTypeClass);
+				auto m_pObjects = Unity::Object::FindObjectsOfType<Unity::CGameObject>(m_pSystemType);
+
+				Unity::il2cppClass* m_pComponentTypeClass = IL2CPP::Class::Find("UnityEngine.Component");
+				auto m_pComponentType = IL2CPP::Class::GetSystemType(m_pComponentTypeClass);
+
 				ofstream file;
 				file.open("dump.txt");
-				for (uintptr_t u = 0U; m_pObjects->m_uMaxLength > u; ++u)
-				{
-					Unity::CGameObject* m_pObject = m_pObjects->m_tValues[u];
 
-					auto name = m_pObject->GetName()->ToString();
-					if (!strcmp(name.c_str(), "Player")) {
-						file << m_pObject->GetName()->ToString().c_str();
-						file << "\n";
-						auto components = m_pObject->GetComponents(UNITY_COMPONENT_CLASS);
-						
-						for (size_t i = 0; components->m_uMaxLength > i; i++) {
-							auto methods = std::vector<Unity::il2cppFieldInfo*>();
-							components->m_tValues[i]->FetchFields(&methods);
-							for (size_t x = 0; x < methods.size(); x++) {
-								file << "		" << methods[x]->m_pType << " " << methods[x]->m_pName;
-								file << "\n";
-							}
-							
-						}
-					}
+				for (uintptr_t u = 0U; m_pObjects->m_uMaxLength > u; ++u) {
+					auto m_pObject = m_pObjects->At(u);
+					file << m_pObject->GetName()->ToString() << std::endl;
 					
+					/* Unity::il2cppArray<Unity::CComponent*>* m_pComponents = m_pObject->GetComponents(m_pComponentType);
+					for (uintptr_t i = 0U; m_pComponents->m_uMaxLength > i; ++i)
+						file << "- " << m_pComponents->At(i)->GetName()->ToString() << std::endl; */
 				}
+
 				file.close();
 			}
 				
 			if (ImGui::Button("Respawn"))
 				GameAPI::RespawnPlayer(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.cameraRot);
-			if (ImGui::Button("Spam packets")) {
-				for (size_t i = 0; i < 30; i++)
-				{
-					GameAPI::DamagePlayer(213, i, 69, 69, GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.cameraRot);
-				}
-			}
+			if (ImGui::Button("Send to Space"))
+				F::bFlingAll = true;
+			if (ImGui::Button("Create Prompt"))
+				GameAPI::Prompt("Snowfall", "Hooked and ready for use!");
+			if (ImGui::Button("Create Alert"))
+				GameAPI::Alert("[Snowfall] Hooked and ready for use!");
 			ImGui::Checkbox("Fly", &F::bFly);
+			ImGui::Checkbox("Block Item Removal", &F::bBlockItemRemoval);
 		}
 		#endif
-
-		
 
 		ImGui::End();
 	}

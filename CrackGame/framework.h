@@ -2,6 +2,7 @@
 
 // Define some compile options
 #define DEV_MODE true
+#define COMMAND_PREFIX '!'
 
 // Vista min supported version
 #define _WIN32_WINNT 0x0600 
@@ -12,6 +13,8 @@
 #define NOMINMAX
 #include <windows.h>
 #include <fstream>
+#include <istream>
+#include <iostream>
 #include <sstream>
 #include <string>
 #include <algorithm>
@@ -19,33 +22,37 @@
 #include <unordered_map>
 #include <chrono>
 #include <ctime>
+#include <d3d11.h>
+#include <mutex>
+#define _USE_MATH_DEFINES
+#include <math.h>
+#include <cstdint>
 
 // Config
 #include "config.h"
-#include "globals.h"
-
-// Thirdparty
-#include "Thirdparty/Ntdll/ntdll.h"
-#include "Thirdparty/MinHook/MinHook.h"
-#include "Thirdparty/Resolver/Main.hpp"
-#include "Thirdparty/Resolver/Includes.hpp"
-
-// GameSDK
-#include "GameSDK/il2cpp.h"
-#include "GameSDK/Other.h"
-#include "GameSDK/Enums.h"
-
-// SDK
-#include "SDK/Vector3.h"
 
 // Helpers
 #include "Helpers/Math.h"
 #include "Helpers/Memory.h"
 
+// Thirdparty
+#include "Thirdparty/Ntdll/ntdll.h"
+#include "Thirdparty/MinHook/MinHook.h"
+#include "Thirdparty/Resolver/IL2CPP_Resolver.hpp"
+
+// GameSDK
+#include "GameSDK/il2cpp.h"
+#include "GameSDK/Enums.h"
+#include "SDK/Vector3.h"
+#include "GameSDK/Other.h"
+#include "GameSDK/CommandHandler.h"
+
+// SDK
+#include "globals.h"
+
 // Hooks
 #include "Hooks/Hooks.h"
 #include "Hooks/PunchPlayers.h"
-#include "Hooks/CameraShake.h"
 #include "Hooks/PlayerMovement.h"
 #include "Hooks/PlayerInventory.h"
 #include "Hooks/PlayerStatus.h"
@@ -64,15 +71,22 @@
 #include "Hooks/ItemGun.h"
 #include "Hooks/ItemMelee.h"
 #include "Hooks/SteamPacketManager.h"
+#include "Hooks/Chatbox.h"
+#include "Hooks/PlayerInput.h"
+#include "Hooks/CameraRecoil.h"
+#include "Hooks/ItemSnowball.h"
+#include "Hooks/SnowballPileInteract.h"
+#include "Hooks/SteamMatchmaking.h"
+#include "Hooks/ClientHandle.h";
+#include "Hooks/GlassBreak.h"
 
 // ImGUI
 #include "ImGUI/imgui.h"
 #include "ImGUI/imgui_impl_win32.h"
 #include "ImGUI/imgui_impl_dx11.h"
+#include "ImGUI/imgui_stdlib.h"
 
 // Menu
 #include "Menu/Menu.h"
-#include "Hooks/Chatbox.h"
-#include "Hooks/PlayerInput.h"
 
 // Features

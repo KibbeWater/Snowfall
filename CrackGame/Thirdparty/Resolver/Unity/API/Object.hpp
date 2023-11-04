@@ -2,36 +2,48 @@
 
 namespace Unity
 {
-	struct SObjectFunctions
+	struct ObjectFunctions_t
 	{
-		void* m_pDestroy = nullptr;
-		void* m_pFindObjectsOfType = nullptr;
-		void* m_pGetName = nullptr;
+		void* m_Destroy = nullptr;
+		void* m_FindObjectsOfType = nullptr;
+		void* m_GetName = nullptr;
 	};
-	extern SObjectFunctions ObjectFunctions;
+	ObjectFunctions_t m_ObjectFunctions;
 
 	class CObject : public IL2CPP::CClass
 	{
 	public:
 		void Destroy(float fTimeDelay = 0.f)
 		{
-			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, float)>(ObjectFunctions.m_pDestroy)(this, fTimeDelay);
+			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, float)>(m_ObjectFunctions.m_Destroy)(this, fTimeDelay);
 		}
 
 		System_String* GetName()
 		{
-			return reinterpret_cast<System_String*(UNITY_CALLING_CONVENTION)(void*)>(ObjectFunctions.m_pGetName)(this);
+			return reinterpret_cast<System_String*(UNITY_CALLING_CONVENTION)(void*)>(m_ObjectFunctions.m_GetName)(this);
 		}
 	};
 
 	namespace Object
 	{
-		void Initialize();
+		void Initialize()
+		{
+			IL2CPP::SystemTypeCache::Initializer::Add(UNITY_OBJECT_CLASS);
 
+			m_ObjectFunctions.m_Destroy				= IL2CPP::ResolveCall(UNITY_OBJECT_DESTROY);
+			m_ObjectFunctions.m_FindObjectsOfType	= IL2CPP::ResolveCall(UNITY_OBJECT_FINDOBJECTSOFTYPE);
+			m_ObjectFunctions.m_GetName				= IL2CPP::ResolveCall(UNITY_OBJECT_GETNAME);
+		}
+
+		static il2cppObject* New(il2cppClass* m_pClass)
+		{
+			return reinterpret_cast<Unity::il2cppObject*(UNITY_CALLING_CONVENTION)(void*)>(IL2CPP::Functions.m_pObjectNew)(m_pClass);
+		}
+	
 		template<typename T>
 		static il2cppArray<T*>* FindObjectsOfType(il2cppObject* m_pSystemType)
 		{
-			return reinterpret_cast<Unity::il2cppArray<T*>*(UNITY_CALLING_CONVENTION)(void*)>(ObjectFunctions.m_pFindObjectsOfType)(m_pSystemType);
+			return reinterpret_cast<Unity::il2cppArray<T*>*(UNITY_CALLING_CONVENTION)(void*)>(m_ObjectFunctions.m_FindObjectsOfType)(m_pSystemType);
 		}
 
 		template<typename T>
@@ -46,10 +58,10 @@ namespace Unity
 		template<typename T>
 		static T* FindObjectOfType(il2cppObject* m_pSystemType)
 		{
-			il2cppArray<T>* m_pArray = FindObjectsOfType<T>(m_pSystemType);
+			il2cppArray<T*>* m_pArray = FindObjectsOfType<T>(m_pSystemType);
 			if (!m_pArray || m_pArray->m_uMaxLength == 0U) return nullptr;
 
-			return m_pArray->m_Object[0];
+			return m_pArray->m_pValues[0];
 		}
 
 		template<typename T>

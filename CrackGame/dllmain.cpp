@@ -1,5 +1,9 @@
 #include "pch.h"
 
+void Started() {
+    GameAPI::Prompt("Snowfall", "Hooked and ready for use!");
+}
+
 INL bool IsShutdown(LPVOID lpParameter)
 {
     // Temp solution
@@ -20,11 +24,13 @@ DWORD WINAPI OnDllAttach(LPVOID lpParameter)
     IL2CPP::Initialize();
     GameAPI::Initialize();
 
-    GameAPI::Prompt("Snowfall", "Loaded sucessfully");
+    Steamworks::Matchmaking::GetNumLobbyMembers();
 
     if (!Hook::Init())
         ::MessageBoxA(0, "Failed to initialize all hooks", "ERROR", MB_OK);
     ImplHookDX11_Init((HMODULE)lpParameter, FindWindow(0, L"Crab Game"));
+
+    // GameAPI::Prompt("Snowfall", "Hooked and ready for use!"); //IL2CPP::Thread::Create(Started);
 
     while (true)
     {

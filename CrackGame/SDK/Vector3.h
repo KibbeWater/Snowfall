@@ -5,9 +5,18 @@ public:
 	float x, y, z;
 
 	Vector3(UnityEngine_Vector3_o unityVector);
+	Vector3(Unity::Vector3 unityVector);
 	Vector3(float x, float y, float z);
 
-	UnityEngine_Vector3_o ToUnity();
+	UnityEngine_Vector3_o ToEngine();
+	Unity::Vector3* ToUnity();
+
+	float distanceTo(const Vector3& other) const {
+		float dx = x - other.x;
+		float dy = y - other.y;
+		float dz = z - other.z;
+		return std::sqrt(dx * dx + dy * dy + dz * dz);
+	}
 
 	#pragma region Operators
 	Vector3 operator+(Vector3 vec) {
@@ -34,29 +43,46 @@ public:
 		return Vector3(this->x * val, this->y * val, this->z * val);
 	}
 
-	Vector3 operator+=(Vector3 vec) {
-		return *this + vec;
+	Vector3& operator+=(const Vector3& vec) {
+		this->x += vec.x;
+		this->y += vec.y;
+		this->z += vec.z;
+		return *this;
 	}
 
-	Vector3 operator+=(int val) {
-		return *this + val;
+	Vector3& operator+=(int val) {
+		this->x += val;
+		this->y += val;
+		this->z += val;
+		return *this;
 	}
 
-	Vector3 operator-=(Vector3 vec) {
-		return *this - vec;
+	Vector3& operator-=(const Vector3& vec) {
+		this->x -= vec.x;
+		this->y -= vec.y;
+		this->z -= vec.z;
+		return *this;
 	}
 
-	Vector3 operator-=(int val) {
-		return *this - val;
+	Vector3& operator-=(int val) {
+		this->x -= val;
+		this->y -= val;
+		this->z -= val;
+		return *this;
 	}
 
-	Vector3 operator*=(Vector3 vec) {
-		return *this * vec;
+	Vector3& operator*=(const Vector3& vec) {
+		this->x *= vec.x;
+		this->y *= vec.y;
+		this->z *= vec.z;
+		return *this;
 	}
 
-	Vector3 operator*=(int val) {
-		return *this * val;
+	Vector3& operator*=(int val) {
+		this->x *= val;
+		this->y *= val;
+		this->z *= val;
+		return *this;
 	}
 	#pragma endregion
 };
-

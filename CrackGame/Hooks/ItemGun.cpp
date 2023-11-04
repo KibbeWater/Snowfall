@@ -4,6 +4,9 @@ void __stdcall Hook::ItemGun::hkTryUse(ItemGun_o* pThis, UnityEngine_Transform_o
 {
 	static auto oTryUse = static_cast<decltype(&hkTryUse)>(pTryUse);
 
+	if (F::bRapidFire)
+		pThis->fields.ready = true;
+
 	if (F::bInfAmmo)
 		pThis->fields.itemData->fields.currentAmmo = INT_MAX;
 

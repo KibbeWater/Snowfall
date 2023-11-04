@@ -4,7 +4,7 @@ void __stdcall Hook::OnlinePlayerMovement::hkUpdate(OnlinePlayerMovement_o* pThi
 {
 	static auto oUpdate = static_cast<decltype(&hkUpdate)>(pUpdate);
 
-	G::pPlayerManager = pThis->fields._playerManager_k__BackingField;
+	M::pPlayerManager = pThis->fields._playerManager_k__BackingField;
 
 	oUpdate(pThis, pMethod);
 }

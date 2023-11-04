@@ -5,7 +5,7 @@ namespace Hook
 	namespace ClientSend
 	{
 		inline void* pPlayerPosition;
-		void __stdcall hkPlayerPosition(UnityEngine_Vector3_o position, uint64_t toId, const MethodInfo* pMethod);
+		void __stdcall hkPlayerPosition(UnityEngine_Vector3_o* position, uint64_t toId, const MethodInfo* pMethod);
 
 		inline void* pPlayerRotation;
 		void __stdcall hkPlayerRotation(float x, float y, uint64_t toId, const MethodInfo* pMethod);
@@ -15,5 +15,7 @@ namespace Hook
 
 		inline void* pUseItem;
 		void __stdcall hkUseItem(int itemID, UnityEngine_Vector3_o* dir, const MethodInfo* pMethod);
+
+		HOOK_DEF(SendChatMessage, void, System_String_o* message)
 	}
 }

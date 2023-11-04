@@ -4,7 +4,7 @@ namespace Hook
 {
 	namespace Chatbox
 	{
-		inline void* pSendMessage;
-		void __stdcall hkSendMessage(Chatbox_o* pThis, System_String_o* message, const MethodInfo* pMethod);
+		inline void* pSendMsg;
+		void __stdcall hkSendMsg(Chatbox_o* pThis, Unity::System_String* message, const MethodInfo* pMethod);
 	}
 }

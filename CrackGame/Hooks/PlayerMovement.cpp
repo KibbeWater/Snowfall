@@ -12,9 +12,10 @@ void __stdcall Hook::PlayerMovement::hkJump(PlayerMovement_o* pThis, const Metho
 {
 	static auto oJump = static_cast<decltype(&hkJump)>(pJump);
 
-	if (F::bAirJump)
+	if (F::bAirJump) {
 		pThis->fields.grounded = true;
-	//Obfuscation::EncryptBool(&pThis->fields.readyToJump, true);
+		//Obfuscation::EncryptBool(&pThis->fields.readyToJump, true);
+	}
 
 	oJump(pThis, pMethod);
 }
@@ -51,24 +52,30 @@ void __stdcall Hook::PlayerMovement::hkMovement(PlayerMovement_o* pThis, float x
 
 		pThis->fields.surfaceType = oldSurfaceType;
 	} else {
-		static float speed = 5;
+		static float speed = 30;
+		static float speedFast = 50;
 
-		auto input = GameAPI::GetPlayerInput();
-		auto curPos = Vector3(GameAPI::GetPosition(input->static_fields->_Instance_k__BackingField->fields.playerCam));
-		auto fwd = Vector3(GameAPI::GetForward(input->static_fields->_Instance_k__BackingField->fields.playerCam));
-		auto right = Vector3(GameAPI::GetRight(input->static_fields->_Instance_k__BackingField->fields.playerCam));
+		auto curCam = reinterpret_cast<Unity::CTransform*>(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerCam);
+		auto curPos = Vector3(curCam->GetPosition()); // Initialize curPos without creating a new Vector3
+		auto fwd = new Vector3(curCam->GetMemberValue<Unity::Vector3>("forward"));
+		auto right = new Vector3(curCam->GetMemberValue<Unity::Vector3>("right"));
+		static auto playerCamOffset = Vector3(*GameAPI::GetPlayerCamOffset());
 		auto deltaTime = GameAPI::DeltaTime();
 
-		if (GetAsyncKeyState(0x57) & 0x01) // W
-			curPos += fwd * deltaTime * speed;
-		if (GetAsyncKeyState(0x53) & 0x01) // S
-			curPos += (fwd * -1)* deltaTime * speed;
+		Vector3 tpPos = curPos; // Initialize tpPos with curPos
 
-		if (GetAsyncKeyState(0x44) & 0x01) // D
-			curPos += right * deltaTime * speed;
-		if (GetAsyncKeyState(0x41) & 0x01) // A
-			curPos += (right * -1) * deltaTime * speed;
+		auto curSpeed = speedFast;
 
-		GameAPI::Teleport(curPos.ToUnity());
+		if (GetAsyncKeyState(0x57) & 0x8000) // W
+			tpPos += (*fwd) * (deltaTime * curSpeed);
+		if (GetAsyncKeyState(0x53) & 0x8000) // S
+			tpPos -= (*fwd) * (deltaTime * curSpeed);
+
+		if (GetAsyncKeyState(0x44) & 0x8000) // D
+			tpPos += (*right) * (deltaTime * curSpeed);
+		if (GetAsyncKeyState(0x41) & 0x8000) // A
+			tpPos -= (*right) * (deltaTime * curSpeed);
+
+		GameAPI::Teleport((tpPos + playerCamOffset).ToEngine());
 	}
 }

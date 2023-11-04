@@ -6,7 +6,8 @@ void __stdcall Hook::GamemodeBombTag::hkTagPlayer(GameModeBombTag_o* pThis, long
 
 	oTagPlayer(pThis, tagger, tagged, pMethod);
 
-	static long yourSteamID = GameAPI::GetSteammanager()->static_fields->Instance->fields._PlayerSteamId_k__BackingField.fields.m_SteamID;
+	auto rot = new Vector3(1, 1, 1);
+	static long yourSteamID = GameAPI::GetSteamID();
 	if (tagged == yourSteamID && F::bAntiBombTag && tagger != yourSteamID && tagger != 0)
-		GameAPI::DamagePlayer(tagger, 0, WEAPON_BOMB, GameAPI::GetItemByID(WEAPON_BOMB)->fields.objectID, GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.cameraRot);
+		GameAPI::DamagePlayer(tagger, 0, rot->ToEngine(), WEAPON_BOMB, GameAPI::FindItemById(WEAPON_BOMB)->fields.objectID);
 }
