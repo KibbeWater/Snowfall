@@ -11,11 +11,18 @@ public:
 	UnityEngine_Vector3_o ToEngine();
 	Unity::Vector3* ToUnity();
 
-	float distanceTo(const Vector3& other) const {
+	float distanceTo(Vector3 other) {
 		float dx = x - other.x;
 		float dy = y - other.y;
 		float dz = z - other.z;
 		return std::sqrt(dx * dx + dy * dy + dz * dz);
+	}
+
+	// Get the normalized vector between our position and the target position
+	Vector3 normalized(Vector3 target) {
+		Vector3 direction = target - *this;
+		float distance = this->distanceTo(target);
+		return Vector3(direction.x / distance, direction.y / distance, direction.z / distance);
 	}
 
 	#pragma region Operators

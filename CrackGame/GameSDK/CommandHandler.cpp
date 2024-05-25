@@ -26,8 +26,14 @@ bool CommandHandler::HandleCommand(std::string command) {
     auto commandArgs = args;
     commandArgs.erase(commandArgs.begin());
 
-    auto callback = *commandData->callback;
-    CommandResult* ret = callback(commandArgs);
+    CommandResult* ret = 0;
+
+    try {
+        auto callback = *commandData->callback;
+        ret = callback(commandArgs);
+    } catch (const std::exception& e) {
+        GameAPI::Log("Unhandled Excetion: " + std::string(e.what()));
+    }
 
     if (!ret->result)
         GameAPI::Log(ret->error);
@@ -53,7 +59,14 @@ bool CommandHandler::RegisterCommand(std::string name, CommandCallback callback)
 
 void CommandHandler::DestroyAllCommands() {
     this->commands.clear();
-}   
+}
+
+CommandResult* CommandHandler::ReturnResult(bool success, std::string err) {
+    CommandResult* result = new CommandResult;
+    result->error = err.c_str();
+    result->result = success;
+    return result;
+}
 
 bool CommandHandler::DoesCommandExist(std::string name) {
     for (auto cmd = this->commands.begin(); cmd != this->commands.end(); ++cmd)

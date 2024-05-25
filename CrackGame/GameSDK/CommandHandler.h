@@ -28,6 +28,8 @@ public:
 	// bool DestroyCommand(std::string name);
 	void DestroyAllCommands();
 
+	static CommandResult* ReturnResult(bool success, std::string err);
+
 private:
 	bool DoesCommandExist(std::string name);
 

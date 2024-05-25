@@ -105,6 +105,8 @@ HRESULT __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT SyncInterval, UIN
 		IsInited = true;
 	}
 
+	G::oCallbackManager->trigger_event(Callbacks::Event::Paint);
+
 	if (GetAsyncKeyState(OpenMenuKey) & 0x1) {
 		Menu::bIsOpen = !Menu::bIsOpen;
 

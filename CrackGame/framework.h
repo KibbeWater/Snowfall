@@ -2,11 +2,12 @@
 
 // Define some compile options
 #define DEV_MODE true
+#define SOL_ALL_SAFETIES_ON 1
 #define COMMAND_PREFIX '!'
 
 // Vista min supported version
-#define _WIN32_WINNT 0x0600 
-#define WINVER 0x0600 
+#define _WIN32_WINNT 0x0600
+#define WINVER 0x0600
 
 // Standard
 #include <iostream>
@@ -19,11 +20,17 @@
 #include <string>
 #include <algorithm>
 #include <vector>
+#include <iterator>
 #include <unordered_map>
 #include <chrono>
 #include <ctime>
 #include <d3d11.h>
 #include <mutex>
+#include <filesystem>
+#include <stdlib.h>
+#include <stdio.h>
+#include <shlobj_core.h>
+#include <direct.h>
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <cstdint>
@@ -31,14 +38,16 @@
 // Config
 #include "config.h"
 
-// Helpers
-#include "Helpers/Math.h"
-#include "Helpers/Memory.h"
-
 // Thirdparty
+#include <sol/sol.hpp>
 #include "Thirdparty/Ntdll/ntdll.h"
 #include "Thirdparty/MinHook/MinHook.h"
 #include "Thirdparty/Resolver/IL2CPP_Resolver.hpp"
+
+// Helpers
+#include "Helpers/Math.h"
+#include "Helpers/Memory.h"
+#include "Helpers/Lua.h"
 
 // GameSDK
 #include "GameSDK/il2cpp.h"
@@ -48,7 +57,20 @@
 #include "GameSDK/CommandHandler.h"
 
 // SDK
+#include "Lua/Callback.h"
 #include "globals.h"
+
+// LUA API
+#include "Lua/Structs/Transform.h"
+#include "Lua/Structs/GameObject.h"
+#include "Lua/Structs/PlayerManager.h"
+#include "Lua/Structs/LocalPlayer.h"
+
+#include "Lua/Chat.h"
+#include "Lua/Cheat.h"
+#include "Lua/Engine.h"
+#include "Lua/Lobby.h"
+#include "Lua/Game.h"
 
 // Hooks
 #include "Hooks/Hooks.h"
@@ -77,7 +99,7 @@
 #include "Hooks/ItemSnowball.h"
 #include "Hooks/SnowballPileInteract.h"
 #include "Hooks/SteamMatchmaking.h"
-#include "Hooks/ClientHandle.h";
+#include "Hooks/ClientHandle.h"
 #include "Hooks/GlassBreak.h"
 
 // ImGUI
@@ -88,5 +110,3 @@
 
 // Menu
 #include "Menu/Menu.h"
-
-// Features

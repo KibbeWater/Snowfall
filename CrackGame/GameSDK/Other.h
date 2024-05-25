@@ -19,6 +19,8 @@ namespace Obfuscation
 
 namespace Packet {
 	long ReadLong(Packet_o* packet);
+	float ReadFloat(Packet_o* packet);
+	Vector3 ReadVector3(Packet_o* packet);
 	void ResetPacket(Packet_o* packet);
 }
 
@@ -42,12 +44,14 @@ namespace GameAPI {
 	SaveManager_c* GetSaveManager();
 	
 	// In-Game API
-	void RespawnPlayer(UnityEngine_Vector3_o pos);
+	void Respawn(int64 playerId);
 	void TagPlayer(GameModeBombTag_o* pThis, long tagger, long tagged);
 	void DamagePlayer(unsigned long hurtPlayerId, int damage, UnityEngine_Vector3_o dmgDir, int itemID, int objectID);
 	void PunchPlayer(unsigned long punchTargetId, UnityEngine_Vector3_o dmgDir);
 	ItemData_o* GetItemByID(int ID);
 	void ForceGiveItem(ItemData_o* item) noexcept;
+	ItemData_o* LobbyGiveWeapon(int64 clientId, EWeapons itemId);
+	bool LobbyGiveAllWeapon(EWeapons itemId);
 	void BanPlayer(long ID);
 	bool TrySnowballReload();
 	void BreakAll();
@@ -55,6 +59,9 @@ namespace GameAPI {
 	void DropItem(int slot = -1);
 	std::vector<ItemData_o*> GetItems();
 	ItemData_o* FindItemById(int itemId);
+	std::vector<PlayerManager_o*> GetPlayers();
+	std::vector<PlayerManager_o*> GetPlayersAlive();
+	std::vector<PlayerManager_o*> GetPlayersDead();
 	
 	// CrackGame API
 	void Initialize();
@@ -66,15 +73,24 @@ namespace GameAPI {
 	void AppendMessage(uint64_t fromUser, Unity::System_String* message, Unity::System_String* fromUsername);
 	void SendChatMessage(std::string message);
 	void Teleport(UnityEngine_Vector3_o pos);
+	int ResolvePlayer(std::string resolvable);
+	int64 ResolvePlayer64(std::string resolvable);
+	std::vector<std::tuple<int, SteamworksNative_CSteamID_o>>* GetLobbyMembers();
 	void CompleteDaily();
 	void CSendPosition(UnityEngine_Vector3_o* vec);
 	void ForceMovementUpdate();
 	uint64_t GetSteamID();
+	bool IsLobbyOwner();
 	Unity::Vector3* GetPlayerCamOffset();
 	void UseItem();
 	EGameModes GetGamemode();
 	void StartGames();
 	void Log(std::string message);
+
+	// Data folders
+	std::string GetAppDataPath();
+	std::string GetDataPath();
+	std::string GetLuaPath();
 
 	// Unity game functions
 	bool Raycast(UnityEngine_Vector3_o origin, UnityEngine_Vector3_o dir, UnityEngine_RaycastHit_o* hitInfo, float maxDistance, int layerMask);
@@ -87,6 +103,7 @@ namespace GameAPI {
 namespace Steamworks {
 	namespace Matchmaking {
 		int GetNumLobbyMembers();//SteamworksNative_CSteamID_o steamId);
+		SteamworksNative_CSteamID_o GetLobbyMemberByIndex(int iMember);
 	}
 }
 
@@ -94,6 +111,7 @@ namespace Commands {
 	DEF_COMMAND(test);
 	DEF_COMMAND(profile);
 
-	DEF_COMMAND(tp);
-	DEF_COMMAND(teleport);
+	DEF_COMMAND(give);
+
+	DEF_COMMAND(respawn)
 }

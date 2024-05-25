@@ -57,3 +57,9 @@ enum ERenderDistance {
     RENDER_FAR = 2,
     RENDER_ANY = 3
 };
+
+// STRUCT DEFS
+struct LuaState {
+	sol::state* state;
+	std::string name;
+};

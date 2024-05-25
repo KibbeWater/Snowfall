@@ -94,6 +94,7 @@ void Menu::Render()
 				ImGui::Checkbox("Disable pre-game freeze", &F::bDisablePregameFreeze);
 				ImGui::Checkbox("Lagswitch", &F::bLagSwitch);
 				ImGui::Checkbox("Auto-Clicker", &F::bAutoClicker);
+				ImGui::Checkbox("Command Handler", &F::bCommandHandler);
 				ImGui::Spacing();
 				if (ImGui::Button("Complete Daily"))
 					GameAPI::CompleteDaily();
@@ -182,20 +183,47 @@ void Menu::Render()
 				}
 			}
 			ImGui::Spacing();
-			if (ImGui::CollapsingHeader("Lobby"))
-			{
-				ImGui::Checkbox("Command Handler", &F::bCommandHandler);
+			if (ImGui::CollapsingHeader("Lobby")) {
+				ImGui::Checkbox("Hacker Prevention", &F::bHackerPrevention);
 				ImGui::Checkbox("Max Player Override", &F::bMaxPlayersOverride);
 				if (F::bMaxPlayersOverride)
 					ImGui::SliderInt("Max Players", &F::iMaxPlayersCount, 40, 5000);
 				if (ImGui::Button("Start Game"))
 					GameAPI::StartGames();
 			}
+			ImGui::Spacing();
+			if (ImGui::CollapsingHeader("Lua")) {
+				// List all .lua files in DATA_PATH\Lua
+				std::string path = GameAPI::GetLuaPath();
+				ImGui::Text("Lua Path: %s", path.c_str());
+				if (ImGui::Button("Reload LUA environment")) {
+					auto oldState = G::vLuaState;
+					G::oCallbackManager->clear_callbacks();
+					G::vLuaState = new sol::state();
+					LuaH::initState(G::vLuaState);
+					delete oldState;
+				}
+				ImGui::Spacing();
+				ImGui::Text("Lua Scripts:");
+				for (const auto& entry : std::filesystem::directory_iterator(path)) {
+					std::string filename = entry.path().filename().string();
+					if (filename.find(".lua") != std::string::npos && filename.find("autorun") == std::string::npos) {
+						if (ImGui::Button(filename.c_str())) {
+							// Get the file contents
+							std::ifstream file(entry.path());
+							std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+							file.close();
+
+							G::vLuaState->safe_script(content, &sol::script_pass_on_error);
+						}
+					}
+				}
+			}
 		}
+
 		#ifdef _DEBUG
 		ImGui::Spacing();
-		if (ImGui::CollapsingHeader("Developer (EXPERIMENTAL)"))
-		{
+		if (ImGui::CollapsingHeader("Developer (EXPERIMENTAL)")) {
 			ImGui::Checkbox("Debug Logging", &F::bDebug);
 			ImGui::Checkbox("Crasher", &F::bCrasher);
 			ImGui::Checkbox("Fake Player Count", &F::bFakePlayers);
@@ -217,7 +245,7 @@ void Menu::Render()
 				for (uintptr_t u = 0U; m_pObjects->m_uMaxLength > u; ++u) {
 					auto m_pObject = m_pObjects->At(u);
 					file << m_pObject->GetName()->ToString() << std::endl;
-					
+
 					/* Unity::il2cppArray<Unity::CComponent*>* m_pComponents = m_pObject->GetComponents(m_pComponentType);
 					for (uintptr_t i = 0U; m_pComponents->m_uMaxLength > i; ++i)
 						file << "- " << m_pComponents->At(i)->GetName()->ToString() << std::endl; */
@@ -225,9 +253,7 @@ void Menu::Render()
 
 				file.close();
 			}
-				
-			if (ImGui::Button("Respawn"))
-				GameAPI::RespawnPlayer(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.cameraRot);
+
 			if (ImGui::Button("Send to Space"))
 				F::bFlingAll = true;
 			if (ImGui::Button("Create Prompt"))

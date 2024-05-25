@@ -58,7 +58,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories);C:\Users\kibbe\Documents\Projects\LuaJIT\src;C:\Users\kibbe\source\repos\CrackGame\CrackGame\Thirdparty\Sol\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <DisableSpecificWarnings>26812;4129;4005;4099;5033</DisableSpecificWarnings>
     </ClCompile>
@@ -66,6 +66,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);C:\Users\kibbe\Documents\Projects\LuaJIT\src\lua51.lib;C:\Users\kibbe\Documents\Projects\LuaJIT\src\luajit.lib</AdditionalDependencies>
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -79,7 +80,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories);C:\Users\kibbe\Documents\Projects\LuaJIT\src;C:\Users\kibbe\source\repos\CrackGame\CrackGame\Thirdparty\Sol\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <DisableSpecificWarnings>26812;4129;4005;4099;5033</DisableSpecificWarnings>
       <Optimization>MinSpace</Optimization>
@@ -91,10 +92,19 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);C:\Users\kibbe\Documents\Projects\LuaJIT\src\lua51.lib;C:\Users\kibbe\Documents\Projects\LuaJIT\src\luajit.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Lua\Structs\LocalPlayer.h" />
+    <ClInclude Include="Lua\Structs\GameObject.h" />
+    <ClInclude Include="Lua\Game.h" />
+    <ClInclude Include="Lua\Lobby.h" />
+    <ClInclude Include="Lua\Engine.h" />
+    <ClInclude Include="Lua\Callback.h" />
+    <ClInclude Include="Lua\Chat.h" />
     <ClInclude Include="GameSDK\CommandHandler.h" />
+    <ClInclude Include="Helpers\Lua.h" />
     <ClInclude Include="Hooks\CameraRecoil.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="framework.h" />
@@ -139,9 +149,11 @@
     <ClInclude Include="ImGUI\imstb_rectpack.h" />
     <ClInclude Include="ImGUI\imstb_textedit.h" />
     <ClInclude Include="ImGUI\imstb_truetype.h" />
+    <ClInclude Include="Lua\Cheat.h" />
     <ClInclude Include="Menu\Menu.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="GameSDK\il2cpp.h" />
+    <ClInclude Include="Lua\Structs\PlayerManager.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Thirdparty\MinHook\buffer.h" />
     <ClInclude Include="Thirdparty\MinHook\hde\hde32.h" />
@@ -153,6 +165,34 @@
     <ClInclude Include="Thirdparty\MinHook\trampoline.h" />
     <ClInclude Include="Thirdparty\Ntdll\ntdll.h" />
     <ClInclude Include="SDK\Vector3.h" />
+    <ClInclude Include="Thirdparty\Resolver\.git\config" />
+    <ClInclude Include="Thirdparty\Resolver\.git\description" />
+    <ClInclude Include="Thirdparty\Resolver\.git\HEAD" />
+    <ClInclude Include="Thirdparty\Resolver\.git\hooks\applypatch-msg.sample" />
+    <ClInclude Include="Thirdparty\Resolver\.git\hooks\commit-msg.sample" />
+    <ClInclude Include="Thirdparty\Resolver\.git\hooks\fsmonitor-watchman.sample" />
+    <ClInclude Include="Thirdparty\Resolver\.git\hooks\post-update.sample" />
+    <ClInclude Include="Thirdparty\Resolver\.git\hooks\pre-applypatch.sample" />
+    <ClInclude Include="Thirdparty\Resolver\.git\hooks\pre-commit.sample" />
+    <ClInclude Include="Thirdparty\Resolver\.git\hooks\pre-merge-commit.sample" />
+    <ClInclude Include="Thirdparty\Resolver\.git\hooks\pre-push.sample" />
+    <ClInclude Include="Thirdparty\Resolver\.git\hooks\pre-rebase.sample" />
+    <ClInclude Include="Thirdparty\Resolver\.git\hooks\pre-receive.sample" />
+    <ClInclude Include="Thirdparty\Resolver\.git\hooks\prepare-commit-msg.sample" />
+    <ClInclude Include="Thirdparty\Resolver\.git\hooks\push-to-checkout.sample" />
+    <ClInclude Include="Thirdparty\Resolver\.git\hooks\sendemail-validate.sample" />
+    <ClInclude Include="Thirdparty\Resolver\.git\hooks\update.sample" />
+    <ClInclude Include="Thirdparty\Resolver\.git\index" />
+    <ClInclude Include="Thirdparty\Resolver\.git\info\exclude" />
+    <ClInclude Include="Thirdparty\Resolver\.git\logs\HEAD" />
+    <ClInclude Include="Thirdparty\Resolver\.git\logs\refs\heads\main" />
+    <ClInclude Include="Thirdparty\Resolver\.git\logs\refs\remotes\origin\HEAD" />
+    <ClInclude Include="Thirdparty\Resolver\.git\objects\pack\pack-aee2f1fb2472b6b3e236bbc64f33af189afef24d.idx" />
+    <ClInclude Include="Thirdparty\Resolver\.git\objects\pack\pack-aee2f1fb2472b6b3e236bbc64f33af189afef24d.pack" />
+    <ClInclude Include="Thirdparty\Resolver\.git\objects\pack\pack-aee2f1fb2472b6b3e236bbc64f33af189afef24d.rev" />
+    <ClInclude Include="Thirdparty\Resolver\.git\packed-refs" />
+    <ClInclude Include="Thirdparty\Resolver\.git\refs\heads\main" />
+    <ClInclude Include="Thirdparty\Resolver\.git\refs\remotes\origin\HEAD" />
     <ClInclude Include="Thirdparty\Resolver\API\Callback.hpp" />
     <ClInclude Include="Thirdparty\Resolver\API\Class.hpp" />
     <ClInclude Include="Thirdparty\Resolver\API\Domain.hpp" />
@@ -180,9 +220,18 @@
     <ClInclude Include="Thirdparty\Resolver\Utils\Hash.hpp" />
     <ClInclude Include="Thirdparty\Resolver\Utils\Helper.hpp" />
     <ClInclude Include="Thirdparty\Resolver\Utils\VTable.hpp" />
+    <ClInclude Include="Lua\Structs\Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Lua\Structs\LocalPlayer.cpp" />
+    <ClCompile Include="Lua\Structs\GameObject.cpp" />
+    <ClCompile Include="Lua\Game.cpp" />
+    <ClCompile Include="Lua\Lobby.cpp" />
+    <ClCompile Include="Lua\Engine.cpp" />
+    <ClCompile Include="Lua\Callback.cpp" />
+    <ClCompile Include="Lua\Chat.cpp" />
     <ClCompile Include="GameSDK\CommandHandler.cpp" />
+    <ClCompile Include="Helpers\Lua.cpp" />
     <ClCompile Include="Hooks\CameraRecoil.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="GameSDK\Other.cpp" />
@@ -223,20 +272,26 @@
     <ClCompile Include="ImGUI\imgui_stdlib.cpp" />
     <ClCompile Include="ImGUI\imgui_tables.cpp" />
     <ClCompile Include="ImGUI\imgui_widgets.cpp" />
+    <ClCompile Include="Lua\Cheat.cpp" />
     <ClCompile Include="Menu\Menu.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Lua\Structs\PlayerManager.cpp" />
     <ClCompile Include="Thirdparty\MinHook\buffer.cpp" />
     <ClCompile Include="Thirdparty\MinHook\hde\hde32.cpp" />
     <ClCompile Include="Thirdparty\MinHook\hde\hde64.cpp" />
     <ClCompile Include="Thirdparty\MinHook\hook.cpp" />
     <ClCompile Include="Thirdparty\MinHook\trampoline.cpp" />
     <ClCompile Include="SDK\Vector3.cpp" />
+    <ClCompile Include="Lua\Structs\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CrackGame.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Thirdparty\Sol\**\*.*" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

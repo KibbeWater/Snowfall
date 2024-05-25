@@ -8,6 +8,7 @@ void __stdcall Hook::ClientHandle::hkTagPlayer(Packet_o* packet, const MethodInf
 	if (GameAPI::GetGamemode() == MODE_TAG) {
 		auto tagger = Packet::ReadLong(packet);
 		auto tagged = Packet::ReadLong(packet);
+		Packet::ResetPacket(packet);
 
 		auto rot = new Vector3(1, 1, 1);
 		static long yourSteamID = GameAPI::GetSteamID();

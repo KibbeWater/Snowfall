@@ -43,7 +43,23 @@ void Obfuscation::EncryptFloat(CodeStage_AntiCheat_ObscuredTypes_ObscuredFloat_o
 }
 
 long Packet::ReadLong(Packet_o* packet) {
-	return *reinterpret_cast<long*>(&packet->fields.readableBuffer->m_Items + packet->fields.readPos);
+	long val = *reinterpret_cast<long*>(&packet->fields.readableBuffer->m_Items + packet->fields.readPos);
+	packet->fields.readPos += sizeof(long);
+	return val;
+}
+
+float Packet::ReadFloat(Packet_o* packet) {
+	float val = *reinterpret_cast<float*>(&packet->fields.readableBuffer->m_Items + packet->fields.readPos);
+	packet->fields.readPos += sizeof(float);
+	return val;
+}
+
+Vector3 Packet::ReadVector3(Packet_o* packet) {
+	return Vector3(
+		Packet::ReadFloat(packet),
+		Packet::ReadFloat(packet),
+		Packet::ReadFloat(packet)
+	);
 }
 
 void Packet::ResetPacket(Packet_o* packet) {
@@ -158,19 +174,18 @@ ELockState GameAPI::GetLockState()
 	return (ELockState)fnGetLockState(nullptr);
 }
 
-void GameAPI::RespawnPlayer(UnityEngine_Vector3_o pos)
-{
-	static auto fnRespawnPlayer = reinterpret_cast<void(__thiscall*)(GameManager_o*, long, UnityEngine_Vector3_o, const MethodInfo*)>(
-		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC 40 80 3D ? ? ? ? ? 49 8B F0 48 8B FA 48 8B D9 75 43"));
+void GameAPI::Respawn(int64 steamId) {
+	static auto fnRespawnPlayer = reinterpret_cast<void(UNITY_CALLING_CONVENTION)(int64, float)>(
+		IL2CPP::Class::Utils::GetMethodPointer(GameAPI::FindMethod("CheckPush", 2)->m_pClass, "QueueRespawn"));
 
-	return fnRespawnPlayer(GameAPI::GetGamemanager()->static_fields->Instance, GameAPI::GetSteammanager()->static_fields->Instance->fields._PlayerSteamId_k__BackingField.fields.m_SteamID, pos, nullptr);
+	return fnRespawnPlayer(steamId, 1);
 }
 
 void GameAPI::TagPlayer(GameModeBombTag_o* pThis, long tagger, long tagged)
 {
 	static auto fnTagPlayer = reinterpret_cast<void(__thiscall*)(GameModeBombTag_o*, long, long, const MethodInfo*)>(
 		MEM::PatternScan("GameAssembly.dll", "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC ? 80 3D ? ? ? ? ? 49 8B F0 48 8B DA 75 ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? ? 48 8B 0D ? ? ? ? F6 81 ? ? ? ? ? 74 ? 83 B9 ? ? ? ? ? 75 ? E8 ? ? ? ? 45 33 C0 48 8B D6 48 8B CB E8 ? ? ? ? 48 8B 0D ? ? ? ? 33 D2 E8 ? ? ? ? 48 8B 0D ? ? ? ? 8B F8 48 8B 91 ? ? ? ? 48 8B 0A 48 85 C9 74 ? 33 D2 E8 ? ? ? ? 45 33 C9 44 8B C0 8B D7 48 8B CE E8 ? ? ? ? 48 85 DB 74 ? 45 33 C0 8B D7 48 8B CB E8 ? ? ? ? 48 8B 5C 24 ? 48 8B 74 24 ? 48 83 C4 ? 5F C3 E8 ? ? ? ? CC CC CC CC CC CC CC 48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC ? 80 3D ? ? ? ? ? 49 8B F0 48 8B DA"));
-	
+
 	return fnTagPlayer(pThis, tagger, tagged, nullptr);
 }
 
@@ -193,7 +208,7 @@ void GameAPI::PunchPlayer(unsigned long punchTargetId, UnityEngine_Vector3_o dmg
 }
 
 ItemData_o* GameAPI::GetItemByID(int ID) {
-	static auto fnGetItemById = reinterpret_cast<ItemData_o*(__thiscall*)(int, const MethodInfo*)>(
+	static auto fnGetItemById = reinterpret_cast<ItemData_o * (__thiscall*)(int, const MethodInfo*)>(
 		GameAPI::FindMethod("GetItemById", 1)->m_pMethodPointer);
 
 	return fnGetItemById(ID, nullptr);
@@ -206,6 +221,28 @@ void GameAPI::ForceGiveItem(ItemData_o* item) noexcept {
 	auto inventory = GameAPI::GetInventory();
 
 	return fnForceGiveItem(inventory->static_fields->Instance, item, nullptr);
+}
+
+ItemData_o* GameAPI::LobbyGiveWeapon(int64 clientId, EWeapons itemId) {
+	static auto fnForceGiveWeapon = reinterpret_cast<void(UNITY_CALLING_CONVENTION)(int64, int, int)>(
+		IL2CPP::Class::Utils::GetMethodPointer(GameAPI::FindMethod("ForceGiveWeapon", 3)->m_pClass, "ForceGiveWeapon"));
+
+	auto item = GetItemByID(itemId);
+	if (!item) return 0;
+
+	fnForceGiveWeapon(clientId, item->fields.itemID, item->fields.objectID);
+	return item;
+}
+
+bool GameAPI::LobbyGiveAllWeapon(EWeapons itemId) {
+	static auto fnForceGiveAllWeapon = reinterpret_cast<void(UNITY_CALLING_CONVENTION)(int)>(
+		IL2CPP::Class::Utils::GetMethodPointer(GameAPI::FindMethod("ForceGiveAllWeapon", 1)->m_pClass, "ForceGiveAllWeapon"));
+
+	auto item = GetItemByID(itemId);
+	if (!item) return false;
+
+	fnForceGiveAllWeapon(item->fields.itemID);
+	return true;
 }
 
 void GameAPI::BanPlayer(long ID) {
@@ -221,7 +258,8 @@ bool GameAPI::TrySnowballReload() {
 	auto m_pSystemType = IL2CPP::Class::GetSystemType(m_pSystemTypeClass);
 	auto m_pObjects = Unity::Object::FindObjectsOfType<Unity::CGameObject>(m_pSystemType);
 
-	auto myPos = new Vector3(reinterpret_cast<Unity::CTransform*>(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerCam)->GetPosition());
+	// auto myPos = new Vector3(reinterpret_cast<Unity::CTransform*>(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerCam)->GetPosition());
+	auto myPos = &G::lastSentPosition;
 	static float maxDist = 12.0;
 
 	for (uintptr_t u = 0U; m_pObjects->m_uMaxLength > u; ++u) {
@@ -245,7 +283,7 @@ bool GameAPI::TrySnowballReload() {
 
 				static auto fnTryInteract = reinterpret_cast<void(UNITY_CALLING_CONVENTION)(SnowballPileInteract_o*)>(
 					IL2CPP::Class::Utils::GetMethodPointer(m_pSystemTypeClass, "TryInteract"));
-				
+
 				fnTryInteract(pile);
 				return true;
 			}
@@ -278,7 +316,7 @@ void GameAPI::TakeAllTiles() {
 	for (uintptr_t u = 0U; m_pComponents->m_uMaxLength > u; ++u) {
 		Unity::CComponent* m_pComponent = m_pComponents->At(u);
 		if (!m_pComponent) continue; // Just in-case
-		
+
 		auto obj = m_pComponent->GetMemberValue<Unity::CGameObject*>("gameObject");
 		G::vPositionOverrideQueue.push_back(new Vector3(obj->GetTransform()->GetPosition()));
 		/* Teleport((Vector3(obj->GetTransform()->GetPosition()) - Vector3(0,.5,0)).ToEngine());
@@ -310,6 +348,54 @@ ItemData_o* GameAPI::FindItemById(int itemId) {
 		if (items.at(i)->fields.itemID == itemId)
 			selItem = items.at(i);
 	return selItem;
+}
+
+std::vector<PlayerManager_o*> GameAPI::GetPlayers() {
+	std::vector<PlayerManager_o*> players = {};
+
+	auto alive = GetPlayersAlive();
+	auto dead = GetPlayersDead();
+
+	for (size_t i = 0; i < alive.size(); i++)
+		players.push_back(alive.at(i));
+	for (size_t i = 0; i < dead.size(); i++)
+		players.push_back(dead.at(i));
+
+	/* alive->insert(
+		alive->end(),
+		std::make_move_iterator(dead->begin()),
+		std::make_move_iterator(dead->end())
+	); */
+
+	return players;
+}
+
+std::vector<PlayerManager_o*> GameAPI::GetPlayersAlive() {
+	std::vector<PlayerManager_o*> activePlayersVec = {};
+	auto activePlayers = GetGamemanager()->static_fields->Instance->fields.activePlayers->fields;
+	if (!activePlayers.entries) return activePlayersVec;
+
+	for (size_t i = 0; i < activePlayers.entries->max_length; i++) {
+		auto player = reinterpret_cast<PlayerManager_o*>(activePlayers.entries->m_Items[i].fields.value);
+		if (!player) continue;
+		activePlayersVec.push_back(player);
+	}
+	
+	return activePlayersVec;
+}
+
+std::vector<PlayerManager_o*> GameAPI::GetPlayersDead() {
+	std::vector<PlayerManager_o*> deadPlayers = {};
+	auto spectatingPlayers = GetGamemanager()->static_fields->Instance->fields.spectators->fields;
+	if (!spectatingPlayers.entries) return deadPlayers;
+
+	for (size_t i = 0; i < spectatingPlayers.entries->max_length; i++) {
+		auto player = reinterpret_cast<PlayerManager_o*>(spectatingPlayers.entries->m_Items[i].fields.value);
+		if (!player) continue;
+		deadPlayers.push_back(player);
+	}
+
+	return deadPlayers;
 }
 
 void GameAPI::CompleteDaily() {
@@ -363,6 +449,15 @@ uint64_t GameAPI::GetSteamID() {
 	return mySteamID;
 }
 
+bool GameAPI::IsLobbyOwner() {
+	static SteamManager_o* steamManager = GetSteammanager()->static_fields->Instance;
+	static Unity::il2cppClass* steamManagerClass = reinterpret_cast<Unity::il2cppClass*>(steamManager->klass);
+	static auto fnIsLobbyOwner = reinterpret_cast<bool(IL2CPP_CALLING_CONVENTION)(SteamManager_o*)>(
+		IL2CPP::Class::Utils::GetMethodPointer(steamManagerClass, "IsLobbyOwner"));
+
+	return fnIsLobbyOwner(steamManager);
+}
+
 Unity::Vector3* GameAPI::GetPlayerCamOffset() {
 	auto m_vPlayerPos = Unity::GameObject::Find("Player")->GetTransform()->GetPosition();
 	auto curCamPos = reinterpret_cast<Unity::CTransform*>(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerCam)->GetPosition();
@@ -373,7 +468,7 @@ void GameAPI::UseItem() {
 	static auto cPlayerInventory = GameAPI::FindMethod("LockInventory", 1)->m_pClass;
 	static auto fnUseItem = reinterpret_cast<void(IL2CPP_CALLING_CONVENTION)(PlayerInventory_o*)>(
 		IL2CPP::Class::Utils::GetMethodPointer(cPlayerInventory, "UseItem"));
-	
+
 	fnUseItem(GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerInventory);
 }
 
@@ -391,16 +486,38 @@ void GameAPI::Log(std::string message) {
 	GameAPI::AppendMessage(1, IL2CPP::String::New(message), IL2CPP::String::New("[Snowfall]"));
 }
 
+std::string GameAPI::GetAppDataPath() {
+	char* buffer = nullptr;
+	size_t len = 0;
+	errno_t err = _dupenv_s(&buffer, &len, "APPDATA");
+
+	std::string appDataPath;
+	if (err == 0 && buffer != nullptr) {
+		appDataPath = std::string(buffer);
+		free(buffer);
+	}
+
+	return appDataPath;
+}
+
+std::string GameAPI::GetDataPath() {
+	return GetAppDataPath() + "\\CrackGame";
+}
+
+std::string GameAPI::GetLuaPath() {
+	return GetDataPath() + "\\Lua";
+}
+
 void GameAPI::Initialize() {
 	cachedMethods.clear();
 
 	auto classList = std::vector<Unity::il2cppClass*>();
 	IL2CPP::Class::FetchClasses(&classList, "Assembly-CSharp", nullptr);
-	
+
 	for (size_t i = 0; i < classList.size(); i++) {
 		auto methodList = std::vector<Unity::il2cppMethodInfo*>();
 		IL2CPP::Class::FetchMethods(classList[i], &methodList);
-		
+
 		for (size_t x = 0; x < methodList.size(); x++)
 			if (methodList[x]->m_pName[0] > 64 && methodList[x]->m_pName[0] < 123)
 				cachedMethods.push_back(methodList[x]);
@@ -408,13 +525,42 @@ void GameAPI::Initialize() {
 
 	REGISTER_COMMAND(test);
 	REGISTER_COMMAND(profile);
+	REGISTER_COMMAND(give);
+	REGISTER_COMMAND(respawn);
+
+	// Initialize Lua state
+	LuaH::initState(G::vLuaState);
+
+	// Ensure every folder leading up to LUA_PATH exists, if not, create it
+	std::string path = GetLuaPath() + "\\";
+	std::string folder = "";
+	for (size_t i = 0; i < path.length(); i++) {
+		if (path[i] == '/' || path[i] == '\\') {
+			if (!folder.empty()) {
+				if (!std::filesystem::exists(folder))
+					std::filesystem::create_directory(folder);
+			}
+			folder += path[i];
+		} else folder += path[i];
+	}
+
+	// Check if LUA_PATH\autorun.lua exists
+	if (std::filesystem::exists(GetLuaPath() + "\\autorun.lua")) {
+		// Read the file
+		std::ifstream file(GetLuaPath() + "\\autorun.lua");
+		std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+		file.close();
+
+		// Execute the file
+		G::vLuaState->safe_script(content, &sol::script_pass_on_error);
+	}
 }
 
 Unity::il2cppMethodInfo* GameAPI::FindMethod(const char* methodName, int args) {
 	for (size_t i = 0; i < cachedMethods.size(); i++)
 		if (!strcmp(methodName, cachedMethods[i]->m_pName) && (args == -1 || cachedMethods[i]->m_uArgsCount == args))
 			return cachedMethods[i];
-		return nullptr;
+	return nullptr;
 }
 
 Unity::il2cppClass* GameAPI::FindClassByField(const char* fieldName, const char* methodName) {
@@ -435,7 +581,7 @@ void GameAPI::Prompt(const char* header, const char* content) {
 
 	auto sHeader = IL2CPP::String::New(header);
 	auto sContent = IL2CPP::String::New(content);
-	
+
 	cPrompt->CallMethodSafe<void*, Unity::System_String*, Unity::System_String*>("NewPrompt", sHeader, sContent);
 }
 
@@ -478,13 +624,77 @@ float GameAPI::DeltaTime() {
 }
 
 void GameAPI::Teleport(UnityEngine_Vector3_o pos) {
-	static auto Physics = IL2CPP::Class::Find("UnityEngine.Physics");
-	void* Raycast = IL2CPP::Class::Utils::GetMethodPointer(Physics, "Raycast", 5);
 	auto rb = reinterpret_cast<Unity::CRigidbody*>(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerMovement->fields.rb);
 	auto enginePos = new Vector3(pos);
 
 	rb->SetVelocity(Unity::Vector3());
 	rb->GetMemberValue<Unity::CGameObject*>("gameObject")->GetTransform()->SetPosition(*(enginePos->ToUnity()));
+}
+
+int GameAPI::ResolvePlayer(std::string resolvable) {
+	bool isSteamID64 = resolvable.length() == 17;
+
+	if (isSteamID64) {
+		int64 steamId = std::stol(resolvable);
+		int clientId = -1;
+		auto members = GetLobbyMembers();
+		for (size_t i = 0; i < members->size(); i++) {
+			auto data = members->at(i);
+			if (std::get<int>(data) == clientId)
+				break;
+		}
+	} else if (strcmp(resolvable.c_str(), "all") == 0) return -1;
+	else if (strcmp(resolvable.c_str(), "me") == 0) return GetSteamID();
+
+	try {
+		auto clientId = std::stoi(resolvable);
+		return clientId;
+	} catch (const std::exception&) {
+		return 0;
+	}
+
+	return 0;
+}
+
+int64 GameAPI::ResolvePlayer64(std::string resolvable) {
+	bool isSteamID64 = resolvable.length() == 17;
+
+	if (isSteamID64) return std::stol(resolvable);
+	else if (strcmp(resolvable.c_str(), "all") == 0) return -1;
+	else if (strcmp(resolvable.c_str(), "me") == 0) return GetSteamID();
+	
+	int clientId = -1;
+	try {
+		clientId = std::stoi(resolvable);
+	} catch (const std::exception&) {
+		return 0;
+	}
+
+	int64 steamId = -1;
+	auto members = GetPlayers();
+	for (size_t i = 0; i < members.size(); i++) {
+		auto data = members.at(i);
+		if (data->fields.playerNumber != clientId) continue;
+		steamId = data->fields.steamProfile.fields.m_SteamID;
+	}
+
+	if (steamId == -1) return 0;
+	return steamId;
+}
+
+std::vector<std::tuple<int, SteamworksNative_CSteamID_o>>* GameAPI::GetLobbyMembers() {
+	std::vector<std::tuple<int, SteamworksNative_CSteamID_o>> lobbyMembers = {};
+
+	int memberCount = Steamworks::Matchmaking::GetNumLobbyMembers();
+	int i = 0;
+	do {
+		auto steamId = Steamworks::Matchmaking::GetLobbyMemberByIndex(i);
+		lobbyMembers.push_back({ i, steamId });
+		if (!steamId.fields.m_SteamID) break;
+		i++;
+	} while (true);
+
+	return &lobbyMembers;
 }
 
 CommandResult* Commands::test(const std::vector<std::string>& args) {
@@ -500,44 +710,76 @@ CommandResult* Commands::test(const std::vector<std::string>& args) {
 }
 
 CommandResult* Commands::profile(const std::vector<std::string>& args) {
-	CommandResult* result = new CommandResult;
-	result->error = nullptr;
-	result->result = false;
+	if (args.size() <= 0) return CommandHandler::ReturnResult(false, "Invalid usage: profile <player#>");
 
-	if (args.size() <= 0) {
-		result->error = "Invalid usage: profile <player#>";
-		return result;
-	}
-	
-	auto strPlayerId = args.front();
-	auto playerId = std::stol(strPlayerId);
+	auto steamid = GameAPI::ResolvePlayer64(args.front());
 
-	if (playerId == 0) {
-		auto err = ("The value \"" + strPlayerId + "\" is not a valid player ID").c_str();
-		result->error = err;
-		return result;
-	}
+	if (steamid <= 0) return CommandHandler::ReturnResult(false, "The value \"" + args.front() + "\" is not a valid player ID");
 
-	auto lookup = GameAPI::GetLobbyManager()->static_fields->Instance->fields.UIDToSteamId;
+	GameAPI::Log(std::string("Player SteamID is: " + to_string(steamid)));
+	system(std::string("start https://steamcommunity.com/profiles/" + to_string(steamid)).c_str());
 
-	if (!lookup->m_Items[playerId-1]) {
-		auto err = ("The value \"" + strPlayerId + "\" is not a valid player ID").c_str();
-		result->error = err;
-		return result;
-	}
-
-
-	GameAPI::Log(std::string("Player SteamID is: " + to_string(lookup->m_Items[playerId - 1])));
-	system(std::string("start https://steamcommunity.com/profiles/" + to_string(lookup->m_Items[playerId - 1])).c_str());
-
-	result->result = true;
-	return result;
+	return CommandHandler::ReturnResult(false, "Success");
 }
 
-//CommandResult* Commands::
+CommandResult* Commands::give(const std::vector<std::string>& args) {
+	if (args.size() <= 1) return CommandHandler::ReturnResult(false, "Invalid usage: give <player#|all|me> <item#>");
+	if (!GameAPI::IsLobbyOwner()) return CommandHandler::ReturnResult(false, "You need to be the lobby owner to execute this command!");
 
-int Steamworks::Matchmaking::GetNumLobbyMembers(){//SteamworksNative_CSteamID_o steamId) {
-	static auto fnGetNumLobbyMembers = reinterpret_cast<void(IL2CPP_CALLING_CONVENTION)(SteamworksNative_CSteamID_o, const MethodInfo*)>(
-		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? 85 C0 7E 1D", -3));
-	return 0;
+	auto strItemId = args.at(1);
+	EWeapons itemId = (EWeapons)std::stoi(strItemId);
+
+	auto playerId = GameAPI::ResolvePlayer64(args.front());
+
+	// Should theoretically be a valid SteamID
+	if (playerId > 0) {
+		auto res = GameAPI::LobbyGiveWeapon(playerId, itemId);
+
+		if (!res) return CommandHandler::ReturnResult(false, "Unable to give item, is the Id valid?");
+		
+		Unity::System_String* itemName = reinterpret_cast<Unity::System_String*>(res->fields.itemName);
+		return CommandHandler::ReturnResult(true, "Gave everyone a " + itemName->ToString());
+	} else if (playerId == -1) // Id is -1, this means "all"
+		if (GameAPI::LobbyGiveAllWeapon(itemId))
+			return CommandHandler::ReturnResult(true, "Gave everyone itemID " + strItemId);
+		else
+			return CommandHandler::ReturnResult(false, "Unable to give item, is the Id valid?");
+	
+
+	return CommandHandler::ReturnResult(false, "Unexpected return");
+}
+
+CommandResult* Commands::respawn(const std::vector<std::string>& args) {
+	if (args.size() <= 0) return CommandHandler::ReturnResult(false, "Invalid usage: respawn <player#|all|me>");
+	if (!GameAPI::IsLobbyOwner()) return CommandHandler::ReturnResult(false, "You need to be the lobby owner to execute this command!");
+
+	auto playerId = GameAPI::ResolvePlayer64(args.front());
+
+	if (playerId > 0) {
+		GameAPI::Respawn(playerId);
+		return CommandHandler::ReturnResult(true, "Respawned!");
+	} else if (playerId == -1)
+		return CommandHandler::ReturnResult(false, "ERR! Not Implemented");
+	/* {
+		if (GameAPI::LobbyGiveAllWeapon(itemId))
+			return CommandHandler::ReturnResult(true, "Gave everyone itemID " + strItemId);
+		else
+			return CommandHandler::ReturnResult(false, "Unable to give item, is the Id valid?");
+	}*/
+
+	return CommandHandler::ReturnResult(false, "Unexpected return");
+}
+
+int Steamworks::Matchmaking::GetNumLobbyMembers() {//SteamworksNative_CSteamID_o steamId) {
+	auto lobbyId = GameAPI::GetSteammanager()->static_fields->Instance->fields.currentLobby;
+	static auto fnGetNumLobbyMembers = reinterpret_cast<int(IL2CPP_CALLING_CONVENTION)(SteamworksNative_CSteamID_o)>(
+		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? 85 C0 7E 1D", 1));
+	return fnGetNumLobbyMembers(lobbyId);
+}
+
+SteamworksNative_CSteamID_o Steamworks::Matchmaking::GetLobbyMemberByIndex(int iMember) {
+	auto lobbyId = GameAPI::GetSteammanager()->static_fields->Instance->fields.currentLobby;
+	static auto fnGetLobbyMemberByIndex = *reinterpret_cast<SteamworksNative_CSteamID_o(IL2CPP_CALLING_CONVENTION)(SteamworksNative_CSteamID_o, int)>(
+		MEM::PatternScanRel("GameAssembly.dll", "E8 ? ? ? ? 48 8B 0D ? ? ? ? 48 8B D8 48 8B 7D 20", 1));
+	return fnGetLobbyMemberByIndex(lobbyId, iMember);
 }

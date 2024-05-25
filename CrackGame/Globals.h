@@ -3,30 +3,38 @@
 struct GameManager_o;
 struct PlayerManager_o;
 
-namespace M {
-	inline GameManager_o* pGameManager = nullptr;
-	inline PlayerManager_o* pPlayerManager = nullptr;
-	inline SnowballPileInteract_o* pSnowballPileInteract = nullptr;
+namespace M
+{
+	inline GameManager_o *pGameManager = nullptr;
+	inline PlayerManager_o *pPlayerManager = nullptr;
+	inline SnowballPileInteract_o *pSnowballPileInteract = nullptr;
 }
 
-namespace G {
+namespace G
+{
 	inline bool bRedLightFreeze = false;
 	inline bool bAnticheatDisabler = true;
 	inline float fKillHeight = -100.0;
 
-	inline std::vector<Vector3*> vPositionOverrideQueue = {};
+	inline Vector3 lastSentPosition = Vector3(0, 0, 0);
 
-	inline CommandHandler* commandHandler = new CommandHandler();
+	inline Callbacks *oCallbackManager = new Callbacks();
+	inline std::vector<Vector3 *> vPositionOverrideQueue = {};
+	inline sol::state *vLuaState = new sol::state();
+
+	inline CommandHandler *commandHandler = new CommandHandler();
 }
 
-namespace F {
-	//General
+namespace F
+{
+	// General
 	inline bool bDisabledCamShake = false;
 	inline bool bDisablePregameFreeze = false;
 	inline bool bLagSwitch = false;
 	inline bool bAutoClicker = false;
-	
-	//Combat
+	inline bool bCommandHandler = false;
+
+	// Combat
 	inline bool bGodmode = false;
 	inline bool bFastSwing = false;
 	inline bool bAutoSnowballRefill = false;
@@ -37,7 +45,7 @@ namespace F {
 	inline bool bReach = false;
 	inline float fReachDist = 2.5;
 
-	//Movement
+	// Movement
 	inline bool bSpeedhack = false;
 	inline int iSpeedPercent = 100;
 	inline bool bAirJump = false;
@@ -45,23 +53,23 @@ namespace F {
 	inline bool bAdvancedAntiKB = false;
 	inline bool bNoSlide = false;
 
-	//Gamemodes
+	// Gamemodes
 	inline bool bRedGreenProtection = false;
 	inline bool bAntiBombTag = false;
 	inline bool bLightsAlwaysOn = false;
 	inline bool bPreventGlassBreak = false;
 
-	//Item giver
+	// Item giver
 	inline int iWeaponID = 0;
 
-	//Lobby
-	inline bool bCommandHandler = false;
+	// Lobby
 	inline bool bMaxPlayersOverride = false;
+	inline bool bHackerPrevention = false;
 	inline int iMaxPlayersCount = 40;
 	inline bool bFakePlayers = false;
 	inline int iFakePlayers = 0;
 
-	//Other
+	// Other
 	inline bool bClickTP = false;
 	inline bool bFly = false;
 	inline bool bBlockItemRemoval = false;

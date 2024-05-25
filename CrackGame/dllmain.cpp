@@ -24,8 +24,6 @@ DWORD WINAPI OnDllAttach(LPVOID lpParameter)
     IL2CPP::Initialize();
     GameAPI::Initialize();
 
-    Steamworks::Matchmaking::GetNumLobbyMembers();
-
     if (!Hook::Init())
         ::MessageBoxA(0, "Failed to initialize all hooks", "ERROR", MB_OK);
     ImplHookDX11_Init((HMODULE)lpParameter, FindWindow(0, L"Crab Game"));

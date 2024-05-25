@@ -7,6 +7,7 @@ static float maxAccelerationThreshold = 500.0;
 void __stdcall Hook::ClientSend::hkPlayerPosition(UnityEngine_Vector3_o* position, uint64_t toId, const MethodInfo* pMethod) {
 	static auto oPlayerPosition = static_cast<decltype(&hkPlayerPosition)>(pPlayerPosition);
 		
+	auto shouldBlock = G::oCallbackManager->trigger_event(Callbacks::Event::OnMove, position->fields.x, position->fields.y, position->fields.z);
 
 	if ((!(G::bRedLightFreeze && F::bRedGreenProtection) || !F::bRedGreenProtection) && !F::bLagSwitch) {
 		if (!G::vPositionOverrideQueue.empty()) {
@@ -41,7 +42,10 @@ void __stdcall Hook::ClientSend::hkPlayerPosition(UnityEngine_Vector3_o* positio
 		if (F::bGodmode)
 			position->fields.y = std::max(position->fields.y, G::fKillHeight);
 
-		oPlayerPosition(position, toId, nullptr);
+		if (!shouldBlock) {
+			G::lastSentPosition = Vector3(*position);
+			oPlayerPosition(position, toId, nullptr);
+		}
 	}
 }
 

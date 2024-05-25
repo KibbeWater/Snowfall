@@ -12,8 +12,7 @@ Vector3::Vector3(Unity::Vector3 unityVector) {
 	this->z = unityVector.z;
 }
 
-Vector3::Vector3(float x, float y, float z)
-{
+Vector3::Vector3(float x, float y, float z) {
 	this->x = z;
 	this->y = y;
 	this->z = z;
