@@ -48,12 +48,13 @@ if %errorlevel% neq 0 (
 
 REM Ensure LUAJIT_BUILD_DIR is available in CMAKE_MODULE_PATH
 set CMAKE_MODULE_PATH=C:\Users\kibbe\source\repos\CrackGame\CrackGame;%CMAKE_MODULE_PATH%
-echo %CMAKE_MODULE_PATH%
 
 set LUA_LIBRARIES=%LUAJIT_BUILD_DIR%\luajit.lib
 set LUA_INCLUDE_DIR=%LUAJIT_BUILD_DIR%
-echo %LUA_LIBRARIES%
-echo %LUA_INCLUDE_DIR%
+
+if not defined BUILD_SOL (
+	goto skip_sol_build
+)
 
 REM Build sol
 echo Building sol...
@@ -70,6 +71,7 @@ if %errorlevel% neq 0 (
     echo Failed to build sol
     exit /b %errorlevel%
 )
+:skip_sol_build
 
 echo Build completed successfully
 endlocal
