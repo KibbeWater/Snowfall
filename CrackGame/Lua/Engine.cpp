@@ -35,5 +35,6 @@ Vector3 Engine::WorldToScreen(Vector3 position)
 	Unity::Vector3 screenPos = Unity::Vector3();
 	Unity::Vector3 worldPos = *position.ToUnity();
 	cam->WorldToScreen(worldPos, screenPos);
+	screenPos.y = ImGui::GetIO().DisplaySize.y - screenPos.y; // Invert Y
 	return Vector3(screenPos);
 }
