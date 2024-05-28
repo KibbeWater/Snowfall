@@ -94,7 +94,8 @@ void LuaH::initState(sol::state* state) {
 	// Register enums
 	state->new_enum("Event",
 		"OnMove", Callbacks::Event::OnMove,
-		"HandleMove", Callbacks::Event::HandleMove
+		"HandleMove", Callbacks::Event::HandleMove,
+		"Render", Callbacks::Event::Render
 	);
 
 	state->new_enum("Weapon",

@@ -58,5 +58,5 @@ Color Color::Black() {
 }
 
 ImColor Color::GetImGUI() {
-	return ImColor(r, g, b, (float)a / 255.0);
+	return ImColor(r, g, b, a);
 }
