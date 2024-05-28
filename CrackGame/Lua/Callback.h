@@ -5,7 +5,7 @@ public:
     enum class Event {
         OnMove,
         HandleMove,
-        Paint,
+        Render,
     };
 
     using Callback = sol::protected_function;

@@ -22,6 +22,8 @@ namespace G
 	inline std::vector<Vector3 *> vPositionOverrideQueue = {};
 	inline sol::state *vLuaState = new sol::state();
 
+	inline ImDrawList *pDrawList = nullptr;
+
 	inline CommandHandler *commandHandler = new CommandHandler();
 }
 

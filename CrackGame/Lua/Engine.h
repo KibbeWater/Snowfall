@@ -6,4 +6,5 @@ public:
 	static long GetSteamID();
 	static std::vector<PlayerManager> GetPlayers();
 	static LocalPlayer GetLocalPlayer();
+	static Vector3 WorldToScreen(Vector3 position);
 };

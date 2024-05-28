@@ -44,6 +44,12 @@
 #include "Thirdparty/MinHook/MinHook.h"
 #include "Thirdparty/Resolver/IL2CPP_Resolver.hpp"
 
+// ImGUI
+#include "ImGUI/imgui.h"
+#include "ImGUI/imgui_impl_win32.h"
+#include "ImGUI/imgui_impl_dx11.h"
+#include "ImGUI/imgui_stdlib.h"
+
 // Helpers
 #include "Helpers/Math.h"
 #include "Helpers/Memory.h"
@@ -65,12 +71,14 @@
 #include "Lua/Structs/GameObject.h"
 #include "Lua/Structs/PlayerManager.h"
 #include "Lua/Structs/LocalPlayer.h"
+#include "Lua/Structs/Color.h"
 
 #include "Lua/Chat.h"
 #include "Lua/Cheat.h"
 #include "Lua/Engine.h"
 #include "Lua/Lobby.h"
 #include "Lua/Game.h"
+#include "Lua/Render.h"
 
 // Hooks
 #include "Hooks/Hooks.h"
@@ -101,12 +109,6 @@
 #include "Hooks/SteamMatchmaking.h"
 #include "Hooks/ClientHandle.h"
 #include "Hooks/GlassBreak.h"
-
-// ImGUI
-#include "ImGUI/imgui.h"
-#include "ImGUI/imgui_impl_win32.h"
-#include "ImGUI/imgui_impl_dx11.h"
-#include "ImGUI/imgui_stdlib.h"
 
 // Menu
 #include "Menu/Menu.h"

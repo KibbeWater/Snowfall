@@ -45,6 +45,10 @@ D3D11_HOOK_API void ImplHookDX11_Present(ID3D11Device* device, ID3D11DeviceConte
 	ImGui_ImplWin32_NewFrame();
 
 	ImGui::NewFrame();
+
+	G::pDrawList = ImGui::GetBackgroundDrawList();
+	G::oCallbackManager->trigger_event(Callbacks::Event::Render);
+	G::pDrawList = nullptr;
 	
 	// Super advanced menu code in here
 	{
@@ -104,8 +108,6 @@ HRESULT __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT SyncInterval, UIN
 
 		IsInited = true;
 	}
-
-	G::oCallbackManager->trigger_event(Callbacks::Event::Paint);
 
 	if (GetAsyncKeyState(OpenMenuKey) & 0x1) {
 		Menu::bIsOpen = !Menu::bIsOpen;

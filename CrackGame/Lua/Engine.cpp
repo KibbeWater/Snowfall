@@ -28,3 +28,12 @@ LocalPlayer Engine::GetLocalPlayer() {
 	}
 	return nullptr;
 }
+
+Vector3 Engine::WorldToScreen(Vector3 position)
+{
+	auto cam = Unity::Camera::GetMain();
+	Unity::Vector3 screenPos = Unity::Vector3();
+	Unity::Vector3 worldPos = *position.ToUnity();
+	cam->WorldToScreen(worldPos, screenPos);
+	return Vector3(screenPos);
+}

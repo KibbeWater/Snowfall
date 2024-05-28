@@ -10,7 +10,8 @@ void LuaH::initState(sol::state* state) {
 		"Teleport", &Engine::Teleport,
 		"GetSteamID", &Engine::GetSteamID,
 		"GetPlayers", &Engine::GetPlayers,
-		"GetLocalPlayer", &Engine::GetLocalPlayer
+		"GetLocalPlayer", &Engine::GetLocalPlayer,
+		"WorldToScreen", &Engine::WorldToScreen
 	);
 	// Chat.*
 	state->new_usertype<Chat>("Chat",
@@ -29,6 +30,19 @@ void LuaH::initState(sol::state* state) {
 	// Game.*
 	state->new_usertype<Game>("Game",
 		"GetGameObjects", &Game::GetGameObjects
+	);
+	// Render.*
+	state->new_usertype<Render>("Render",
+		"Rect", &Render::Rect,
+		"RectFilled", &Render::RectFilled,
+		"Triangle", &Render::Triangle,
+		"TriangleFilled", &Render::TriangleFilled,
+		"Quad", &Render::Quad,
+		"QuadFilled", &Render::QuadFilled,
+		"Circle", &Render::Circle,
+		"CircleFilled", &Render::CircleFilled,
+		"Line", &Render::Line,
+		"Text", &Render::Text
 	);
 
 	// Register structs
@@ -53,6 +67,16 @@ void LuaH::initState(sol::state* state) {
 		"z", &Vector3::z,
 		"distance", &Vector3::distanceTo,
 		"normalize", &Vector3::normalized
+	);
+
+	state->new_usertype<Color>("Color", sol::constructors<Color(int,int,int,int)>(),
+		"r", &Color::r,
+		"g", &Color::g,
+		"b", &Color::b,
+		"a", &Color::a,
+		"FromHSV", &Color::FromHSV,
+		"White", &Color::White,
+		"Black", &Color::Black
 	);
 
 	state->new_usertype<GameObject>("GameObject",
