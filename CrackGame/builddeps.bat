@@ -39,6 +39,7 @@ if not exist %BUILD_DIR% (
 
 REM Build LuaJIT
 echo Building LuaJIT...
+echo %LUAJIT_ROOT%\src
 cd %LUAJIT_ROOT%\src
 call msvcbuild.bat static
 
