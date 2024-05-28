@@ -1,8 +1,27 @@
 @echo off
 setlocal
 
-REM Set up Visual Studio 2022 environment
-call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+REM Set the path to vswhere.exe
+set "VSWHERE_PATH=C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe"
+
+REM Check if vswhere exists
+if not exist "%VSWHERE_PATH%" (
+    echo vswhere.exe not found. Please install Visual Studio or set the correct path.
+    exit /b 1
+)
+
+REM Run vswhere command to get installation path
+for /f "usebackq tokens=*" %%i in (`"%VSWHERE_PATH%" -latest -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do (
+    set "VS_INSTALL_PATH=%%i"
+)
+
+if not defined VS_INSTALL_PATH (
+    echo Visual Studio 2022 not found
+    exit /b 1
+)
+
+REM Set up Visual Studio environment
+call "%VS_INSTALL_PATH%\VC\Auxiliary\Build\vcvars64.bat"
 
 REM Define paths
 set PROJECT_ROOT=%~dp0
