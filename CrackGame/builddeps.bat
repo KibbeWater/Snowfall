@@ -30,6 +30,8 @@ set LUAJIT_BUILD_DIR=%LUAJIT_ROOT%\src
 set SOL_ROOT=%PROJECT_ROOT%Thirdparty\sol
 set BUILD_DIR=%PROJECT_ROOT%build
 
+cd %PROJECT_ROOT%
+
 REM Create build directory if it doesn't exist
 if not exist %BUILD_DIR% (
     mkdir %BUILD_DIR%
