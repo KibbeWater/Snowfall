@@ -115,7 +115,10 @@ void LuaH::initState(sol::state* state) {
 
 	// Own implementation of os.time as the library one is unsafe
 	state->set_function("GetTime", []() {
-		return std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+		auto now = std::chrono::system_clock::now();
+		auto duration = now.time_since_epoch();
+		auto seconds = std::chrono::duration_cast<std::chrono::duration<double>>(duration);
+		return seconds.count();
 	});
 }
 
