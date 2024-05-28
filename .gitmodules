@@ -3,4 +3,4 @@
 	url = https://github.com/ThePhD/sol2.git
 [submodule "CrackGame/Thirdparty/luajit"]
 	path = CrackGame/Thirdparty/luajit
-	url = https://luajit.org/git/luajit.git
+	url = https://github.com/LuaJIT/LuaJIT.git
