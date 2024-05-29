@@ -258,8 +258,9 @@ bool GameAPI::TrySnowballReload() {
 	auto m_pSystemType = IL2CPP::Class::GetSystemType(m_pSystemTypeClass);
 	auto m_pObjects = Unity::Object::FindObjectsOfType<Unity::CGameObject>(m_pSystemType);
 
-	// auto myPos = new Vector3(reinterpret_cast<Unity::CTransform*>(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerCam)->GetPosition());
-	auto myPos = &G::lastSentPosition;
+	auto myPos = GameAPI::IsLobbyOwner() ? 
+		new Vector3(reinterpret_cast<Unity::CTransform*>(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerCam)->GetPosition())
+		: &G::lastSentPosition;
 	static float maxDist = 12.0;
 
 	for (uintptr_t u = 0U; m_pObjects->m_uMaxLength > u; ++u) {

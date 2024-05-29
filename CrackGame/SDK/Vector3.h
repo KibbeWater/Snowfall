@@ -25,6 +25,10 @@ public:
 		return Vector3(direction.x / distance, direction.y / distance, direction.z / distance);
 	}
 
+	Vector3 lerp(Vector3 target, float t) {
+		return Vector3(x + (target.x - x) * t, y + (target.y - y) * t, z + (target.z - z) * t);
+	}
+
 	#pragma region Operators
 	Vector3 operator+(Vector3 vec) {
 		return Vector3(this->x + vec.x, this->y + vec.y, this->z + vec.z);

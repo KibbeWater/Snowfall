@@ -66,7 +66,8 @@ void LuaH::initState(sol::state* state) {
 		"y", &Vector3::y,
 		"z", &Vector3::z,
 		"distance", &Vector3::distanceTo,
-		"normalize", &Vector3::normalized
+		"normalized", &Vector3::normalized,
+		"lerp", &Vector3::lerp
 	);
 
 	state->new_usertype<Color>("Color", sol::constructors<Color(int,int,int,int)>(),
