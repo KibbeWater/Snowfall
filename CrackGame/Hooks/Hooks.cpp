@@ -77,6 +77,8 @@ INL bool Hook::Init() {
 		auto cClientHandle = GameAPI::FindMethod("BlockCrush", 1)->m_pClass;
 		DO_HOOK(reinterpret_cast<PVOID>(IL2CPP::Class::Utils::GetMethodPointer(cClientHandle, "TagPlayer")),
 			ClientHandle, TagPlayer);
+		DO_HOOK(reinterpret_cast<PVOID>(IL2CPP::Class::Utils::GetMethodPointer(cClientHandle, "PlayerPosition")),
+			ClientHandle, PlayerPosition);
 
 		auto cGlassBreak = GameAPI::FindMethod("MakeSolid", 0)->m_pClass;
 		DO_HOOK(IL2CPP::Class::Utils::GetMethodPointer(cGlassBreak, "OnTriggerEnter"),

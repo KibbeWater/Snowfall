@@ -17,7 +17,7 @@ namespace Obfuscation
 	void EncryptFloat(CodeStage_AntiCheat_ObscuredTypes_ObscuredFloat_o* obscuredFloat, float value);
 }
 
-namespace Packet {
+namespace PacketUtil {
 	long ReadLong(Packet_o* packet);
 	float ReadFloat(Packet_o* packet);
 	Vector3 ReadVector3(Packet_o* packet);

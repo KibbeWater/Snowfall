@@ -334,6 +334,15 @@
     <ClInclude Include="Lua\Structs\LocalPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Lua\Structs\Color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lua\Render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lua\Structs\Packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -516,9 +525,18 @@
     <ClCompile Include="Lua\Structs\LocalPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Lua\Structs\Color.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lua\Render.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lua\Structs\Packet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="CrackGame.rc">
+    <ResourceCompile Include="Snowfall.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
@@ -9044,6 +9062,4200 @@
     <None Include="Thirdparty\Sol\**\*.*">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
+    <None Include="Thirdparty\Sol\**\*.*" />
     <None Include="Thirdparty\Sol\**\*.*" />
     <None Include="Thirdparty\Sol\**\*.*" />
     <None Include="Thirdparty\Sol\**\*.*" />

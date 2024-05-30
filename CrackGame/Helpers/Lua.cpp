@@ -92,6 +92,19 @@ void LuaH::initState(sol::state* state) {
 		"GetPosition", &Transform::GetPosition
 	);
 
+	state->new_usertype<Packet>("Packet", sol::no_constructor,
+		"ReadLong", &Packet::ReadLong,
+		"WriteLong", &Packet::WriteLong,
+		"ReadInt", &Packet::ReadInt,
+		"WriteInt", &Packet::WriteInt,
+		"ReadFloat", &Packet::ReadFloat,
+		"WriteFloat", &Packet::WriteFloat,
+		"ReadVector3", &Packet::ReadVector3,
+		"WriteVector3", &Packet::WriteVector3,
+		"Skip", &Packet::Skip,
+		"SetPos", &Packet::SetPos
+	);
+
 	// Register enums
 	state->new_enum("Event",
 		"OnMove", Callbacks::Event::OnMove,

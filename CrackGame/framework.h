@@ -72,6 +72,7 @@
 #include "Lua/Structs/PlayerManager.h"
 #include "Lua/Structs/LocalPlayer.h"
 #include "Lua/Structs/Color.h"
+#include "Lua/Structs/Packet.h"
 
 #include "Lua/Chat.h"
 #include "Lua/Cheat.h"

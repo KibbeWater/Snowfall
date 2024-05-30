@@ -28,8 +28,7 @@ jobs:
     - name: Cleanup release
       shell: bash
       run: |
-        find "x64/Release" -type f ! -name "CrackGame.dll" -delete
-        mv x64/Release/CrackGame.dll x64/Release/Snowfall.dll
+        find "x64/Release" -type f ! -name "Snowfall.dll" -delete
     - name: Upload Build
       if: startsWith(github.ref, 'refs/tags/') == false
       uses: actions/upload-artifact@v3

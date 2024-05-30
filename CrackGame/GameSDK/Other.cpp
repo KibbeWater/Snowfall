@@ -42,27 +42,27 @@ void Obfuscation::EncryptFloat(CodeStage_AntiCheat_ObscuredTypes_ObscuredFloat_o
 	obscuredInt->fields.hiddenValue = fnXorFloatToInt(value, obscuredInt->fields.currentCryptoKey, nullptr);
 }
 
-long Packet::ReadLong(Packet_o* packet) {
+long PacketUtil::ReadLong(Packet_o* packet) {
 	long val = *reinterpret_cast<long*>(&packet->fields.readableBuffer->m_Items + packet->fields.readPos);
 	packet->fields.readPos += sizeof(long);
 	return val;
 }
 
-float Packet::ReadFloat(Packet_o* packet) {
+float PacketUtil::ReadFloat(Packet_o* packet) {
 	float val = *reinterpret_cast<float*>(&packet->fields.readableBuffer->m_Items + packet->fields.readPos);
 	packet->fields.readPos += sizeof(float);
 	return val;
 }
 
-Vector3 Packet::ReadVector3(Packet_o* packet) {
+Vector3 PacketUtil::ReadVector3(Packet_o* packet) {
 	return Vector3(
-		Packet::ReadFloat(packet),
-		Packet::ReadFloat(packet),
-		Packet::ReadFloat(packet)
+		PacketUtil::ReadFloat(packet),
+		PacketUtil::ReadFloat(packet),
+		PacketUtil::ReadFloat(packet)
 	);
 }
 
-void Packet::ResetPacket(Packet_o* packet) {
+void PacketUtil::ResetPacket(Packet_o* packet) {
 	packet->fields.readPos = 0;
 }
 
