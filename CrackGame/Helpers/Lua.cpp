@@ -80,11 +80,17 @@ void LuaH::initState(sol::state* state) {
 		"Black", &Color::Black
 	);
 
-	state->new_usertype<GameObject>("GameObject",
+	state->new_usertype<GameObject>("GameObject", sol::constructors<GameObject(GameObject::GameObjectType)>(),
 		"SetActive", &GameObject::SetActive,
 		"GetActive", &GameObject::GetActive,
 		"GetTransform", &GameObject::GetTransform,
-		"GetName", &GameObject::GetName
+		"GetName", &GameObject::GetName,
+		"GetBool", &GameObject::GetBool,
+		"SetBool", &GameObject::SetBool,
+		"GetInt", &GameObject::GetInt,
+		"SetInt", &GameObject::SetInt,
+		"GetFloat", &GameObject::GetFloat,
+		"SetFloat", &GameObject::SetFloat
 	);
 
 	state->new_usertype<Transform>("Transform",
@@ -124,6 +130,11 @@ void LuaH::initState(sol::state* state) {
 		"Pipe", WEAPON_PIPE,
 		"Snowball", WEAPON_SNOWBALL,
 		"Stick", WEAPON_STICK
+	);
+
+	state->new_enum("PrimitiveType",
+		"Cube", Unity::GameObject::m_ePrimitiveType::Cube,
+		"Sphere", Unity::GameObject::m_ePrimitiveType::Sphere
 	);
 
 	// Other
