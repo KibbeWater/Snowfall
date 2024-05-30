@@ -3,7 +3,7 @@ name: MSBuild
 on: [push]
 
 env:
-  SOLUTION_FILE_PATH: CrackGame.sln
+  SOLUTION_FILE_PATH: Snowfall.sln
   BUILD_CONFIGURATION: Release
 
 jobs:
