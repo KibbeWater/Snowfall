@@ -7,8 +7,8 @@ This is not in as much active development as it used to be, game has largely die
 
 ### Lua Engine
 
-The menu has an integrated Lua API to interact with the game. See the [docs](https://github.com/KibbeWater/Snowfall/wiki/Snowfall-Lua-API) here:
-https://github.com/KibbeWater/Snowfall/wiki/Snowfall-Lua-API
+The menu has an integrated Lua API to interact with the game. See the [docs](https://kibbewater.gitbook.io/snowfall-lua-api) here:
+https://kibbewater.gitbook.io/snowfall-lua-api
 
 ### General
 * Disable pre-game freeze
