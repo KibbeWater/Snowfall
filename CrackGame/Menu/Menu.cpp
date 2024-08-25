@@ -219,7 +219,6 @@ void Menu::Render()
 			}
 		}
 
-		#ifdef _DEBUG
 		ImGui::Spacing();
 		if (ImGui::CollapsingHeader("Developer (EXPERIMENTAL)")) {
 			ImGui::Checkbox("Debug Logging", &F::bDebug);
@@ -261,7 +260,6 @@ void Menu::Render()
 			ImGui::Checkbox("Fly", &F::bFly);
 			ImGui::Checkbox("Block Item Removal", &F::bBlockItemRemoval);
 		}
-		#endif
 
 		ImGui::End();
 	}
