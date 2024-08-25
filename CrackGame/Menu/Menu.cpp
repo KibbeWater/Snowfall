@@ -148,14 +148,12 @@ void Menu::Render()
 					ImGui::Checkbox("Lights always on", &F::bLightsAlwaysOn);
 					ImGui::TreePop();
 				}
-				#ifdef _DEBUG
 				if (ImGui::TreeNode("Glass Break")) {
 					ImGui::Checkbox("Prevent glass breaking", &F::bPreventGlassBreak);
 					if (ImGui::Button("Break Glass"))
 						GameAPI::BreakAll();
 					ImGui::TreePop();
 				}
-				#endif
 			}
 			ImGui::Spacing();
 			if (ImGui::CollapsingHeader("Item Giver"))
