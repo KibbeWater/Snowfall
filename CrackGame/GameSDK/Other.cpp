@@ -461,7 +461,7 @@ bool GameAPI::IsLobbyOwner() {
 
 Unity::Vector3* GameAPI::GetPlayerCamOffset() {
 	auto m_vPlayerPos = Unity::GameObject::Find("Player")->GetTransform()->GetPosition();
-	auto curCamPos = reinterpret_cast<Unity::CTransform*>(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerCam)->GetPosition();
+	auto curCamPos = Unity::Camera::GetMain()->GetTransform()->GetPosition();
 	return new Unity::Vector3(m_vPlayerPos.x - curCamPos.x, m_vPlayerPos.y - curCamPos.y, m_vPlayerPos.z - curCamPos.z);
 }
 

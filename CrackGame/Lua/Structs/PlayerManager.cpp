@@ -7,6 +7,13 @@ Vector3 PlayerManager::GetPosition() {
 	return Vector3(playerMovement->fields.desiredPosition);
 }
 
+void PlayerManager::SetPosition(Vector3 position) {
+	auto playerMovement = this->manager->fields._onlinePlayerMovement_k__BackingField;
+	if (playerMovement == nullptr) return;
+
+	playerMovement->fields.desiredPosition = position.ToEngine();
+}
+
 int PlayerManager::GetNumber() {
 	return this->manager->fields.playerNumber;
 }

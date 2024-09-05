@@ -48,6 +48,7 @@ void LuaH::initState(sol::state* state) {
 	// Register structs
 	state->new_usertype<PlayerManager>("PlayerManager",
 		"GetPosition", &PlayerManager::GetPosition,
+		"SetPosition", &PlayerManager::SetPosition,
 		"GetNumber", &PlayerManager::GetNumber,
 		"IsDead", &PlayerManager::IsDead,
 		"GetName", &PlayerManager::GetName

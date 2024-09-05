@@ -5,6 +5,10 @@ Vector3 LocalPlayer::GetPosition() {
 	return myPos;
 }
 
+Vector3 LocalPlayer::GetRotation() {
+	return Vector3(reinterpret_cast<Unity::CTransform*>(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerCam)->GetRotation().ToEuler());
+}
+
 int LocalPlayer::GetNumber() {
 	return this->manager->fields.playerNumber;
 }

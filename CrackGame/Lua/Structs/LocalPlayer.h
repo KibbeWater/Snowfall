@@ -7,6 +7,7 @@ public:
     }
 
 	Vector3 GetPosition();
+    Vector3 GetRotation();
 
     int GetNumber();
 

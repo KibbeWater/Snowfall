@@ -55,8 +55,9 @@ void __stdcall Hook::PlayerMovement::hkMovement(PlayerMovement_o* pThis, float x
 		static float speed = 30;
 		static float speedFast = 50;
 
-		auto curCam = reinterpret_cast<Unity::CTransform*>(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerCam);
-		auto curPos = Vector3(curCam->GetPosition()); // Initialize curPos without creating a new Vector3
+
+		auto curCam = Unity::Camera::GetMain();
+		auto curPos = curCam->GetTransform()->GetPosition(); // Initialize curPos without creating a new Vector3
 		auto fwd = new Vector3(curCam->GetMemberValue<Unity::Vector3>("forward"));
 		auto right = new Vector3(curCam->GetMemberValue<Unity::Vector3>("right"));
 		static auto playerCamOffset = Vector3(*GameAPI::GetPlayerCamOffset());
