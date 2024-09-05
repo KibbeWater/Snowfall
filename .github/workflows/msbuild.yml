@@ -28,7 +28,7 @@ jobs:
     - name: Cleanup release
       shell: bash
       run: |
-        find "x64/Release" -type f ! -name "Snowfall.dll" -delete
+        find "x64/Debug" -type f ! -name "Snowfall.dll" -delete
     - name: Upload Build
       if: startsWith(github.ref, 'refs/tags/') == false
       uses: actions/upload-artifact@v3
@@ -49,4 +49,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         name: Snowfall v${{ steps.get_version.outputs.version }}
-        files: ./x64/Release/Snowfall.dll
+        files: ./x64/Debug/Snowfall.dll
