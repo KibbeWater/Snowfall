@@ -3,6 +3,11 @@
 Mod menu for [Crab Game](https://store.steampowered.com/app/1782210/Crab_Game/), dani's gamified version of Crab Game.
 This is not in as much active development as it used to be, game has largely died down and is now filled with bots. I have therefore lost interest and releasing my private mod menu written fully in C++ with an integrated Lua engine
 
+## NOTE
+
+This is not really meant for actual use, it's a private mod menu and was never intended to be distributed. I will not assist with any problems that arise if you try to use it.
+When injecting however, make sure to set your display mode to exclusive fullscreen, menu key is INSERT. If the menu does not appear you might have to switch to/from exclusive fullscreen
+
 ## Features
 
 ### Lua Engine
