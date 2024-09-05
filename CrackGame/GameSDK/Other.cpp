@@ -502,7 +502,7 @@ std::string GameAPI::GetAppDataPath() {
 }
 
 std::string GameAPI::GetDataPath() {
-	return GetAppDataPath() + "\\CrackGame";
+	return GetAppDataPath() + "\\Snowfall";
 }
 
 std::string GameAPI::GetLuaPath() {
