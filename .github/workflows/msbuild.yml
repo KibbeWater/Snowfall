@@ -34,7 +34,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: Snowfall-${{ github.sha }}
-        path: ./x64/Release/
+        path: ./x64/Debug/
         
     - name: Extract Release Version
       if: startsWith(github.ref, 'refs/tags/')
