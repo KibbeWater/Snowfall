@@ -4,7 +4,7 @@ on: [push]
 
 env:
   SOLUTION_FILE_PATH: Snowfall.sln
-  BUILD_CONFIGURATION: Release
+  BUILD_CONFIGURATION: Debug
 
 jobs:
   build:
