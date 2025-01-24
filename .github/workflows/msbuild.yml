@@ -23,7 +23,7 @@ jobs:
       uses: johnwason/vcpkg-action@v6
       with:
         manifest-dir: ${{ github.workspace }} # Set to directory containing vcpkg.json
-        cache-key: '347a25c7eece49ad7ddb2ba1d665ae0bf630984e'
+        revision: '347a25c7eece49ad7ddb2ba1d665ae0bf630984e'
         triplet: x64-windows-static
         token: ${{ github.token }}
         github-binarycache: true
