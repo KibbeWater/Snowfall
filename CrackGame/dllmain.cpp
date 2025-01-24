@@ -21,8 +21,20 @@ INL bool IsShutdown(LPVOID lpParameter)
 
 DWORD WINAPI OnDllAttach(LPVOID lpParameter)
 {
+    const json j = {};
+    Config::loadConfig(j);
+
     IL2CPP::Initialize();
     GameAPI::Initialize();
+
+    auto steamProfile = SteamProfileXMLParser(GameAPI::GetSteamID());
+    steamProfile.parse();
+
+    FS::DownloadAsset(steamProfile.get_data_member("avatarFull"), "steamAvatar.jpg");
+
+    FS::DownloadAsset("https://d1o1p29cakohyk.cloudfront.net/Snowfall.ttf", "snowfall.ttf");
+    FS::DownloadAsset("https://d1o1p29cakohyk.cloudfront.net/Roboto.ttf", "roboto.ttf");
+    FS::DownloadAsset("https://d1o1p29cakohyk.cloudfront.net/Logo.png", "logo.png");
 
     if (!Hook::Init())
         ::MessageBoxA(0, "Failed to initialize all hooks", "ERROR", MB_OK);

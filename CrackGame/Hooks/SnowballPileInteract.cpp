@@ -5,7 +5,7 @@ void __stdcall Hook::SnowballPileInteract::hkTryInteract(SnowballPileInteract_o*
 
 	M::pSnowballPileInteract = pThis;
 
-	if (F::bFastThrow)
+	if (Config::get("combat_fastthrow", false))
 		pThis->fields.ready = false;
 
 	oTryInteract(pThis, pMethod);

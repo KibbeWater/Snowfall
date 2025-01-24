@@ -1,6 +1,6 @@
 #include "pch.h"
 
-using namespace ImGui;
+using namespace Modules;
 
 std::wstring s2ws(const std::string& s)
 {
@@ -14,253 +14,370 @@ std::wstring s2ws(const std::string& s)
 	return r;
 }
 
+void RenderVisual() {
+    RenderFeaturelist(
+        []() {
+            RenderSection("ESP", []() {
+                CheckboxHotkey("ESP", "visual_esp_state", false);
+
+                Components::Checkbox("Box",
+                    Config::getConfig("visual_esp_box", true));
+                });
+        },
+        []() {
+            RenderSectionHeaderless("global", []() {
+                CheckboxHotkey("Tracers", "visual_tracers", false);
+
+                });
+        });
+}
+
+void RenderCombat() {
+    RenderFeaturelist(
+        []() {
+            RenderSectionHeaderless("global", []() {
+                CheckboxHotkey("Godmode", "combat_godmode", false);
+
+                Components::Checkbox("Fast Swing",
+                    Config::getConfig("combat_fastswing", false));
+                });
+            RenderSection("Ranged", []() {
+                Components::Checkbox("Auto Fire",
+                    Config::getConfig("combat_autofire", false));
+
+                CheckboxHotkey("Rapid Fire", "combat_rapidfire", false);
+
+                Components::Checkbox("Infinite Ammo",
+                    Config::getConfig("combat_infiniteammo", false));
+
+                Components::Checkbox("No Recoil",
+                    Config::getConfig("combat_norecoil", false));
+
+                });
+        },
+        []() {
+            RenderSection("Throwing", []() {
+                CheckboxHotkey("Auto Snowball Refill", "combat_autosnowball", false);
+
+                Components::Checkbox("No Throw Cooldown",
+                    Config::getConfig("combat_fastthrow", false));
+                });
+        });
+}
+
+void RenderMovement() {
+	RenderFeaturelist(
+		[]() {
+			RenderSectionHeaderless("global", []() {
+				CheckboxHotkey("Speedhack", "movement_speedhack", false);
+                ImGui::SliderInt("Speed", Config::getConfig("movement_speedhack_speed", 100), 100, 1000);
+
+                ImGui::Spacing();
+
+				Components::Checkbox("Air Jump",
+					Config::getConfig("movement_airjump", false));
+
+                // Doesn't work
+				// Components::Checkbox("No Fall Damage",
+					// Config::getConfig("movement_nofalldamage", false));
+				});
+			RenderSection("Teleport", []() {
+				CheckboxHotkey("Click TP", "movement_clicktp", false);
+				});
+		},
+		[]() {
+			RenderSection("Misc", []() {
+				bool* bKnockback = Config::getConfig("movement_antikb", false);
+				Components::Checkbox("Anti-Knockback", bKnockback);
+                if (*bKnockback)
+					Components::Checkbox("Advanced Anti-Knockback", 
+                        Config::getConfig("movement_advancedantikb", false));
+
+				});
+		});
+}
+
+void RenderGamemode() {
+	RenderFeaturelist(
+		[]() {
+			RenderSection("Red light Green light", []() {
+				CheckboxHotkey("Freeze", "gamemode_redlight_freeze", false);
+				});
+
+            RenderSection("Dorms", []() {
+                Components::Checkbox("Lights always on", 
+                    Config::getConfig("gamemode_dorms_antidark", false));
+                });
+		},
+		[]() {
+			RenderSection("Misc", []() {
+				Components::Checkbox("Anti-Freeze",
+					Config::getConfig("gamemode_nofreeze", false));
+				});
+            RenderSection("Glass Break", []() {
+                Components::Checkbox("Prevent glass break", 
+                    Config::getConfig("gamemode_glass_antibreak", false));
+                if (Components::Button("Break glass"))
+                    GameAPI::BreakAll();
+                });
+		});
+}
+
+void RenderItems() {
+	RenderFeaturelist(
+		[]() {
+			RenderSection("Item Giver", []() {
+                static const char* curItem = "Rifle (BANNABLE)";
+                static int selectedWeapon = 0;
+                const char* items[] = { "Rifle (BANNABLE)", "Pistol", "Revolver", "Shotgun (BANNABLE)", "Bat", "Bomb", "Katana", "Knife", "Pipe", "Snowball", "Stick" };
+
+                if (ImGui::BeginCombo("Weapon", curItem)) {
+                    for (int n = 0; n < IM_ARRAYSIZE(items); n++) { // Loop through all weapons
+                        bool isSelected = (curItem == items[n]);
+                        if (ImGui::Selectable(items[n], isSelected)) {
+                            curItem = items[n];
+                            selectedWeapon = n;
+                        }
+                        if (isSelected)
+                            ImGui::SetItemDefaultFocus();
+                    }
+                    ImGui::EndCombo();
+                }
+
+                if (Components::Button("Give Weapon")) {
+                    auto item = GameAPI::GetItemByID(selectedWeapon);
+                    GameAPI::ForceGiveItem(item);
+                }
+
+				});
+		},
+		[]() {
+		});
+}
+
+void RenderLobby() {
+	RenderFeaturelist(
+		[]() {
+			RenderSection("Lobby", []() {
+
+                bool* bMaxPlayesOverride = Config::getConfig("lobby_maxplayers_on", false);
+                Components::Checkbox("Max Player Override", 
+                    bMaxPlayesOverride);
+                if (*bMaxPlayesOverride)
+                    ImGui::SliderInt("Max Players", Config::getConfig("lobby_maxplayers_count", 40), 40, 5000);
+                if (Components::Button("Start Game"))
+                    GameAPI::StartGames();
+				});
+		},
+		[]() {
+			RenderSectionHeaderless("global", []() {
+				Components::Checkbox("Hacker Prevention",
+					Config::getConfig("lobby_anticheat", true));
+				});
+		});
+}
+
+void RenderMisc() {
+	RenderFeaturelist(
+		[]() {
+			RenderSection("Misc", []() {
+                CheckboxHotkey("Lagswitch", "misc_lagswitch", false);
+                Components::Checkbox("Command Handler", 
+                    Config::getConfig("misc_commandhandler", false));
+
+				ImGui::Separator();
+
+                if (Components::Button("Complete Daily"))
+                    GameAPI::CompleteDaily();
+
+                ImGui::Separator();
+
+                Components::Checkbox("Chatspammer", 
+                    Config::getConfig("misc_chatspammer_on", false));
+                ImGui::InputText("Spam Text", 
+                    Config::getConfig("misc_chatspammer_msg", std::string("Snowfall on top")));
+				});
+		},
+		[]() {
+			RenderSection("Debug", []() {
+				Components::Checkbox("Debug",
+					Config::getConfig("misc_debug", false));
+				});
+		});
+}
+
+void RenderConfig() {
+	RenderFeaturelist(
+		[]() {
+            std::string path = FS::GetLuaFile("");
+            RenderSectionHeaderless("global", [&]() {
+                
+                ImGui::Text("Lua Path: %s", path.c_str());
+
+				if (Components::Button("Reload Lua")) {
+                    auto oldState = G::vLuaState;
+                    G::oCallbackManager->clear_callbacks();
+                    G::vLuaState = new sol::state();
+                    LuaH::initState(G::vLuaState);
+                    delete oldState;
+                }
+				});
+
+			RenderSection("Lua", [&]() {
+                for (const auto& entry : std::filesystem::directory_iterator(path)) {
+                    std::string filename = entry.path().filename().string();
+                    if (filename.find(".lua") != std::string::npos && filename.find("autorun") == std::string::npos) {
+                        if (ImGui::Button(filename.c_str())) {
+                            // Get the file contents
+                            std::ifstream file(entry.path());
+                            std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+                            file.close();
+
+                            G::vLuaState->safe_script(content, &sol::script_pass_on_error);
+                        }
+                    }
+                }
+				});
+		},
+		[]() {
+			RenderSection("Debug", []() {
+                ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 4));
+                ImGui::Text("Config Name");
+
+                ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 8.0f);
+                ImGui::PushStyleColor(ImGuiCol_FrameBg, IM_COL32(35, 35, 35, 255));
+                static std::string configName = "config";
+                ImGui::PushItemWidth(-1);
+                ImGui::InputText("Config Name", &configName);
+                ImGui::PopItemWidth();
+                ImGui::PopStyleVar(2);
+                ImGui::PopStyleColor(1);
+
+                ImGui::Spacing();
+
+                if (Components::Button("Save Config") && !configName.empty()) Config::saveConfig(configName);
+                if (Components::Button("Load Config") && !configName.empty()) Config::loadConfig(std::string(configName));
+				});
+		});
+}
+
 void Menu::Render()
 {
-	static bool no_titlebar = false;
-	static bool no_border = true;
-	static bool no_resize = false;
-	static bool auto_resize = false;
-	static bool no_move = false;
-	static bool no_scrollbar = false;
-	static bool no_collapse = false;
-	static bool no_menu = true;
-	static bool start_pos_set = false;
-
-	ImVec4* colors = ImGui::GetStyle().Colors;
-	colors[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
-	colors[ImGuiCol_TextDisabled] = ImVec4(0.50f, 0.50f, 0.50f, 1.00f);
-	colors[ImGuiCol_WindowBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.83f);
-	colors[ImGuiCol_ChildBg] = ImVec4(1.00f, 1.00f, 1.00f, 0.00f);
-	colors[ImGuiCol_PopupBg] = ImVec4(0.08f, 0.08f, 0.08f, 0.94f);
-	colors[ImGuiCol_Border] = ImVec4(0.43f, 0.43f, 0.50f, 0.50f);
-	colors[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-	colors[ImGuiCol_FrameBg] = ImVec4(0.16f, 0.29f, 0.48f, 0.54f);
-	colors[ImGuiCol_FrameBgHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
-	colors[ImGuiCol_FrameBgActive] = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
-	colors[ImGuiCol_TitleBg] = ImVec4(0.04f, 0.04f, 0.04f, 1.00f);
-	colors[ImGuiCol_TitleBgActive] = ImVec4(0.16f, 0.29f, 0.48f, 1.00f);
-	colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
-	colors[ImGuiCol_MenuBarBg] = ImVec4(1.00f, 0.00f, 0.00f, 0.61f);
-	colors[ImGuiCol_ScrollbarBg] = ImVec4(0.02f, 0.02f, 0.02f, 0.53f);
-	colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.16f, 0.29f, 0.48f, 0.54f);
-	colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.41f, 0.41f, 0.41f, 1.00f);
-	colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.51f, 0.51f, 0.51f, 1.00f);
-	colors[ImGuiCol_CheckMark] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-	colors[ImGuiCol_SliderGrab] = ImVec4(0.24f, 0.52f, 0.88f, 1.00f);
-	colors[ImGuiCol_SliderGrabActive] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-	colors[ImGuiCol_Button] = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);
-	colors[ImGuiCol_ButtonHovered] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-	colors[ImGuiCol_ButtonActive] = ImVec4(0.06f, 0.53f, 0.98f, 1.00f);
-	colors[ImGuiCol_Header] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-	colors[ImGuiCol_HeaderHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.80f);
-	colors[ImGuiCol_HeaderActive] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-	colors[ImGuiCol_Separator] = ImVec4(0.43f, 0.43f, 0.50f, 0.50f);
-	colors[ImGuiCol_SeparatorHovered] = ImVec4(0.10f, 0.40f, 0.75f, 0.78f);
-	colors[ImGuiCol_SeparatorActive] = ImVec4(0.10f, 0.40f, 0.75f, 1.00f);
-	colors[ImGuiCol_ResizeGrip] = ImVec4(0.26f, 0.59f, 0.98f, 0.25f);
-	colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.26f, 0.59f, 0.98f, 0.67f);
-	colors[ImGuiCol_ResizeGripActive] = ImVec4(0.26f, 0.59f, 0.98f, 0.95f);
-	colors[ImGuiCol_PlotLines] = ImVec4(0.61f, 0.61f, 0.61f, 1.00f);
-	colors[ImGuiCol_PlotLinesHovered] = ImVec4(1.00f, 0.43f, 0.35f, 1.00f);
-	colors[ImGuiCol_PlotHistogram] = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
-	colors[ImGuiCol_PlotHistogramHovered] = ImVec4(1.00f, 0.60f, 0.00f, 1.00f);
-	colors[ImGuiCol_TextSelectedBg] = ImVec4(0.26f, 0.59f, 0.98f, 0.35f);
-	//colors[ImGuiCol_ModalWindowDarkening] = ImVec4(0.80f, 0.80f, 0.80f, 0.35f);
-	colors[ImGuiCol_DragDropTarget] = ImVec4(1.00f, 1.00f, 0.00f, 0.90f);
-
-	ImGuiWindowFlags	window_flags = 0;
-	if (no_titlebar)	window_flags |= ImGuiWindowFlags_NoTitleBar;
-	if (no_resize)		window_flags |= ImGuiWindowFlags_NoResize;
-	if (auto_resize)	window_flags |= ImGuiWindowFlags_AlwaysAutoResize;
-	if (no_move)		window_flags |= ImGuiWindowFlags_NoMove;
-	if (no_scrollbar)	window_flags |= ImGuiWindowFlags_NoScrollbar;
-	if (no_collapse)	window_flags |= ImGuiWindowFlags_NoCollapse;
-	if (!no_menu)		window_flags |= ImGuiWindowFlags_MenuBar;
-	ImGui::SetNextWindowSize(ImVec2(450, 600));
-	if (!start_pos_set) { ImGui::SetNextWindowPos(ImVec2(25, 25)); start_pos_set = true; }
+	ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(4, 4));
+	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(15, 10));
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 6.0f);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
+	ImGui::PushStyleColor(ImGuiCol_Button, IM_COL32(20, 20, 40, 255));
+	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, IM_COL32(50, 50, 80, 255));
+	ImGui::PushStyleColor(ImGuiCol_ButtonActive, IM_COL32(70, 70, 120, 255));
+	ImGui::PushStyleColor(ImGuiCol_WindowBg, IM_COL32(20, 20, 20, 255));
+	ImGui::PushStyleColor(ImGuiCol_Border, IM_COL32(0, 0, 0, 0));
 
 	ImGui::GetIO().MouseDrawCursor = Menu::bIsOpen;
 
-	if (Menu::bIsOpen)
-	{
-		ImGui::Begin("Snowfall", &Menu::bIsOpen, window_flags);
+    static MenuTab activeTab = MenuTab::NONE;
+    if (Menu::bIsOpen) {
+        ImGui::SetNextWindowSize(ImVec2(700, 500));
+        if (ImGui::Begin("Snowfall", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize))
+        {
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(10, 10));
+            {
+                // Left Col
+                ImGui::PushStyleColor(ImGuiCol_ChildBg, IM_COL32(25, 25, 25, 255));
+                if (ImGui::BeginChild("Sidebar", ImVec2(175, ImGui::GetContentRegionAvail().y))) {
+                    float userSizeY = 60;
+                    ImGuiWindowFlags window_flags = ImGuiWindowFlags_None; // ImGuiWindowFlags_HorizontalScrollbar;
 
-		ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.65f);
-		ImGui::PushItemWidth(-140);
+                    {
+                        if (ImGui::BeginChild("FeatL", ImVec2(175, ImGui::GetContentRegionAvail().y - (userSizeY + 10)), ImGuiChildFlags_Borders | ImGuiChildFlags_AutoResizeY, window_flags)) {
+                            int clickedButton = -1;
 
-		{
-			if (ImGui::CollapsingHeader("General"))
-			{
-				ImGui::Checkbox("Disable pre-game freeze", &F::bDisablePregameFreeze);
-				ImGui::Checkbox("Lagswitch", &F::bLagSwitch);
-				ImGui::Checkbox("Auto-Clicker", &F::bAutoClicker);
-				ImGui::Checkbox("Command Handler", &F::bCommandHandler);
-				ImGui::Spacing();
-				if (ImGui::Button("Complete Daily"))
-					GameAPI::CompleteDaily();
-				ImGui::Checkbox("Chatspammer", &F::bChatSpammer);
-				ImGui::InputText("Spam Text", F::sSpammerMsg, IM_ARRAYSIZE(F::sSpammerMsg));
-			}
-			ImGui::Spacing();
-			if (ImGui::CollapsingHeader("Combat"))
-			{
-				ImGui::Checkbox("Godmode", &F::bGodmode);
-				ImGui::Checkbox("Fast Swing", &F::bFastSwing);
-				ImGui::Checkbox("No Throw Cooldown", &F::bFastThrow);
-				ImGui::Checkbox("Auto Snowball Refill", &F::bAutoSnowballRefill);
-				ImGui::Checkbox("Infinite Ammo", &F::bInfAmmo);
-				ImGui::Checkbox("No Recoil", &F::bNoRecoil);
-				ImGui::Checkbox("Rapid Fire", &F::bRapidFire);
-				/*ImGui::Checkbox("Reach", &F::bReach);
-				if (F::bReach)
-					ImGui::SliderFloat("Reach Slider", &F::fReachDist, 2.5, 100);*/
-			}
-			ImGui::Spacing();
-			if (ImGui::CollapsingHeader("Movement"))
-			{
-				ImGui::Checkbox("Speedhack", &F::bSpeedhack);
-				if (F::bSpeedhack)
-					ImGui::SliderInt("Speed", &F::iSpeedPercent, 100, 1000);
-				ImGui::Checkbox("AirJump", &F::bAirJump);
-				ImGui::Checkbox("Anti-Knockback", &F::bAntiKnockback);
-				if (F::bAntiKnockback)
-					ImGui::Checkbox("Advanced Anti-Knockback", &F::bAdvancedAntiKB);
-				/*ImGui::Checkbox("NoSlide", &F::bNoSlide);*/
-				ImGui::Checkbox("Click TP (Mouse3)", &F::bClickTP);
-			}
-			ImGui::Spacing();
-			if (ImGui::CollapsingHeader("Gamemodes"))
-			{
-				if (ImGui::TreeNode("Red Light Green Light"))
-				{
-					ImGui::Checkbox("Red Light freeze", &F::bRedGreenProtection);
-					ImGui::TreePop();
-				}
-				#ifdef _DEBUG
-				if (ImGui::TreeNode("Bomb Tag"))
-				{
-					ImGui::Checkbox("Anti-Bomb Tag", &F::bAntiBombTag);
-					ImGui::TreePop();
-				}
-				#endif
-				if (ImGui::TreeNode("Dorms"))
-				{
-					ImGui::Checkbox("Lights always on", &F::bLightsAlwaysOn);
-					ImGui::TreePop();
-				}
-				if (ImGui::TreeNode("Glass Break")) {
-					ImGui::Checkbox("Prevent glass breaking", &F::bPreventGlassBreak);
-					if (ImGui::Button("Break Glass"))
-						GameAPI::BreakAll();
-					ImGui::TreePop();
-				}
-			}
-			ImGui::Spacing();
-			if (ImGui::CollapsingHeader("Item Giver"))
-			{
-				static const char* curItem = "Rifle (BANNABLE)";
-				static int selectedWeapon = 0;
-				const char* items[] = { "Rifle (BANNABLE)", "Pistol", "Revolver", "Shotgun (BANNABLE)", "Bat", "Bomb", "Katana", "Knife", "Pipe", "Snowball", "Stick" };
+                            Components::FileImage(FS::GetAsset("logo.png"), ImVec2(-1, -1), 1, ImGuiImageFlags_AutoResizeX);
 
-				if (ImGui::BeginCombo("Weapon", curItem)) {
-					for (int n = 0; n < IM_ARRAYSIZE(items); n++) { // Loop through all weapons
-						bool isSelected = (curItem == items[n]);
-						if (ImGui::Selectable(items[n], isSelected)) {
-							curItem = items[n];
-							selectedWeapon = n;
-						}
-						if (isSelected)
-							ImGui::SetItemDefaultFocus();
-					}
-					ImGui::EndCombo();
-				}
+                            ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 4));
+                            if (CategoryButton("Visual", "\xEE\x80\x80", ImVec2(ImGui::GetContentRegionAvail().x, 35))) clickedButton = MenuTab::VISUAL;
+                            if (CategoryButton("Combat", "\xEE\x80\x82", ImVec2(ImGui::GetContentRegionAvail().x, 35))) clickedButton = MenuTab::COMBAT;
+							if (CategoryButton("Movement", "\xEE\x80\x83", ImVec2(ImGui::GetContentRegionAvail().x, 35))) clickedButton = MenuTab::MOVEMENT;
+							if (CategoryButton("Gamemode", "\xEE\x80\x83", ImVec2(ImGui::GetContentRegionAvail().x, 35))) clickedButton = MenuTab::GAMEMODE;
+							if (CategoryButton("Items", "\xEE\x80\x83", ImVec2(ImGui::GetContentRegionAvail().x, 35))) clickedButton = MenuTab::ITEMS;
+							if (CategoryButton("Lobby", "\xEE\x80\x83", ImVec2(ImGui::GetContentRegionAvail().x, 35))) clickedButton = MenuTab::LOBBY;
+                            if (CategoryButton("Misc", "\xEE\x80\x85", ImVec2(ImGui::GetContentRegionAvail().x, 35))) clickedButton = MenuTab::MISC;
+							if (CategoryButton("Config", "\xEE\x80\x81", ImVec2(ImGui::GetContentRegionAvail().x, 35))) clickedButton = MenuTab::CONFIG;
+                            ImGui::PopStyleVar(1);
 
-				if (ImGui::Button("Give Weapon")) {
-					auto item = GameAPI::GetItemByID(selectedWeapon);
-					GameAPI::ForceGiveItem(item);
-				}
-			}
-			ImGui::Spacing();
-			if (ImGui::CollapsingHeader("Lobby")) {
-				ImGui::Checkbox("Hacker Prevention", &F::bHackerPrevention);
-				ImGui::Checkbox("Max Player Override", &F::bMaxPlayersOverride);
-				if (F::bMaxPlayersOverride)
-					ImGui::SliderInt("Max Players", &F::iMaxPlayersCount, 40, 5000);
-				if (ImGui::Button("Start Game"))
-					GameAPI::StartGames();
-			}
-			ImGui::Spacing();
-			if (ImGui::CollapsingHeader("Lua")) {
-				// List all .lua files in DATA_PATH\Lua
-				std::string path = GameAPI::GetLuaPath();
-				ImGui::Text("Lua Path: %s", path.c_str());
-				if (ImGui::Button("Reload LUA environment")) {
-					auto oldState = G::vLuaState;
-					G::oCallbackManager->clear_callbacks();
-					G::vLuaState = new sol::state();
-					LuaH::initState(G::vLuaState);
-					delete oldState;
-				}
-				ImGui::Spacing();
-				ImGui::Text("Lua Scripts:");
-				for (const auto& entry : std::filesystem::directory_iterator(path)) {
-					std::string filename = entry.path().filename().string();
-					if (filename.find(".lua") != std::string::npos && filename.find("autorun") == std::string::npos) {
-						if (ImGui::Button(filename.c_str())) {
-							// Get the file contents
-							std::ifstream file(entry.path());
-							std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-							file.close();
+                            if (clickedButton != -1) {
+                                if (clickedButton == activeTab) {
+                                    activeTab = MenuTab::NONE;
+                                }
+                                else if (clickedButton != MenuTab::NONE) { //  lalalalalal "condition is always true" NO IT'S NOT???
+                                    activeTab = static_cast<MenuTab>(clickedButton);
+                                }
+                            }
+                        }
+                        ImGui::EndChild();
+                    }
 
-							G::vLuaState->safe_script(content, &sol::script_pass_on_error);
-						}
-					}
-				}
-			}
-		}
+                    {
+                        if (ImGui::BeginChild("UserCard", ImVec2(175, userSizeY), ImGuiChildFlags_Border, ImGuiWindowFlags_None)) {
+                            Components::FileImage(FS::GetAsset("steamAvatar.jpg"), ImVec2(-1, -1), 8, ImGuiImageFlags_AutoResizeY);
+                            ImGui::SameLine();
 
-		ImGui::Spacing();
-		if (ImGui::CollapsingHeader("Developer (EXPERIMENTAL)")) {
-			ImGui::Checkbox("Debug Logging", &F::bDebug);
-			ImGui::Checkbox("Crasher", &F::bCrasher);
-			ImGui::Checkbox("Fake Player Count", &F::bFakePlayers);
-			if (F::bFakePlayers)
-				ImGui::SliderInt("Fake Players", &F::iFakePlayers, 0, 1000);
-			if (ImGui::Button("Tiles"))
-				GameAPI::TakeAllTiles();
-			if (ImGui::Button("Dump GameObjects")) {
-				Unity::il2cppClass* m_pSystemTypeClass = IL2CPP::Class::Find("UnityEngine.GameObject");
-				auto m_pSystemType = IL2CPP::Class::GetSystemType(m_pSystemTypeClass);
-				auto m_pObjects = Unity::Object::FindObjectsOfType<Unity::CGameObject>(m_pSystemType);
+                            ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 2));
+                            ImGui::BeginGroup(); {
+                                ImGui::Text("KibbeWater");
+                                ImGui::Text("456 Days");
+                            } ImGui::EndGroup();
+                            ImGui::PopStyleVar(1);
+                        }
+                        ImGui::EndChild();
+                    }
+                }
+                ImGui::EndChild();
+                ImGui::PopStyleColor(1);
 
-				Unity::il2cppClass* m_pComponentTypeClass = IL2CPP::Class::Find("UnityEngine.Component");
-				auto m_pComponentType = IL2CPP::Class::GetSystemType(m_pComponentTypeClass);
+                ImGui::SameLine();
 
-				ofstream file;
-				file.open("dump.txt");
+                // Right Col
+                if (ImGui::BeginChild("rCol", ImGui::GetContentRegionAvail(), ImGuiChildFlags_Borders)) {
+                    switch (activeTab) {
+                    case MenuTab::NONE:
+                        break;
+                    case MenuTab::VISUAL:
+                        RenderVisual();
+                        break;
+                    case MenuTab::COMBAT:
+                        RenderCombat();
+                        break;
+					case MenuTab::MOVEMENT:
+						RenderMovement();
+						break;
+					case MenuTab::GAMEMODE:
+						RenderGamemode();
+						break;
+					case MenuTab::ITEMS:
+						RenderItems();
+						break;
+					case MenuTab::LOBBY:
+						RenderLobby();
+						break;
+					case MenuTab::MISC:
+						RenderMisc();
+						break;
+					case MenuTab::CONFIG:
+						RenderConfig();
+						break;
+                    }
+                }
+                ImGui::EndChild();
+            }
 
-				for (uintptr_t u = 0U; m_pObjects->m_uMaxLength > u; ++u) {
-					auto m_pObject = m_pObjects->At(u);
-					file << m_pObject->GetName()->ToString() << std::endl;
+            ImGui::PopStyleVar(1);
+        }
+        ImGui::End();
+    }
 
-					/* Unity::il2cppArray<Unity::CComponent*>* m_pComponents = m_pObject->GetComponents(m_pComponentType);
-					for (uintptr_t i = 0U; m_pComponents->m_uMaxLength > i; ++i)
-						file << "- " << m_pComponents->At(i)->GetName()->ToString() << std::endl; */
-				}
-
-				file.close();
-			}
-
-			if (ImGui::Button("Send to Space"))
-				F::bFlingAll = true;
-			if (ImGui::Button("Create Prompt"))
-				GameAPI::Prompt("Snowfall", "Hooked and ready for use!");
-			if (ImGui::Button("Create Alert"))
-				GameAPI::Alert("[Snowfall] Hooked and ready for use!");
-			ImGui::Checkbox("Fly", &F::bFly);
-			ImGui::Checkbox("Block Item Removal", &F::bBlockItemRemoval);
-		}
-
-		ImGui::End();
-	}
+    // Pop styles
+    ImGui::PopStyleColor(6);
+    ImGui::PopStyleVar(4);
 }

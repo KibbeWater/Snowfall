@@ -86,11 +86,7 @@ namespace GameAPI {
 	EGameModes GetGamemode();
 	void StartGames();
 	void Log(std::string message);
-
-	// Data folders
-	std::string GetAppDataPath();
-	std::string GetDataPath();
-	std::string GetLuaPath();
+	Unity::Bounds* GetBounds(Unity::CGameObject* gameObject);
 
 	// Unity game functions
 	bool Raycast(UnityEngine_Vector3_o origin, UnityEngine_Vector3_o dir, UnityEngine_RaycastHit_o* hitInfo, float maxDistance, int layerMask);

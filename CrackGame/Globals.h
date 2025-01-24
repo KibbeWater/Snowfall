@@ -25,59 +25,11 @@ namespace G
 	inline ImDrawList *pDrawList = nullptr;
 
 	inline CommandHandler *commandHandler = new CommandHandler();
+
+	inline ID3D11Device* g_pd3dDevice = nullptr;
 }
 
 namespace F
 {
-	// General
-	inline bool bDisabledCamShake = false;
-	inline bool bDisablePregameFreeze = false;
-	inline bool bLagSwitch = false;
-	inline bool bAutoClicker = false;
-	inline bool bCommandHandler = false;
 
-	// Combat
-	inline bool bGodmode = false;
-	inline bool bFastSwing = false;
-	inline bool bAutoSnowballRefill = false;
-	inline bool bFastThrow = false;
-	inline bool bInfAmmo = false;
-	inline bool bRapidFire = false;
-	inline bool bNoRecoil = false;
-	inline bool bReach = false;
-	inline float fReachDist = 2.5;
-
-	// Movement
-	inline bool bSpeedhack = false;
-	inline int iSpeedPercent = 100;
-	inline bool bAirJump = false;
-	inline bool bAntiKnockback = false;
-	inline bool bAdvancedAntiKB = false;
-	inline bool bNoSlide = false;
-
-	// Gamemodes
-	inline bool bRedGreenProtection = false;
-	inline bool bAntiBombTag = false;
-	inline bool bLightsAlwaysOn = false;
-	inline bool bPreventGlassBreak = false;
-
-	// Item giver
-	inline int iWeaponID = 0;
-
-	// Lobby
-	inline bool bMaxPlayersOverride = false;
-	inline bool bHackerPrevention = false;
-	inline int iMaxPlayersCount = 40;
-	inline bool bFakePlayers = false;
-	inline int iFakePlayers = 0;
-
-	// Other
-	inline bool bClickTP = false;
-	inline bool bFly = false;
-	inline bool bBlockItemRemoval = false;
-	inline bool bDebug = false;
-	inline bool bCrasher = false;
-	inline bool bFlingAll = false;
-	inline bool bChatSpammer = false;
-	inline char sSpammerMsg[32767] = {"LOL"};
 }

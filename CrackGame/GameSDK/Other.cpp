@@ -373,7 +373,11 @@ std::vector<PlayerManager_o*> GameAPI::GetPlayers() {
 
 std::vector<PlayerManager_o*> GameAPI::GetPlayersAlive() {
 	std::vector<PlayerManager_o*> activePlayersVec = {};
-	auto activePlayers = GetGamemanager()->static_fields->Instance->fields.activePlayers->fields;
+
+	auto gameManagerInstance = GetGamemanager()->static_fields->Instance;
+	if (!gameManagerInstance) return activePlayersVec;
+	
+	auto activePlayers = gameManagerInstance->fields.activePlayers->fields;
 	if (!activePlayers.entries) return activePlayersVec;
 
 	for (size_t i = 0; i < activePlayers.entries->max_length; i++) {
@@ -487,26 +491,11 @@ void GameAPI::Log(std::string message) {
 	GameAPI::AppendMessage(1, IL2CPP::String::New(message), IL2CPP::String::New("[Snowfall]"));
 }
 
-std::string GameAPI::GetAppDataPath() {
-	char* buffer = nullptr;
-	size_t len = 0;
-	errno_t err = _dupenv_s(&buffer, &len, "APPDATA");
-
-	std::string appDataPath;
-	if (err == 0 && buffer != nullptr) {
-		appDataPath = std::string(buffer);
-		free(buffer);
-	}
-
-	return appDataPath;
-}
-
-std::string GameAPI::GetDataPath() {
-	return GetAppDataPath() + "\\Snowfall";
-}
-
-std::string GameAPI::GetLuaPath() {
-	return GetDataPath() + "\\Lua";
+Unity::Bounds* GameAPI::GetBounds(Unity::CGameObject* gameObject)
+{
+	auto renderer = gameObject->GetComponentInChildren("UnityEngine.Renderer");
+	Unity::Bounds bounds = renderer->GetPropertyValue<Unity::Bounds>("bounds");
+	return &bounds;
 }
 
 void GameAPI::Initialize() {
@@ -532,23 +521,11 @@ void GameAPI::Initialize() {
 	// Initialize Lua state
 	LuaH::initState(G::vLuaState);
 
-	// Ensure every folder leading up to LUA_PATH exists, if not, create it
-	std::string path = GetLuaPath() + "\\";
-	std::string folder = "";
-	for (size_t i = 0; i < path.length(); i++) {
-		if (path[i] == '/' || path[i] == '\\') {
-			if (!folder.empty()) {
-				if (!std::filesystem::exists(folder))
-					std::filesystem::create_directory(folder);
-			}
-			folder += path[i];
-		} else folder += path[i];
-	}
-
 	// Check if LUA_PATH\autorun.lua exists
-	if (std::filesystem::exists(GetLuaPath() + "\\autorun.lua")) {
+	auto autorunPath = FS::GetLuaFile("autorun.lua");
+	if (std::filesystem::exists(autorunPath)) {
 		// Read the file
-		std::ifstream file(GetLuaPath() + "\\autorun.lua");
+		std::ifstream file(autorunPath);
 		std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 		file.close();
 

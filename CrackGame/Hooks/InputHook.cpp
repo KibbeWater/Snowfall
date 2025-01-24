@@ -14,8 +14,13 @@ void InputHook::Remove(HWND hWindow)
 	SetWindowLongPtr(hWindow, GWLP_WNDPROC, (LONG_PTR)oWndProc);
 }
 
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 LRESULT APIENTRY WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	if (ImGui_ImplWin32_WndProcHandler(hwnd, uMsg, wParam, lParam))
+		return CallWindowProc(oWndProc, hwnd, uMsg, wParam, lParam);
+
 	switch (uMsg)
 	{
 		case WM_LBUTTONDOWN:

@@ -6,8 +6,8 @@ void __stdcall Hook::GamemodeHat::hkStealHat(GameModeHat_o* pThis, long stealer,
 
 	oStealHat(pThis, stealer, stolenFrom, pMethod);
 
-	auto rot = new Vector3(1,1,1);
+	/* auto rot = new Vector3(1, 1, 1);
 	static long yourSteamID = GameAPI::GetSteamID();
 	if (F::bAntiBombTag)
-		GameAPI::PunchPlayer(stealer, rot->ToEngine());
+		GameAPI::PunchPlayer(stealer, rot->ToEngine()); */
 }

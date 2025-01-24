@@ -1,0 +1,18 @@
+{
+    "name": "snowfall",
+    "version": "1.0.0",
+    "dependencies": [
+		{
+			"name": "imgui",
+			"features": ["dx11-binding", "freetype", "win32-binding"]
+		},
+        {
+            "name": "curl",
+            "default-features": false,
+            "features": ["ssl", "http2"]
+        },
+		"nlohmann-json",
+		"freetype"
+    ],
+	"builtin-baseline": "347a25c7eece49ad7ddb2ba1d665ae0bf630984e"
+}

@@ -4,5 +4,7 @@ void __stdcall Hook::GamemodeLights::hkToggleLights(GameModeLights_o* pThis, boo
 {
 	static auto oToggleLights = static_cast<decltype(&hkToggleLights)>(pToggleLights);
 
-	oToggleLights(pThis, F::bLightsAlwaysOn ? true : b, pMethod);
+	bool bLightsAlwaysOn = Config::get("gamemode_dorms_antidark", false);
+
+	oToggleLights(pThis, bLightsAlwaysOn ? true : b, pMethod);
 }

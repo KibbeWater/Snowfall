@@ -5,7 +5,7 @@ void __stdcall Hook::ClientHandle::hkTagPlayer(Packet_o* packet, const MethodInf
 
 	oTagPlayer(packet, pMethod);
 
-	if (GameAPI::GetGamemode() == MODE_TAG) {
+	/* if (GameAPI::GetGamemode() == MODE_TAG) {
 		auto tagger = PacketUtil::ReadLong(packet);
 		auto tagged = PacketUtil::ReadLong(packet);
 		PacketUtil::ResetPacket(packet);
@@ -14,7 +14,7 @@ void __stdcall Hook::ClientHandle::hkTagPlayer(Packet_o* packet, const MethodInf
 		static long yourSteamID = GameAPI::GetSteamID();
 		if (tagged == yourSteamID && F::bAntiBombTag && tagger != yourSteamID && tagger != 0)
 			GameAPI::DamagePlayer(tagger, 0, rot->ToEngine(), WEAPON_STICK, GameAPI::GetItemByID(WEAPON_STICK)->fields.objectID);
-	}
+	} */
 }
 
 void __stdcall Hook::ClientHandle::hkPlayerPosition(Packet_o* packet, const MethodInfo* pMethod) {

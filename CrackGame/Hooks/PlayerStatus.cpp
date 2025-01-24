@@ -4,6 +4,6 @@ void __stdcall Hook::PlayerStatus::hkDamagePlayer(PlayerStatus_o* pThis, int32_t
 {
 	static auto oDamagePlayer = static_cast<decltype(&hkDamagePlayer)>(pDamagePlayer);
 
-	if (!F::bGodmode)
+	if (!Config::get("combat_godmode_enabled", false))
 		oDamagePlayer(pThis, dmg, damageDir, damageDoerId, itemId, pMethod);
 }

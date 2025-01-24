@@ -9,7 +9,12 @@ void __stdcall Hook::ClientSend::hkPlayerPosition(UnityEngine_Vector3_o* positio
 		
 	auto shouldBlock = G::oCallbackManager->trigger_event(Callbacks::Event::OnMove, position->fields.x, position->fields.y, position->fields.z);
 
-	if ((!(G::bRedLightFreeze && F::bRedGreenProtection) || !F::bRedGreenProtection) && !F::bLagSwitch) {
+	bool bGodmode = Config::get("combat_godmode_enabled", false);
+	bool bLagswitch = Config::get("misc_lagswitch_enabled", false);
+	bool bRedlightProtection = Config::get("gamemode_redlight_freeze_enabled", false);
+	bool bAdvancedAntiKB = Config::get("movement_advancedantikb", false);
+
+	if ((!(G::bRedLightFreeze && bRedlightProtection) || !bRedlightProtection) && !bLagswitch) {
 		if (!G::vPositionOverrideQueue.empty()) {
 			auto pos = G::vPositionOverrideQueue[0]->ToEngine();
 			G::vPositionOverrideQueue.pop_back();
@@ -17,7 +22,7 @@ void __stdcall Hook::ClientSend::hkPlayerPosition(UnityEngine_Vector3_o* positio
 			position = &pos;
 		}
 
-		if (F::bAdvancedAntiKB) {
+		if (bAdvancedAntiKB) {
 			auto playerPos = new Vector3(*position);
 
 			ULONGLONG currentTick = GetTickCount64();
@@ -39,7 +44,7 @@ void __stdcall Hook::ClientSend::hkPlayerPosition(UnityEngine_Vector3_o* positio
 			prevTick = currentTick;
 		}
 
-		if (F::bGodmode)
+		if (bGodmode)
 			position->fields.y = std::max(position->fields.y, G::fKillHeight);
 
 		if (!shouldBlock) {
@@ -53,7 +58,10 @@ void __stdcall Hook::ClientSend::hkPlayerRotation(float x, float y, uint64_t toI
 {
 	static auto oPlayerRotation = static_cast<decltype(&hkPlayerRotation)>(pPlayerRotation);
 
-	if ((!(G::bRedLightFreeze && F::bRedGreenProtection) || !F::bRedGreenProtection) && !F::bLagSwitch)
+	bool bLagswitch = Config::get("misc_lagswitch_enabled", false);
+	bool bRedlightProtection = Config::get("gamemode_redlight_freeze_enabled", false);
+
+	if ((!(G::bRedLightFreeze && bRedlightProtection) || !bRedlightProtection) && !bLagswitch)
 		oPlayerRotation(x, y, toId, pMethod);
 }
 
@@ -80,8 +88,10 @@ void __stdcall Hook::ClientSend::hkUseItem(int itemID, UnityEngine_Vector3_o* di
 void __stdcall Hook::ClientSend::hkSendChatMessage(System_String_o* message, const MethodInfo* pMethod) {
 	static auto oSendChatMessage = HOOK_ORIG_FUNC(SendChatMessage);
 
+	bool bCommandHandler = Config::get("misc_commandhandler", false);
+
 	std::string msg = reinterpret_cast<Unity::System_String*>(message)->ToString();
-	if (F::bCommandHandler)
+	if (bCommandHandler)
 		if (G::commandHandler->HandleCommand(msg)) // Should block?
 			return;
 

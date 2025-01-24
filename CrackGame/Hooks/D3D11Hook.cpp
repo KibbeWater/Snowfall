@@ -45,8 +45,10 @@ D3D11_HOOK_API void ImplHookDX11_Present(ID3D11Device* device, ID3D11DeviceConte
 	ImGui_ImplWin32_NewFrame();
 
 	ImGui::NewFrame();
+	Config::newFrame();
 
-	G::pDrawList = ImGui::GetBackgroundDrawList();
+	ImDrawList* draw = ImGui::GetBackgroundDrawList();
+	G::pDrawList = draw;
 	G::oCallbackManager->trigger_event(Callbacks::Event::Render);
 	G::pDrawList = nullptr;
 	
@@ -56,27 +58,89 @@ D3D11_HOOK_API void ImplHookDX11_Present(ID3D11Device* device, ID3D11DeviceConte
 	}
 
 	{
-		////Temporary solution, just wanted it to work for now
-		static bool hasTeleported = false;
-		if (F::bClickTP) {
-			if (!hasTeleported && GetAsyncKeyState(VK_MBUTTON) & 0x01) {
-				auto m_pPlayer = Unity::GameObject::Find("Player");
+		bool bESP = Config::get("visual_esp_state_enabled", false);
 
-				auto curCam = reinterpret_cast<Unity::CTransform*>(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerCam);
-				auto pos = new Vector3(curCam->GetPosition());
-				auto fwd = new Vector3(curCam->GetMemberValue<Unity::Vector3>("forward"));
+		if (bESP && false)
+			for (auto player : GameAPI::GetPlayersAlive()) {
+				if (!player) continue;
 
-				UnityEngine_RaycastHit_o hit = {};
-				if (GameAPI::Raycast(pos->ToEngine(), fwd->ToEngine(), &hit, 1000, GameAPI::GetGamemanager()->static_fields->Instance->fields.whatIsHittableBullet.fields.m_Mask)) {
-					auto tpPos = new Vector3(hit.fields.m_Point);
-					tpPos->y++;
-					m_pPlayer->GetTransform()->SetPosition(*tpPos->ToUnity());
+				Unity::CComponent* playerComponent = reinterpret_cast<Unity::CComponent*>(player);
+				if (!playerComponent) continue;
+
+				Unity::CGameObject* gameObject = playerComponent->GetMemberValue<Unity::CGameObject*>("gameObject");
+				if (!gameObject) continue;
+
+				auto bounds = GameAPI::GetBounds(gameObject);
+
+				Vector3 origin = Vector3(bounds->m_vCenter);
+				Vector3 extent = Vector3(bounds->m_vExtents);
+
+				Vector3 Corners[8]{ Vector3(0,0,0),Vector3(0,0,0),Vector3(0,0,0),Vector3(0,0,0),Vector3(0,0,0),Vector3(0,0,0),Vector3(0,0,0),Vector3(0,0,0) };
+				Corners[0] = origin + Vector3(-extent.x, -extent.y, -extent.z);
+				Corners[1] = origin + Vector3(extent.x, -extent.y, -extent.z);
+				Corners[2] = origin + Vector3(extent.x, extent.y, -extent.z);
+				Corners[3] = origin + Vector3(-extent.x, extent.y, -extent.z);
+				Corners[4] = origin + Vector3(-extent.x, -extent.y, extent.z);
+				Corners[5] = origin + Vector3(extent.x, -extent.y, extent.z);
+				Corners[6] = origin + Vector3(extent.x, extent.y, extent.z);
+				Corners[7] = origin + Vector3(-extent.x, extent.y, extent.z);
+
+				Vector3 ScreenCorners[8]{ Vector3(0,0,0),Vector3(0,0,0),Vector3(0,0,0),Vector3(0,0,0),Vector3(0,0,0),Vector3(0,0,0),Vector3(0,0,0),Vector3(0,0,0) };
+				for (int i = 0; i < 8; ++i) {
+					auto screen = Engine::WorldToScreen(Corners[i]);
+					ScreenCorners[i] = screen;
 				}
 
-				hasTeleported = true;
-			} else if (hasTeleported && !(GetAsyncKeyState(VK_MBUTTON) & 0x01)) {
-				hasTeleported = false;
+				auto DrawLine = [&](int Index1, int Index2)
+					{
+						auto p1 = ScreenCorners[Index1];
+						auto p2 = ScreenCorners[Index2];
+						draw->AddLine(ImVec2(p1.x, p1.y), ImVec2(p2.x, p2.y), IM_COL32(255,0,0,255));
+					};
+
+				// Bottom face
+				DrawLine(0, 1);
+				DrawLine(1, 2);
+				DrawLine(2, 3);
+				DrawLine(3, 0);
+
+				// Top face
+				DrawLine(4, 5);
+				DrawLine(5, 6);
+				DrawLine(6, 7);
+				DrawLine(7, 4);
+
+				// Vertical lines
+				DrawLine(0, 4);
+				DrawLine(1, 5);
+				DrawLine(2, 6);
+				DrawLine(3, 7);
 			}
+		
+		////Temporary solution, just wanted it to work for now
+		static bool hasTeleported = false;
+		auto iClickTPKey = Config::get("movement_clicktp_hotkey", (int)ImGuiKey_None);
+		bool bClickTPDown = iClickTPKey != ImGuiKey_None ? ImGui::IsKeyPressed(
+			static_cast<ImGuiKey>(iClickTPKey),
+			false) : false;
+		if (!hasTeleported && bClickTPDown) {
+			auto m_pPlayer = Unity::GameObject::Find("Player");
+
+			auto curCam = reinterpret_cast<Unity::CTransform*>(GameAPI::GetPlayerInput()->static_fields->_Instance_k__BackingField->fields.playerCam);
+			auto pos = new Vector3(curCam->GetPosition());
+			auto fwd = new Vector3(curCam->GetMemberValue<Unity::Vector3>("forward"));
+
+			UnityEngine_RaycastHit_o hit = {};
+			if (GameAPI::Raycast(pos->ToEngine(), fwd->ToEngine(), &hit, 1000, GameAPI::GetGamemanager()->static_fields->Instance->fields.whatIsHittableBullet.fields.m_Mask)) {
+				auto tpPos = new Vector3(hit.fields.m_Point);
+				tpPos->y++;
+				m_pPlayer->GetTransform()->SetPosition(*tpPos->ToUnity());
+			}
+
+			hasTeleported = true;
+		}
+		else if (hasTeleported && !bClickTPDown) {
+			hasTeleported = false;
 		}
 	}
 
@@ -94,10 +158,21 @@ HRESULT __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT SyncInterval, UIN
 	{
 		pSwapChain->GetDevice(__uuidof(g_pd3dDevice), reinterpret_cast<void**>(&g_pd3dDevice));
 		g_pd3dDevice->GetImmediateContext(&g_pd3dContext);
+		G::g_pd3dDevice = g_pd3dDevice;
 
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO();
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+
+		io.Fonts->AddFontFromFileTTF(FS::GetAsset("roboto.ttf").c_str(), 16);
+
+		ImFontConfig config;
+		config.MergeMode = true;
+		config.GlyphMinAdvanceX = 13.0f; // Use if you want to make the icon monospaced
+		static constexpr ImWchar icon_ranges[] = { 0xe000, 0xe007, 0 };
+		io.Fonts->AddFontFromFileTTF(FS::GetAsset("snowfall.ttf").c_str(), 24, &config, icon_ranges);
+
+		io.Fonts->Build();
 
 		ImGui::StyleColorsDark();
 
@@ -122,8 +197,6 @@ HRESULT __stdcall PresentHook(IDXGISwapChain* pSwapChain, UINT SyncInterval, UIN
 				GameAPI::SetLockState(oldLockState);
 		}
 	}
-
-	F::bLagSwitch = GetAsyncKeyState(0x51) & 0x8000; // Is Q being pressed rn bro? (I'm de-pressed lol)
 
 	ImplHookDX11_Present(g_pd3dDevice, g_pd3dContext, g_pSwapChain);
 

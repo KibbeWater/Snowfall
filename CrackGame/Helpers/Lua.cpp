@@ -19,7 +19,17 @@ void LuaH::initState(sol::state* state) {
 	);
 	// Cheat.*
 	state->new_usertype<CommandHandler>("Cheat",
-		"on", &Cheat::on
+		"on", &Cheat::on,
+
+		"getBool", &Cheat::getBool,
+		"getString", &Cheat::getString,
+		"getInt", &Cheat::getInt,
+		"getFloat", &Cheat::getFloat,
+
+		"setBool", &Cheat::setBool,
+		"setString", &Cheat::setString,
+		"setInt", &Cheat::setInt,
+		"setFloat", &Cheat::setFloat
 	);
 	// Lobby.*
 	state->new_usertype<Lobby>("Lobby",

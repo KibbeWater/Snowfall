@@ -16,6 +16,7 @@
 #include <fstream>
 #include <istream>
 #include <iostream>
+#include <functional>
 #include <sstream>
 #include <string>
 #include <algorithm>
@@ -23,6 +24,7 @@
 #include <iterator>
 #include <unordered_map>
 #include <chrono>
+#include <map>
 #include <ctime>
 #include <d3d11.h>
 #include <mutex>
@@ -35,6 +37,9 @@
 #include <math.h>
 #include <cstdint>
 
+#include <curl/curl.h>
+#include <nlohmann/json.hpp>
+
 // Config
 #include "config.h"
 
@@ -45,15 +50,19 @@
 #include "Thirdparty/Resolver/IL2CPP_Resolver.hpp"
 
 // ImGUI
-#include "ImGUI/imgui.h"
-#include "ImGUI/imgui_impl_win32.h"
-#include "ImGUI/imgui_impl_dx11.h"
-#include "ImGUI/imgui_stdlib.h"
+#define IMGUI_DEFINE_MATH_OPERATORS
+#include <imgui.h>
+#include "Components/imgui_stdlib.h"
+#include <imgui_impl_win32.h>
+#include <imgui_impl_dx11.h>
 
 // Helpers
 #include "Helpers/Math.h"
 #include "Helpers/Memory.h"
 #include "Helpers/Lua.h"
+#include "Helpers/Config.h"
+#include "Helpers/Filesystem.h"
+#include "Helpers/SteamProfileXMLParser.h"
 
 // GameSDK
 #include "GameSDK/il2cpp.h"
@@ -111,5 +120,14 @@
 #include "Hooks/ClientHandle.h"
 #include "Hooks/GlassBreak.h"
 
+// Components
+#define STB_IMAGE_IMPLEMENTATION
+#include "Components/stb_image.h"
+#include "Components/Button.h"
+#include "Components/Checkbox.h"
+#include "Components/Hotkey.h"
+#include "Components/Image.h"
+
 // Menu
+#include "Menu/Modules.h"
 #include "Menu/Menu.h"

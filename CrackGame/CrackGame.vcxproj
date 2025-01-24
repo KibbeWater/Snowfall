@@ -51,6 +51,15 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>true</VcpkgEnableManifest>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <VcpkgUseStatic>true</VcpkgUseStatic>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <VcpkgUseStatic>true</VcpkgUseStatic>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -60,14 +69,15 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories);$(ProjectDir)Thirdparty\luajit\src;$(ProjectDir)Thirdparty\sol\include</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <DisableSpecificWarnings>26812;4129;4005;4099;5033</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);$(ProjectDir)Thirdparty\luajit\src\lua51.lib;$(ProjectDir)Thirdparty\luajit\src\luajit.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);$(ProjectDir)Thirdparty\luajit\src\lua51.lib;$(ProjectDir)Thirdparty\luajit\src\luajit.lib;libcurl.lib;nghttp2.lib;zlib.lib;ws2_32.lib;crypt32.lib;secur32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)vcpkg_installed\x64-windows-static\x64-windows-static\lib</AdditionalLibraryDirectories>
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <CustomBuildStep>
@@ -86,7 +96,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories);$(ProjectDir)Thirdparty\luajit\src;$(ProjectDir)Thirdparty\sol\include</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <DisableSpecificWarnings>26812;4129;4005;4099;5033</DisableSpecificWarnings>
       <Optimization>MinSpace</Optimization>
     </ClCompile>
@@ -96,11 +106,21 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);$(ProjectDir)Thirdparty\luajit\src\lua51.lib;$(ProjectDir)Thirdparty\luajit\src\luajit.lib;libcurl.lib;nghttp2.lib;zlib.lib;ws2_32.lib;crypt32.lib;secur32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)vcpkg_installed\x64-windows-static\x64-windows-static\lib</AdditionalLibraryDirectories>
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);$(ProjectDir)Thirdparty\luajit\src\lua51.lib;$(ProjectDir)Thirdparty\luajit\src\luajit.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Components\Button.h" />
+    <ClInclude Include="Components\Checkbox.h" />
+    <ClInclude Include="Components\Hotkey.h" />
+    <ClInclude Include="Components\Image.h" />
+    <ClInclude Include="Components\imgui_stdlib.h" />
+    <ClInclude Include="Components\stb_image.h" />
+    <ClInclude Include="Helpers\Config.h" />
+    <ClInclude Include="Helpers\Filesystem.h" />
+    <ClInclude Include="Helpers\SteamProfileXMLParser.h" />
     <ClInclude Include="Lua\Structs\Color.h" />
     <ClInclude Include="Lua\Structs\LocalPlayer.h" />
     <ClInclude Include="Lua\Structs\GameObject.h" />
@@ -146,18 +166,10 @@
     <ClInclude Include="Hooks\SnowballPileInteract.h" />
     <ClInclude Include="Hooks\SteamMatchmaking.h" />
     <ClInclude Include="Hooks\SteamPacketManager.h" />
-    <ClInclude Include="ImGUI\imconfig.h" />
-    <ClInclude Include="ImGUI\imgui.h" />
-    <ClInclude Include="ImGUI\imgui_impl_dx11.h" />
-    <ClInclude Include="ImGUI\imgui_impl_win32.h" />
-    <ClInclude Include="ImGUI\imgui_internal.h" />
-    <ClInclude Include="ImGUI\imgui_stdlib.h" />
-    <ClInclude Include="ImGUI\imstb_rectpack.h" />
-    <ClInclude Include="ImGUI\imstb_textedit.h" />
-    <ClInclude Include="ImGUI\imstb_truetype.h" />
     <ClInclude Include="Lua\Cheat.h" />
     <ClInclude Include="Menu\Menu.h" />
     <ClInclude Include="Lua\Structs\Packet.h" />
+    <ClInclude Include="Menu\Modules.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="GameSDK\il2cpp.h" />
     <ClInclude Include="Lua\Structs\PlayerManager.h" />
@@ -231,6 +243,13 @@
     <ClInclude Include="Lua\Structs\Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Components\Button.cpp" />
+    <ClCompile Include="Components\Checkbox.cpp" />
+    <ClCompile Include="Components\Hotkey.cpp" />
+    <ClCompile Include="Components\Image.cpp" />
+    <ClCompile Include="Components\imgui_stdlib.cpp" />
+    <ClCompile Include="Helpers\Config.cpp" />
+    <ClCompile Include="Helpers\Filesystem.cpp" />
     <ClCompile Include="Lua\Structs\Color.cpp" />
     <ClCompile Include="Lua\Structs\LocalPlayer.cpp" />
     <ClCompile Include="Lua\Structs\GameObject.cpp" />
@@ -273,14 +292,6 @@
     <ClCompile Include="Hooks\SnowballPileInteract.cpp" />
     <ClCompile Include="Hooks\SteamMatchmaking.cpp" />
     <ClCompile Include="Hooks\SteamPacketManager.cpp" />
-    <ClCompile Include="ImGUI\imgui.cpp" />
-    <ClCompile Include="ImGUI\imgui_demo.cpp" />
-    <ClCompile Include="ImGUI\imgui_draw.cpp" />
-    <ClCompile Include="ImGUI\imgui_impl_dx11.cpp" />
-    <ClCompile Include="ImGUI\imgui_impl_win32.cpp" />
-    <ClCompile Include="ImGUI\imgui_stdlib.cpp" />
-    <ClCompile Include="ImGUI\imgui_tables.cpp" />
-    <ClCompile Include="ImGUI\imgui_widgets.cpp" />
     <ClCompile Include="Lua\Cheat.cpp" />
     <ClCompile Include="Menu\Menu.cpp" />
     <ClCompile Include="Lua\Structs\Packet.cpp" />
