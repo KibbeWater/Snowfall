@@ -18,10 +18,14 @@ jobs:
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
 
-    - name: Setup vcpkg
-      uses: lukka/run-vcpkg@v11
+    - name: vcpkg build
+      id: vcpkg
+      uses: johnwason/vcpkg-action@v6
       with:
-        runVcpkgInstall: true
+        manifest-dir: ${{ github.workspace }} # Set to directory containing vcpkg.json
+        triplet: x64-windows-static
+        token: ${{ github.token }}
+        github-binarycache: true
 
     - name: Build Dependencies
       run: ./CrackGame/builddeps.bat
